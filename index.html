@@ -1,0 +1,3472 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>GreenGlo Cleaners | Premium Eco-Friendly Cleaning Services London</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="shortcut icon" type="image/x-icon" href="logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <!-- Add Supabase client library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        :root {
+            --primary-green: #10B981;
+            --secondary-green: #34D399;
+            --dark-green: #065F46;
+            --light-green: #D1FAE5;
+            --accent-green: #059669;
+            --emerald: #10B981;
+            --teal: #0D9488;
+            --mint: #A7F3D0;
+            --white: #FFFFFF;
+            --off-white: #F9FAFB;
+            --light-gray: #F3F4F6;
+            --medium-gray: #9CA3AF;
+            --dark-gray: #4B5563;
+            --black: #111827;
+            --gold: #FBBF24;
+            --shadow: 0 20px 40px rgba(16, 185, 129, 0.12);
+            --shadow-lg: 0 25px 50px rgba(16, 185, 129, 0.15);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 16px;
+            --border-radius-lg: 24px;
+            --gradient-primary: linear-gradient(135deg, var(--primary-green), var(--teal));
+            --gradient-dark: linear-gradient(135deg, var(--dark-green), var(--teal));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.7;
+            color: var(--dark-gray);
+            background-color: var(--off-white);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--dark-green);
+            letter-spacing: -0.5px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2.5rem;
+            background: var(--gradient-primary);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: var(--shadow);
+            gap: 0.75rem;
+            min-height: 56px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-dark);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            opacity: 1;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn:active {
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-green);
+            color: var(--white);
+        }
+
+        .btn-large {
+            padding: 1.25rem 3rem;
+            font-size: 1.125rem;
+            min-height: 64px;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 5px 20px rgba(16, 185, 129, 0.1);
+            padding: 0.5rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 1.5rem;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .nav-logo:hover {
+            transform: translateY(-2px);
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text h1 {
+            font-size: 1.75rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .logo-text span {
+            font-size: 0.75rem;
+            color: var(--medium-gray);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 0.25rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--primary-green);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            margin-left: 1rem;
+        }
+
+        .nav-cta .btn {
+            padding: 0.75rem 1.75rem;
+            min-height: auto;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            width: 48px;
+            height: 48px;
+            background: var(--light-green);
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-green);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-btn:hover {
+            background: var(--mint);
+            transform: rotate(90deg);
+        }
+
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .hero {
+            min-height: 100vh;
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, rgba(209, 250, 229, 0.8) 0%, rgba(255, 255, 255, 0.9) 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 850px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--white);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2.5rem;
+            animation: float 3s ease-in-out infinite;
+            justify-content: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .bics-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .bics-logo {
+            height: 24px;
+            width: auto;
+            display: block;
+        }
+
+        .hero-badge i {
+            color: var(--gold);
+            font-size: 1.25rem;
+        }
+
+        .hero-badge span {
+            font-weight: 600;
+            color: var(--dark-green);
+            font-size: 0.9375rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            background: linear-gradient(to right, var(--dark-green), var(--teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.125rem, 3vw, 1.375rem);
+            color: var(--dark-gray);
+            margin-bottom: 3rem;
+            line-height: 1.6;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-bottom: 3rem;
+            justify-items: center;
+        }
+
+        .hero-feature {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+            transition: var(--transition);
+            text-align: left;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .hero-feature:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+            border-color: var(--primary-green);
+        }
+
+        .feature-icon {
+            min-width: 56px;
+            height: 56px;
+            background: var(--gradient-primary);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .feature-text {
+            flex: 1;
+        }
+
+        .feature-text h4 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+            color: var(--dark-green);
+        }
+
+        .feature-text p {
+            font-size: 0.875rem;
+            color: var(--medium-gray);
+            margin: 0;
+        }
+
+        .hero-cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            align-items: center;
+            margin-bottom: 3rem;
+            justify-content: center;
+        }
+
+        .club-notice {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 1.25rem 2rem;
+            border-radius: var(--border-radius);
+            margin-top: 2rem;
+            justify-content: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .club-notice i {
+            font-size: 1.5rem;
+        }
+
+        .club-notice p {
+            margin: 0;
+            font-weight: 600;
+            font-size: 0.9375rem;
+        }
+
+        .section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-light {
+            background: var(--white);
+        }
+
+        .section-gray {
+            background: var(--off-white);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            font-size: 1.125rem;
+            color: var(--medium-gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 3rem 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-green);
+        }
+
+        .feature-icon-large {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            color: var(--white);
+            font-size: 2rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stats {
+            background: var(--gradient-dark);
+            color: var(--white);
+            padding: 4rem 0;
+            border-radius: var(--border-radius-lg);
+            margin: 4rem auto;
+            max-width: 1200px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3.5rem;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .stat-item p {
+            font-size: 1.125rem;
+            opacity: 0.9;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-green);
+        }
+
+        .service-header {
+            height: 200px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--white);
+        }
+
+        .service-content {
+            padding: 2rem;
+        }
+
+        .service-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-content p {
+            color: var(--medium-gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonials-carousel {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .carousel-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .testimonial-card {
+            flex: 0 0 100%;
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            position: relative;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            font-size: 4rem;
+            color: var(--light-green);
+            font-family: serif;
+            line-height: 1;
+        }
+
+        .testimonial-rating {
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+
+        .testimonial-content {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--dark-gray);
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+            flex-grow: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: auto;
+        }
+
+        .author-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--light-green);
+        }
+
+        .author-info h4 {
+            margin-bottom: 0.25rem;
+            font-size: 1.125rem;
+        }
+
+        .author-info p {
+            color: var(--medium-gray);
+            font-size: 0.875rem;
+            margin: 0;
+        }
+
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .carousel-btn {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            border: none;
+            color: var(--white);
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .carousel-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .carousel-indicators {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+        }
+
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--light-gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .carousel-indicator.active {
+            background: var(--primary-green);
+            transform: scale(1.2);
+        }
+
+        .faq-grid {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+            transition: var(--transition);
+        }
+
+        .faq-item.active {
+            border-color: var(--primary-green);
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.15);
+        }
+
+        .faq-question {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.125rem;
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            background: var(--light-green);
+        }
+
+        .faq-toggle {
+            width: 32px;
+            height: 32px;
+            background: var(--light-green);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            flex-shrink: 0;
+            margin-left: 1rem;
+        }
+
+        .faq-item.active .faq-toggle {
+            background: var(--primary-green);
+            color: var(--white);
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 2rem 2rem;
+            max-height: 500px;
+        }
+
+        .faq-answer p {
+            color: var(--dark-gray);
+            line-height: 1.7;
+        }
+
+        .cta-section {
+            background: var(--gradient-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 6rem 0;
+            border-radius: var(--border-radius-lg);
+            margin: 4rem auto;
+            max-width: 1200px;
+        }
+
+        .cta-section h2 {
+            color: var(--white);
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .coverage-container {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        .coverage-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+            height: 100%;
+            transition: var(--transition);
+        }
+
+        .coverage-card:hover {
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-green);
+        }
+
+        .postcode-form {
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark-green);
+            font-size: 1rem;
+        }
+
+        .input-with-button {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        #postcodeInput {
+            flex: 1;
+            padding: 1rem 1.25rem;
+            border: 2px solid var(--light-gray);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            transition: var(--transition);
+        }
+
+        #postcodeInput:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+        }
+
+        .input-hint {
+            display: block;
+            color: var(--medium-gray);
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+
+        #checkButton {
+            padding: 1rem 1.75rem;
+            min-height: auto;
+            white-space: nowrap;
+        }
+
+        .coverage-result {
+            background: var(--off-white);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed rgba(16, 185, 129, 0.3);
+            transition: var(--transition);
+        }
+
+        .result-placeholder {
+            text-align: center;
+            color: var(--medium-gray);
+        }
+
+        .result-placeholder i {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+            color: var(--light-gray);
+        }
+
+        .result-success,
+        .result-error {
+            text-align: center;
+            width: 100%;
+        }
+
+        .result-success i,
+        .result-error i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .result-success i {
+            color: var(--primary-green);
+        }
+
+        .result-error i {
+            color: #EF4444;
+        }
+
+        .result-success h4,
+        .result-error h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.25rem;
+        }
+
+        .result-success p,
+        .result-error p {
+            color: var(--dark-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .postcode-display {
+            display: inline-block;
+            background: var(--light-green);
+            color: var(--dark-green);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-weight: 600;
+            margin: 0.5rem 0;
+            font-family: monospace;
+        }
+
+        .result-cta {
+            margin-top: 1rem;
+        }
+
+        .service-areas {
+            border-top: 1px solid rgba(16, 185, 129, 0.1);
+            padding-top: 1.5rem;
+        }
+
+        .areas-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .area-badge {
+            padding: 0.75rem;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .area-london {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--dark-green);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .area-kent {
+            background: rgba(52, 211, 153, 0.1);
+            color: var(--dark-green);
+            border: 1px solid rgba(52, 211, 153, 0.3);
+        }
+
+        .area-essex {
+            background: rgba(13, 148, 136, 0.1);
+            color: var(--dark-green);
+            border: 1px solid rgba(13, 148, 136, 0.3);
+        }
+
+        .areas-note {
+            font-size: 0.8rem;
+            color: var(--medium-gray);
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        #serviceAreaMap {
+            height: 400px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            margin-bottom: 1.5rem;
+            z-index: 1;
+        }
+
+        .map-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--dark-gray);
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            border: 2px solid;
+        }
+
+        .image-showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .image-showcase-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .image-showcase-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-green);
+        }
+
+        .image-showcase-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .image-showcase-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .image-showcase-content {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .image-showcase-content h4 {
+            margin-bottom: 0.75rem;
+            color: var(--dark-green);
+        }
+
+        .image-showcase-content p {
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+        }
+
+        .services-showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .service-showcase-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .service-showcase-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-green);
+        }
+
+        .service-showcase-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .service-showcase-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .service-showcase-card:hover .service-showcase-image img {
+            transform: scale(1.05);
+        }
+
+        .service-showcase-content {
+            padding: 1.5rem;
+        }
+
+        .service-showcase-content h3 {
+            margin-bottom: 0.75rem;
+            color: var(--dark-green);
+        }
+
+        .service-showcase-content p {
+            color: var(--medium-gray);
+            margin-bottom: 1rem;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .result-card {
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .result-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .result-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .result-card h4 {
+            margin-bottom: 0.5rem;
+            color: var(--dark-green);
+        }
+
+        .result-card p {
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+        }
+
+        .whatsapp-button {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .whatsapp-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-icon {
+            width: 32px;
+            height: 32px;
+        }
+
+        .whatsapp-notification {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #FF3B30;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .whatsapp-tooltip {
+            position: absolute;
+            right: 75px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--white);
+            color: var(--dark-gray);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .whatsapp-button:hover + .whatsapp-tooltip {
+            opacity: 1;
+        }
+
+        /* Email Popup Styles */
+        .email-popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .email-popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .email-popup-modal {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .email-popup-overlay.active .email-popup-modal {
+            transform: translateY(0) scale(1);
+        }
+
+        .email-popup-header {
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .email-popup-header h3 {
+            color: var(--white);
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .email-popup-header p {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+
+        .email-popup-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            color: var(--white);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .email-popup-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .email-popup-content {
+            padding: 2.5rem 2rem;
+        }
+
+        .email-popup-content p {
+            text-align: center;
+            color: var(--dark-gray);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .email-popup-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .email-popup-input-group {
+            position: relative;
+        }
+
+        .email-popup-input {
+            width: 100%;
+            padding: 1.25rem 1.5rem;
+            border: 2px solid var(--light-gray);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            transition: var(--transition);
+            background: var(--white);
+        }
+
+        .email-popup-input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+        }
+
+        .email-popup-input.error {
+            border-color: #EF4444;
+        }
+
+        .email-popup-error {
+            color: #EF4444;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .email-popup-error.show {
+            display: block;
+        }
+
+        .email-popup-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .email-popup-checkbox input {
+            margin-top: 0.25rem;
+            flex-shrink: 0;
+        }
+
+        .email-popup-checkbox label {
+            font-size: 0.875rem;
+            color: var(--dark-gray);
+            line-height: 1.5;
+        }
+
+        .email-popup-checkbox a {
+            color: var(--primary-green);
+            text-decoration: underline;
+        }
+
+        .email-popup-submit {
+            width: 100%;
+            padding: 1.25rem;
+            font-size: 1.125rem;
+        }
+
+        .email-popup-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .email-popup-success {
+            text-align: center;
+            padding: 2rem;
+            display: none;
+        }
+
+        .email-popup-success.show {
+            display: block;
+        }
+
+        .email-popup-success i {
+            font-size: 3rem;
+            color: var(--primary-green);
+            margin-bottom: 1.5rem;
+        }
+
+        .email-popup-success h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark-green);
+        }
+
+        .email-popup-success p {
+            color: var(--medium-gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .coupon-code {
+            display: inline-block;
+            background: var(--light-green);
+            color: var(--dark-green);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin: 1.5rem 0;
+            border: 2px dashed var(--primary-green);
+        }
+
+        .email-popup-footer {
+            text-align: center;
+            padding: 1rem 2rem 2rem;
+            border-top: 1px solid var(--light-gray);
+            color: var(--medium-gray);
+            font-size: 0.875rem;
+        }
+
+        .footer {
+            background: var(--dark-green);
+            color: var(--white);
+            padding: 6rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-col h3 {
+            color: var(--white);
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary-green);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--primary-green);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.875rem;
+        }
+
+        .footer-bottom a {
+            color: var(--primary-green);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-bottom a:hover {
+            color: var(--secondary-green);
+            text-decoration: underline;
+        }
+
+        /* Mobile-specific optimizations */
+        @media (max-width: 1024px) {
+            .coverage-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            #serviceAreaMap {
+                height: 350px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Mobile menu fixes */
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 100%;
+                max-width: 320px;
+                height: 100vh;
+                background: var(--white);
+                flex-direction: column;
+                padding: 80px 1.5rem 2rem;
+                gap: 0;
+                transition: var(--transition);
+                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+                z-index: 9998;
+                overflow-y: auto;
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-item {
+                width: 100%;
+            }
+
+            .nav-link {
+                display: flex;
+                align-items: center;
+                padding: 1rem;
+                border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+                font-size: 1rem;
+                min-height: 50px;
+                width: 100%;
+            }
+
+            .nav-cta {
+                margin: 1.5rem 0 0;
+                width: 100%;
+                padding: 1rem 0;
+            }
+
+            .nav-cta .btn {
+                width: 100%;
+                justify-content: center;
+                padding: 1rem 2rem;
+                min-height: 50px;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+                z-index: 9999;
+            }
+
+            .mobile-menu-btn.active {
+                background: var(--primary-green);
+                color: var(--white);
+            }
+
+            /* Mobile menu close button - fixed positioning */
+            .mobile-menu-close {
+                display: none;
+            }
+
+            /* Improve mobile layout */
+            .hero {
+                padding: 100px 0 4rem;
+            }
+
+            .section {
+                padding: 4rem 0;
+            }
+
+            .hero-features {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin: 0 auto 2rem;
+            }
+
+            .features-grid,
+            .services-grid,
+            .image-showcase-grid,
+            .services-showcase-grid,
+            .results-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .coverage-card {
+                padding: 1.5rem;
+            }
+
+            .areas-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .input-with-button {
+                flex-direction: column;
+            }
+
+            #checkButton {
+                width: 100%;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .hero-cta .btn {
+                width: 100%;
+                max-width: 300px;
+                min-height: 56px;
+            }
+
+            /* Prevent iOS zoom on input focus */
+            input, select, textarea {
+                font-size: 16px !important;
+            }
+
+            /* Mobile carousel improvements */
+            .carousel-btn {
+                width: 48px;
+                height: 48px;
+            }
+
+            .testimonial-card {
+                padding: 1.5rem;
+                min-height: auto;
+            }
+
+            .testimonial-content {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+
+            /* FAQ mobile improvements */
+            .faq-question {
+                padding: 1.25rem 1.5rem;
+                font-size: 1rem;
+            }
+            
+            .faq-answer {
+                padding: 0 1.5rem;
+            }
+            
+            .faq-item.active .faq-answer {
+                padding: 0 1.5rem 1.5rem;
+            }
+
+            /* Email popup mobile */
+            .email-popup-modal {
+                max-width: 95%;
+                margin: 1rem;
+            }
+
+            .email-popup-header {
+                padding: 1.5rem;
+            }
+
+            .email-popup-content {
+                padding: 1.5rem;
+            }
+
+            /* Hero badge mobile */
+            .hero-badge {
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem;
+                gap: 0.5rem;
+            }
+            
+            .bics-logo-container {
+                justify-content: center;
+            }
+            
+            .club-notice {
+                padding: 1rem;
+                flex-direction: column;
+                text-align: center;
+                gap: 0.75rem;
+            }
+
+            /* WhatsApp button mobile */
+            .whatsapp-button {
+                width: 56px;
+                height: 56px;
+            }
+
+            .whatsapp-icon {
+                width: 28px;
+                height: 28px;
+            }
+
+            .whatsapp-tooltip {
+                display: none; /* Hide on mobile */
+            }
+
+            /* Carousel controls mobile */
+            .carousel-controls {
+                gap: 1rem;
+                margin-top: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.75rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn-large {
+                padding: 1rem 2rem;
+                min-height: 56px;
+            }
+
+            .coupon-code {
+                padding: 0.75rem 1rem;
+                font-size: 1rem;
+            }
+
+            .result-card img {
+                height: 200px;
+            }
+
+            .service-showcase-image {
+                height: 150px;
+            }
+
+            /* Mobile map fixes */
+            #serviceAreaMap {
+                height: 300px;
+            }
+
+            .map-legend {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            /* WhatsApp notification */
+            .whatsapp-notification {
+                width: 20px;
+                height: 20px;
+                font-size: 10px;
+            }
+        }
+
+        /* Prevent horizontal scrolling */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        /* Better touch targets for mobile */
+        button, 
+        .btn, 
+        .nav-link,
+        .carousel-btn,
+        .carousel-indicator,
+        .faq-question {
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+            touch-action: manipulation;
+        }
+
+        /* Fix for iOS button styling */
+        button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+    <!-- Premium Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#" class="nav-logo">
+                <div class="logo-icon">
+                    <img src="logo.png" alt="GreenGlo Cleaners Logo"
+                        style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px;">
+                </div>
+                <div class="logo-text">
+                    <h1>GreenGlo</h1>
+                    <span>Cleaners</span>
+                </div>
+            </a>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="services.html" class="nav-link">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gallery.html" class="nav-link">Gallery</a>
+                </li>
+                <li class="nav-item">
+                    <a href="greengloclub.html" class="nav-link">Green Glo Club</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#testimonials" class="nav-link">Testimonials</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a href="airbnb.html" class="nav-link">GreenGlo For Airbnbs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="commercial.html" class="nav-link">Commercial Cleaning</a>
+                </li>
+                <li class="nav-item nav-cta">
+                    <a href="https://api.whatsapp.com/send?phone=447827784204&text=Hello%20GreenGlo%2C%20I'd%20like%20a%20quote%20for%20cleaning%20services"
+                        class="btn" target="_blank">Get Quote</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Premium Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <div class="bics-logo-container">
+                        <img src="bics.png" alt="BICSc Registered" class="bics-logo">
+                        <span>BICSc Registered</span>
+                    </div>
+                </div>
+
+                <h1>Professional Cleaning and Maintenance Services</h1>
+
+                <p class="hero-subtitle">
+                    Affordable cleaning rates and Maintenance services London. Reliable home cleaning services near you
+                    available on weekends and holidays
+                </p>
+
+                <div class="hero-features">
+                    <div class="hero-feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Background-checked & Insured</h4>
+                            <p>Fully vetted cleaners across London</p>
+                        </div>
+                    </div>
+                    <div class="hero-feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Flexible Scheduling</h4>
+                            <p>Weekly, fortnightly, monthly, or one-off</p>
+                        </div>
+                    </div>
+                    <div class="hero-feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Professional Housekeepers</h4>
+                            <p>Expert cleaners with great discounts</p>
+                        </div>
+                    </div>
+                    <div class="hero-feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Eco-Friendly Cleaning</h4>
+                            <p>Non-toxic and pet-friendly solutions</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-cta">
+                    <a href="https://api.whatsapp.com/send?phone=447827784204&text=Hello%20GreenGlo%2C%20I'd%20like%20a%20free%20cleaning%20quote"
+                        class="btn btn-large" target="_blank">
+                        <i class="fas fa-whatsapp"></i>
+                        Free Cleaning Quote
+                    </a>
+                    <a href="services.html" class="btn btn-outline btn-large">
+                        <i class="fas fa-list"></i>
+                        View Our Services
+                    </a>
+                </div>
+
+                <div class="club-notice">
+                    <i class="fas fa-crown"></i>
+                    <p>Enjoy priority booking, £300 in credits & MORE with GreenGlo Club</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section section-light" id="sustainability">
+        <div class="container">
+            <div class="section-title">
+                <h2>Sustainability & Service Excellence</h2>
+                <p>Tailored cleaning plans for individual homes</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon-large">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h3>Easy To Book</h3>
+                    <p>Getting a quote is quick and easy through our WhatsApp. Message us anytime, and we'll send you a
+                        prompt, no-hassle estimate right away.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-large">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>Flexible Scheduling</h3>
+                    <p>Manage all your house cleaning appointments from a single account! Easily book, reschedule, or
+                        plan your future cleaning services with just a few clicks.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-large">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Family-Friendly Cleaning</h3>
+                    <p>Enjoy a spotless home without the harsh chemicals. Our non-toxic, eco-friendly cleaning products
+                        are safe for your family, pets, and the environment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Showcase Section -->
+    <section class="section section-gray" id="image-showcase">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Cleaning Services in Action</h2>
+                <p>Professional results you can trust</p>
+            </div>
+            
+            <div class="image-showcase-grid">
+                <div class="image-showcase-card" onclick="location.href='services.html?book=5'" style="cursor:pointer;">
+                    <img src="bathroom.png" alt="Professional bathroom cleaning service">
+                    <div class="image-showcase-content">
+                        <h4>Bathroom Cleaning</h4>
+                        <p>Sparkling clean bathrooms with eco-friendly products</p>
+                    </div>
+                </div>
+                
+                <div class="image-showcase-card" onclick="location.href='services.html?book=7'" style="cursor:pointer;">
+                    <img src="carpet.png" alt="Professional carpet cleaning service">
+                    <div class="image-showcase-content">
+                        <h4>Carpet Cleaning</h4>
+                        <p>Deep cleaning for carpets and rugs of all types</p>
+                    </div>
+                </div>
+                
+                <div class="image-showcase-card" onclick="location.href='services.html?book=11'" style="cursor:pointer;">
+                    <img src="afterbuilders.png" alt="After builders cleaning service">
+                    <div class="image-showcase-content">
+                        <h4>After Builders Clean</h4>
+                        <p>Post-construction cleanup for a spotless finish</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Carousel Section -->
+    <section class="section section-light" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Home Cleaning Services London Reviews</h2>
+                <p>Residential cleaning experts for same-day and emergency cleaning service</p>
+            </div>
+
+            <div class="testimonials-carousel">
+                <div class="carousel-container" id="carouselContainer">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-content">
+                            "Green Glo Cleaning were amazing for my end of tenancy clean for my 1 bed flat. It was quite
+                            easy to get an appointment booked and the service was top notch.
+
+                            Will definitely recommend to my contacts who require cleaning services.
+                            "
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Adekunle Adepitan</h4>
+                                <p>5stars on Google reviews </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-content">
+                            "I recently had an extractor deep clean done in my kitchen, and I couldn't be happier with
+                            the results. The team was professional, thorough, and incredibly attentive to detail. Every
+                            surface, appliance, and hard-to-reach area looks spotless and refreshed. The extractor
+                            system, in particular, looks as good as new and is working far more efficiently.
+
+                            They arrived on time, worked efficiently, and left the space looking immaculate. It's such a
+                            relief to have a kitchen that feels genuinely clean from top to bottom. Highly recommended
+                            for anyone needing a proper deep clean and expert extractor cleaning!"
+                        </p>
+                        <div class="testimonial-author">
+
+                            <div class="author-info">
+                                <h4>Natasha Cheema</h4>
+                                <p>5stars on Google reviews </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-content">
+                            "I'm really happy with the service from this cleaning company! Everything was spotless —
+                            they did such a great job. Tomi was especially helpful and kind; anytime I asked for a
+                            favor, he never hesitated. I've tried other cleaning companies before, but this one stands
+                            out — very easy to communicate with and super reliable. Definitely recommending them to
+                            others!
+                            "
+                        </p>
+                        <div class="testimonial-author">
+
+                            <div class="author-info">
+                                <h4>Fresus Anne Velicaria</h4>
+                                <p>5 stars on Google Reviews</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 4 -->
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-content">
+                            "I was so impressed with the recent cleaning done by Green Glo !They were punctual,
+                            friendly, and incredibly thorough. They paid attention to detail, even in areas I hadn't
+
+                            noticed. My home now looks and smells amazing, and I feel so much more relaxed. I would
+                            definitely recommend them to anyone in need of a professional clean!!"
+                        </p>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Michaela Hickey</h4>
+                                <p>5 stars on Google Reviews</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-controls">
+                    <button class="carousel-btn" id="prevBtn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="carousel-indicators" id="carouselIndicators">
+                        <span class="carousel-indicator active" data-slide="0"></span>
+                        <span class="carousel-indicator" data-slide="1"></span>
+                        <span class="carousel-indicator" data-slide="2"></span>
+                        <span class="carousel-indicator" data-slide="3"></span>
+                    </div>
+                    <button class="carousel-btn" id="nextBtn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Showcase Section -->
+    <section class="section section-gray" id="services-showcase">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Professional Cleaning Services</h2>
+                <p>Comprehensive cleaning solutions for every need</p>
+            </div>
+            
+            <div class="services-showcase-grid">
+                <div class="service-showcase-card" onclick="location.href='services.html?book=8'" style="cursor:pointer;">
+                    <div class="service-showcase-image">
+                        <img src="domestic.png" alt="Domestic cleaning service">
+                    </div>
+                    <div class="service-showcase-content">
+                        <h3>Domestic Cleaning</h3>
+                        <p>Regular home cleaning services tailored to your schedule and needs. Perfect for busy families and professionals.</p>
+                        <a href="services.html?book=8" class="btn" style="padding: 0.75rem 1.5rem; font-size: 0.9rem; width: 100%;" onclick="event.stopPropagation()">Book Now</a>
+                    </div>
+                </div>
+                
+                <div class="service-showcase-card" onclick="location.href='commercial.html'" style="cursor:pointer;">
+                    <div class="service-showcase-image">
+                        <img src="commercial.png" alt="Commercial cleaning service">
+                    </div>
+                    <div class="service-showcase-content">
+                        <h3>Commercial Cleaning</h3>
+                        <p>Office and commercial space cleaning for a productive work environment. Customized cleaning plans for businesses.</p>
+                        <a href="commercial.html" class="btn" style="padding: 0.75rem 1.5rem; font-size: 0.9rem; width: 100%;" onclick="event.stopPropagation()">Book Now</a>
+                    </div>
+                </div>
+                
+                <div class="service-showcase-card" onclick="location.href='services.html?book=9'" style="cursor:pointer;">
+                    <div class="service-showcase-image">
+                        <img src="deep.png" alt="Deep cleaning service">
+                    </div>
+                    <div class="service-showcase-content">
+                        <h3>Deep Cleaning</h3>
+                        <p>Thorough cleaning service for move-in/move-out or seasonal deep cleans. Attention to every detail.</p>
+                        <a href="services.html?book=9" class="btn" style="padding: 0.75rem 1.5rem; font-size: 0.9rem; width: 100%;" onclick="event.stopPropagation()">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GreenGlo Club Section -->
+    <section class="section section-light" id="club">
+        <div class="container">
+            <div class="section-title">
+                <h2>GreenGlo Membership Club</h2>
+                <p>Join GreenGlo</p>
+            </div>
+
+            <div class="feature-card" style="max-width: 800px; margin: 0 auto; display: flex; align-items: center; padding: 2rem;">
+                <div style="flex: 1; padding-right: 2rem;">
+                    <div class="feature-icon-large" style="margin: 0 0 1.5rem;">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h3 style="font-size: 2rem; margin-bottom: 1rem;">Enjoy premium booking slots & preferential member rates</h3>
+                    <p style="font-size: 1.125rem; color: var(--medium-gray); margin-bottom: 2rem;">
+                        Join our exclusive membership club and enjoy benefits like priority booking, exclusive discounts, £300 in credits, and much more.
+                    </p>
+                    <a href="greengloclub.html" class="btn btn-large">
+                        <i class="fas fa-gem"></i>
+                        Learn about the club
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Gallery Section -->
+    <section class="section section-light" id="results-gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Cleaning Results</h2>
+                <p>See the transformation our professional cleaning services provide</p>
+            </div>
+            
+            <div class="results-grid">
+                <div class="result-card" onclick="location.href='services.html?book=12'" style="cursor:pointer;">
+                    <img src="furniture.png" alt="Furniture cleaning results">
+                    <h4>Upholstery & Furniture</h4>
+                    <p>Professional deep cleaning for all fabric surfaces</p>
+                </div>
+                
+                <div class="result-card" onclick="location.href='services.html?book=7'" style="cursor:pointer;">
+                    <img src="flooring.png" alt="Floor cleaning results">
+                    <h4>Floor & Carpet Care</h4>
+                    <p>Expert floor and carpet cleaning services</p>
+                </div>
+                
+                <div class="result-card" onclick="location.href='services.html'" style="cursor:pointer;">
+                    <img src="emergency.png" alt="Emergency cleaning service">
+                    <h4>Emergency Response</h4>
+                    <p>24/7 emergency cleaning solutions</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section section-gray" id="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>House Cleaning Services FAQ</h2>
+                <p>Common questions about our cleaning services</p>
+            </div>
+
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How much does a professional house cleaning service cost in London?
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our affordable home cleaning services in London starts at £18/h and offer clear, transparent
+                            pricing with no hidden fees. You can get a personalised quote based on the size of your
+                            property and the level of cleaning required.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Are the cleaners vetted and insured?
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, all our local cleaners in London are fully background-checked, trained, and insured.
+                            Hiring our trusted domestic cleaners London ensures your home is in safe, professional
+                            hands.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What tasks are included in a standard home cleaning service?
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our house cleaning services London include dusting, vacuuming, sweeping, mopping, kitchen and
+                            bathroom cleaning, and general tidying of living areas. You can also request extras such as
+                            appliance cleaning and oven cleaning London for a complete, spotless home.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How do I schedule or manage bookings online?
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our easy-to-use platform allows you to book professional home cleaners London in just a few
+                            clicks. You can manage all appointments, reschedule services, and plan future visits
+                            directly from your account.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What eco-friendly products do you use?
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We use only certified eco-friendly, non-toxic cleaning products that are safe for children,
+                            pets, and the environment. Our products are biodegradable and come from sustainable sources.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Do you offer emergency cleaning services?
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we offer same-day and emergency cleaning services for urgent situations. Contact us via
+                            WhatsApp for immediate assistance, and we'll do our best to accommodate your needs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Coverage Checker & Map Section -->
+    <section class="section section-light" id="coverage-checker">
+        <div class="container">
+            <div class="section-title">
+                <h2>Check Our Service Coverage</h2>
+                <p>Enter your postcode to see if GreenGlo serves your area in London, Kent, and Essex.</p>
+            </div>
+
+            <div class="coverage-container">
+                <!-- Left Column: Input Form & Results -->
+                <div class="coverage-form-container">
+                    <div class="coverage-card">
+                        <div class="feature-icon-large" style="margin: 0 auto 1.5rem;">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3 style="text-align: center; margin-bottom: 1rem;">Are We in Your Area?</h3>
+
+                        <!-- Input Form -->
+                        <form id="postcodeForm" class="postcode-form">
+                            <div class="form-group">
+                                <label for="postcodeInput">Your UK Postcode</label>
+                                <div class="input-with-button">
+                                    <input 
+                                        type="text" 
+                                        id="postcodeInput" 
+                                        placeholder="e.g., SW1A 1AA, ME14 2TT" 
+                                        aria-label="Enter your UK postcode"
+                                    >
+                                    <button type="submit" class="btn" id="checkButton">
+                                        <i class="fas fa-search"></i> Check
+                                    </button>
+                                </div>
+                                <small class="input-hint">Enter the first part (outcode) or full postcode.</small>
+                            </div>
+                        </form>
+
+                        <!-- Results Display -->
+                        <div id="coverageResult" class="coverage-result" aria-live="polite">
+                            <div class="result-placeholder">
+                                <i class="fas fa-map-pin"></i>
+                                <p>Your coverage result will appear here.</p>
+                            </div>
+                        </div>
+
+                        <!-- Service Area List -->
+                        <div class="service-areas">
+                            <h4 style="margin-bottom: 1rem;"><i class="fas fa-check-circle"></i> Our Primary Service Areas</h4>
+                            <div class="areas-grid">
+                                <div class="area-badge area-london">
+                                    <i class="fas fa-landmark"></i> London
+                                </div>
+                                <div class="area-badge area-kent">
+                                    <i class="fas fa-tree"></i> Kent
+                                </div>
+                                <div class="area-badge area-essex">
+                                    <i class="fas fa-water"></i> Essex
+                                </div>
+                            </div>
+                            <p class="areas-note">Coverage based on postcode areas. Some outer districts may vary.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Interactive Map -->
+                <div class="coverage-map-container">
+                    <div class="coverage-card">
+                        <h3 style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+                            <i class="fas fa-map"></i> Service Coverage Map
+                        </h3>
+                        <p style="color: var(--medium-gray); margin-bottom: 1.5rem; font-size: 0.95rem;">
+                            Explore our service regions. <strong>Green areas</strong> are covered.
+                        </p>
+                        
+                        <!-- Map Container -->
+                        <div id="serviceAreaMap"></div>
+                        
+                        <div class="map-legend">
+                            <div class="legend-item">
+                                <span class="legend-color" style="background-color: rgba(16, 185, 129, 0.3); border-color: var(--primary-green);"></span>
+                                <span>Covered Region (London, Kent, Essex)</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color" style="background-color: var(--light-gray); border-color: var(--medium-gray);"></span>
+                                <span>Surrounding Areas</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="cta-section">
+                <h2>Ready to book now?</h2>
+                <p>Schedule your professional cleaning service today with our easy online booking system.</p>
+                <div class="cta-buttons">
+                    <a href="https://api.whatsapp.com/send?phone=447827784204&text=Hello%20GreenGlo%2C%20I'd%20like%20to%20book%20a%20cleaning%20service"
+                        class="btn btn-large" target="_blank">
+                        <i class="fas fa-whatsapp"></i>
+                        Book now
+                    </a>
+                    <a href="https://api.whatsapp.com/send?phone=447827784204&text=Hello%20GreenGlo%2C%20I'd%20like%20to%20request%20a%20quote"
+                        class="btn btn-outline btn-large" target="_blank">
+                        <i class="fas fa-whatsapp"></i>
+                        Request a quote
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <div class="whatsapp-float">
+        <div class="whatsapp-button" id="whatsappButton">
+            <div class="whatsapp-notification" id="whatsappNotification">1</div>
+            <div class="whatsapp-icon-container">
+                <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="white">
+                    <path d="M12 0a12 12 0 1 0 12 12A12 12 0 0 0 12 0Zm6.49 15.387l-1.745 1.745a.374.374 0 0 1-.531 0l-1.93-1.93a.374.374 0 0 1 0-.53l1.745-1.745a6.9 6.9 0 0 0-8.858-.416l-1.21 1.21a6.9 6.9 0 0 0-.416 8.858l-1.745 1.745a.374.374 0 0 1-.531 0l-1.93-1.93a.374.374 0 0 1 0-.53l1.745-1.745a6.9 6.9 0 0 0 .416-8.858l1.21-1.21a6.9 6.9 0 0 0 8.858-.416l1.745-1.745a.374.374 0 0 1 .531 0l1.93 1.93a.374.374 0 0 1 0 .53l-1.745 1.745a6.9 6.9 0 0 0 .416 8.858Z" />
+                </svg>
+            </div>
+        </div>
+        <span class="whatsapp-tooltip">Chat with Green Glo Cleaning</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>GreenGlo Cleaners</h3>
+                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 1.5rem;">
+                        Professional eco-friendly cleaning services for homes and offices across London.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/greenglocleaningco" class="social-link" target="_blank" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://tiktok.com/@greenglocleaningco" class="social-link" target="_blank" aria-label="TikTok">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="https://facebook.com/greenglocleaningco" class="social-link" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html">Domestic cleaning</a></li>
+                        <li><a href="services.html">One-off cleaning</a></li>
+                        <li><a href="services.html">End of tenancy cleaning</a></li>
+                        <li><a href="services.html">Carpet cleaning</a></li>
+                        <li><a href="services.html">Office cleaning</a></li>
+                        <li><a href="services.html">View all services</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="index.html#prices">Prices</a></li>
+                        <li><a href="index.html#club">GreenGlo Club</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="index.html#faq">FAQ</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 1.5rem;">
+                        <i class="fas fa-phone" style="margin-right: 0.5rem;"></i> 07827 784204
+                    </p>
+                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 1.5rem;">
+                        <i class="fas fa-envelope" style="margin-right: 0.5rem;"></i> info@greenglocleaningco.com
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>GreenGlo Cleaners London © 2025. All rights reserved | <a href="#">Privacy Policy</a> | <a
+                        href="#">Terms of Service</a></p>
+                <p style="margin-top: 0.5rem;">Created by <a
+                        href="https://api.whatsapp.com/send?phone=447543737488&text=" target="_blank">Sacha
+                        Raif</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script>
+        // ===== EmailJS Configuration =====
+        const EMAIL_CONFIG = {
+            publicKey: 'qS1v1ZEwi4XnBl1As',
+            serviceId: 'service_cj7heuj',
+            templateId: 'template_xe4rngx',
+            businessTemplateId: 'template_zf4ph1s',
+            couponCode: 'NEWCUSTOMER10',
+            couponPercent: 10,
+            popupDelay: 5000 // 5 seconds delay
+        };
+
+        // ===== Main JavaScript =====
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize EmailJS
+            (function() {
+                emailjs.init({
+                    publicKey: EMAIL_CONFIG.publicKey,
+                    blockHeadless: true,
+                    limitRate: {
+                        id: 'greenglo',
+                        throttle: 10000
+                    }
+                });
+                console.log('✅ EmailJS initialized successfully');
+            })();
+            
+            // ===== Mobile Navigation =====
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+            const navMenu = document.getElementById('navMenu');
+            const navbar = document.getElementById('navbar');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            // Mobile menu toggle function
+            function toggleMobileMenu() {
+                const isActive = navMenu.classList.contains('active');
+                
+                if (isActive) {
+                    closeMobileMenu();
+                } else {
+                    openMobileMenu();
+                }
+            }
+
+            function openMobileMenu() {
+                navMenu.classList.add('active');
+                mobileMenuOverlay.classList.add('active');
+                mobileMenuBtn.classList.add('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeMobileMenu() {
+                navMenu.classList.remove('active');
+                mobileMenuOverlay.classList.remove('active');
+                mobileMenuBtn.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                document.body.style.overflow = '';
+            }
+
+            // Mobile menu button click
+            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+            // Close menu when clicking overlay
+            mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+
+            // Close menu when clicking nav links
+            navLinks.forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+
+            // Close menu with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+                    closeMobileMenu();
+                }
+            });
+
+            // Navbar scroll effect
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // ===== Testimonial Carousel =====
+            const carouselContainer = document.getElementById('carouselContainer');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const indicators = document.querySelectorAll('.carousel-indicator');
+            const totalSlides = document.querySelectorAll('.testimonial-card').length;
+            let currentSlide = 0;
+            let carouselInterval;
+
+            function updateCarousel() {
+                if (carouselContainer) {
+                    carouselContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+                    indicators.forEach((indicator, index) => {
+                        if (index === currentSlide) {
+                            indicator.classList.add('active');
+                        } else {
+                            indicator.classList.remove('active');
+                        }
+                    });
+                }
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateCarousel();
+            }
+
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                updateCarousel();
+            }
+
+            // Initialize carousel
+            if (prevBtn && nextBtn) {
+                prevBtn.addEventListener('click', prevSlide);
+                nextBtn.addEventListener('click', nextSlide);
+
+                indicators.forEach((indicator, index) => {
+                    indicator.addEventListener('click', () => {
+                        currentSlide = index;
+                        updateCarousel();
+                    });
+                });
+
+                // Auto-rotate carousel
+                carouselInterval = setInterval(nextSlide, 5000);
+                
+                // Pause on hover
+                const carousel = document.querySelector('.testimonials-carousel');
+                if (carousel) {
+                    carousel.addEventListener('mouseenter', () => {
+                        clearInterval(carouselInterval);
+                    });
+
+                    carousel.addEventListener('mouseleave', () => {
+                        carouselInterval = setInterval(nextSlide, 5000);
+                    });
+
+                    // Pause on touch for mobile
+                    carousel.addEventListener('touchstart', () => {
+                        clearInterval(carouselInterval);
+                    });
+
+                    carousel.addEventListener('touchend', () => {
+                        carouselInterval = setInterval(nextSlide, 5000);
+                    });
+                }
+            }
+
+            // ===== FAQ Accordion =====
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    item.classList.toggle('active');
+                });
+            });
+
+            // ===== WhatsApp Button =====
+            const whatsappButton = document.getElementById('whatsappButton');
+            const whatsappNotification = document.getElementById('whatsappNotification');
+
+            function openWhatsApp() {
+                const message = "Hello GreenGlo, I'm interested in your professional cleaning services. Could you provide more information?";
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappUrl = `https://api.whatsapp.com/send?phone=447827784204&text=${encodedMessage}`;
+                
+                window.open(whatsappUrl, '_blank');
+                
+                // Hide notification after click
+                if (whatsappNotification) {
+                    whatsappNotification.style.display = 'none';
+                    localStorage.setItem('whatsappNotificationRead', 'true');
+                }
+            }
+
+            // Add click event to WhatsApp button
+            if (whatsappButton) {
+                whatsappButton.addEventListener('click', openWhatsApp);
+                
+                // Check notification status
+                const notificationRead = localStorage.getItem('whatsappNotificationRead');
+                const lastVisit = localStorage.getItem('lastWhatsAppVisit');
+                const now = new Date().getTime();
+                
+                if (whatsappNotification) {
+                    if (!notificationRead || !lastVisit || (now - parseInt(lastVisit)) > 24 * 60 * 60 * 1000) {
+                        whatsappNotification.style.display = 'flex';
+                    } else {
+                        whatsappNotification.style.display = 'none';
+                    }
+                    localStorage.setItem('lastWhatsAppVisit', now.toString());
+                }
+            }
+
+            // ===== Coverage Checker & Map =====
+            const serviceConfig = {
+                coveredAreas: [
+                    'E', 'EC', 'N', 'NW', 'SE', 'SW', 'W', 'WC',
+                    'ME', 'TN', 'CT', 'DA',
+                    'IG', 'RM', 'CM', 'SS', 'CO'
+                ],
+                companyName: 'GreenGlo Cleaners',
+                phoneNumber: '447827784204'
+            };
+
+            const postcodeForm = document.getElementById('postcodeForm');
+            const postcodeInput = document.getElementById('postcodeInput');
+            const coverageResult = document.getElementById('coverageResult');
+            const checkButton = document.getElementById('checkButton');
+
+            let serviceMap = null;
+
+            function initServiceMap() {
+                // Check if map container exists
+                const mapContainer = document.getElementById('serviceAreaMap');
+                if (!mapContainer) {
+                    console.error('Map container not found');
+                    return;
+                }
+
+                // Clear any existing map
+                if (serviceMap) {
+                    serviceMap.remove();
+                }
+
+                // Initialize map
+                serviceMap = L.map('serviceAreaMap').setView([51.507, 0.127], 9);
+                
+                // Add tile layer
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                    maxZoom: 13,
+                    minZoom: 7
+                }).addTo(serviceMap);
+                
+                // Define service area with multiple polygons for London, Kent, and Essex
+                const londonArea = [
+                    [51.686, -0.510],
+                    [51.686, 0.800],
+                    [51.200, 0.800],
+                    [51.200, -0.510]
+                ];
+                
+                const kentArea = [
+                    [51.447, 0.374],
+                    [51.447, 1.450],
+                    [50.940, 1.450],
+                    [50.940, 0.374]
+                ];
+                
+                const essexArea = [
+                    [51.980, -0.208],
+                    [51.980, 1.300],
+                    [51.447, 1.300],
+                    [51.447, -0.208]
+                ];
+                
+                // Add London polygon
+                L.polygon(londonArea, {
+                    color: 'var(--primary-green)',
+                    weight: 2,
+                    fillColor: 'rgba(16, 185, 129, 0.3)',
+                    fillOpacity: 0.4,
+                    className: 'service-coverage-layer'
+                }).addTo(serviceMap)
+                  .bindPopup('<b>London Coverage</b><br>Full service available');
+                
+                // Add Kent polygon
+                L.polygon(kentArea, {
+                    color: 'var(--primary-green)',
+                    weight: 2,
+                    fillColor: 'rgba(52, 211, 153, 0.3)',
+                    fillOpacity: 0.4,
+                    className: 'service-coverage-layer'
+                }).addTo(serviceMap)
+                  .bindPopup('<b>Kent Coverage</b><br>Full service available');
+                
+                // Add Essex polygon
+                L.polygon(essexArea, {
+                    color: 'var(--primary-green)',
+                    weight: 2,
+                    fillColor: 'rgba(13, 148, 136, 0.3)',
+                    fillOpacity: 0.4,
+                    className: 'service-coverage-layer'
+                }).addTo(serviceMap)
+                  .bindPopup('<b>Essex Coverage</b><br>Full service available');
+                
+                // Add markers for key locations
+                const locations = [
+                    { coords: [51.507, -0.127], title: 'London Headquarters', iconColor: '#10B981' },
+                    { coords: [51.278, 0.527], title: 'Kent Service Center', iconColor: '#34D399' },
+                    { coords: [51.759, 0.457], title: 'Essex Service Center', iconColor: '#0D9488' }
+                ];
+                
+                locations.forEach(loc => {
+                    L.circleMarker(loc.coords, {
+                        radius: 8,
+                        fillColor: loc.iconColor,
+                        color: '#fff',
+                        weight: 2,
+                        opacity: 1,
+                        fillOpacity: 0.8
+                    }).addTo(serviceMap)
+                      .bindPopup(`<b>${loc.title}</b>`);
+                });
+
+                // Handle map resize on mobile
+                setTimeout(() => {
+                    serviceMap.invalidateSize();
+                }, 100);
+            }
+
+            // Initialize map
+            initServiceMap();
+
+            // Handle window resize for map
+            window.addEventListener('resize', function() {
+                if (serviceMap) {
+                    setTimeout(() => {
+                        serviceMap.invalidateSize();
+                    }, 100);
+                }
+            });
+
+            // Postcode checker functionality
+            if (postcodeForm && postcodeInput && coverageResult && checkButton) {
+                function validateAndParsePostcode(postcode) {
+                    let cleanPostcode = postcode.toUpperCase().replace(/\s+/g, '').trim();
+                    
+                    const postcodeRegex = /^([A-Z]{1,2}\d{1,2}[A-Z]?)\d[A-Z]{2}$/;
+                    
+                    if (!postcodeRegex.test(cleanPostcode)) {
+                        const outcodeRegex = /^([A-Z]{1,2}\d{1,2}[A-Z]?)/;
+                        const match = cleanPostcode.match(outcodeRegex);
+                        if (match) {
+                            return { valid: true, fullPostcode: null, outcode: match[1] };
+                        }
+                        return { valid: false, error: 'Please enter a valid UK postcode format (e.g., SW1A 1AA or ME14 2TT).' };
+                    }
+                    
+                    const outcodeMatch = cleanPostcode.match(/^[A-Z]{1,2}\d{1,2}[A-Z]?/);
+                    const outcode = outcodeMatch ? outcodeMatch[0] : null;
+                    
+                    return {
+                        valid: true,
+                        fullPostcode: cleanPostcode.replace(/(.{3})$/, ' $1'),
+                        outcode: outcode
+                    };
+                }
+
+                function checkServiceCoverage(postcodeData) {
+                    const outcode = postcodeData.outcode;
+                    if (!outcode) return false;
+                    
+                    for (const area of serviceConfig.coveredAreas) {
+                        if (outcode.startsWith(area)) {
+                            return {
+                                covered: true,
+                                area: area,
+                                region: getRegionName(area)
+                            };
+                        }
+                    }
+                    return { covered: false };
+                }
+
+                function getRegionName(area) {
+                    const londonAreas = ['E', 'EC', 'N', 'NW', 'SE', 'SW', 'W', 'WC'];
+                    const kentAreas = ['ME', 'TN', 'CT', 'DA'];
+                    const essexAreas = ['IG', 'RM', 'CM', 'SS', 'CO'];
+                    
+                    if (londonAreas.includes(area)) return 'London';
+                    if (kentAreas.includes(area)) return 'Kent';
+                    if (essexAreas.includes(area)) return 'Essex';
+                    return area;
+                }
+
+                function displayCoverageResult(postcodeData, coverageInfo) {
+                    if (coverageInfo.covered) {
+                        coverageResult.innerHTML = `
+                            <div class="result-success">
+                                <i class="fas fa-check-circle"></i>
+                                <h4>Great News! We Cover Your Area</h4>
+                                <div class="postcode-display">${postcodeData.fullPostcode || postcodeData.outcode}</div>
+                                <p>Your postcode is in our <strong>${coverageInfo.region}</strong> service area.</p>
+                                <p style="font-size: 0.95rem; color: var(--medium-gray);">
+                                    <i class="fas fa-clock"></i> Next available slots in ${coverageInfo.region}
+                                </p>
+                                <div class="result-cta">
+                                    <a href="https://api.whatsapp.com/send?phone=${serviceConfig.phoneNumber}&text=Hello%20GreenGlo,%20I'm%20in%20${encodeURIComponent(postcodeData.outcode)}%20and%20would%20like%20a%20quote" 
+                                       class="btn" 
+                                       target="_blank" 
+                                       style="margin-top: 1rem;">
+                                        <i class="fas fa-whatsapp"></i> Get a Quote for ${postcodeData.outcode}
+                                    </a>
+                                </div>
+                            </div>
+                        `;
+                        coverageResult.style.borderColor = 'var(--primary-green)';
+                        coverageResult.style.background = 'rgba(16, 185, 129, 0.05)';
+                    } else {
+                        coverageResult.innerHTML = `
+                            <div class="result-error">
+                                <i class="fas fa-times-circle"></i>
+                                <h4>Currently Not in Your Area</h4>
+                                <div class="postcode-display">${postcodeData.fullPostcode || postcodeData.outcode}</div>
+                                <p>We don't currently serve <strong>${postcodeData.outcode}</strong>. Our primary areas are London, Kent & Essex.</p>
+                                <p style="font-size: 0.95rem; color: var(--medium-gray);">
+                                    <i class="fas fa-info-circle"></i> Service areas expanding soon!
+                                </p>
+                                <div class="result-cta">
+                                    <button class="btn btn-outline" onclick="document.getElementById('postcodeInput').focus()" style="margin-top: 1rem;">
+                                        <i class="fas fa-redo"></i> Check Another Postcode
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        coverageResult.style.borderColor = '#EF4444';
+                        coverageResult.style.background = 'rgba(239, 68, 68, 0.05)';
+                    }
+                }
+
+                postcodeForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const postcode = postcodeInput.value.trim();
+                    if (!postcode) {
+                        postcodeInput.focus();
+                        return;
+                    }
+                    
+                    const originalBtnText = checkButton.innerHTML;
+                    checkButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Checking...';
+                    checkButton.disabled = true;
+                    
+                    setTimeout(() => {
+                        const postcodeData = validateAndParsePostcode(postcode);
+                        
+                        if (!postcodeData.valid) {
+                            coverageResult.innerHTML = `
+                                <div class="result-error">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    <h4>Invalid Postcode</h4>
+                                    <p>${postcodeData.error}</p>
+                                    <p style="font-size: 0.9rem;">Examples: SW1A 1AA (London), ME14 2TT (Kent), CM1 1AA (Essex)</p>
+                                </div>
+                            `;
+                            coverageResult.style.borderColor = '#F59E0B';
+                            coverageResult.style.background = 'rgba(245, 158, 11, 0.05)';
+                        } else {
+                            const coverageInfo = checkServiceCoverage(postcodeData);
+                            displayCoverageResult(postcodeData, coverageInfo);
+                            
+                            if (coverageInfo.covered && serviceMap) {
+                                const regions = {
+                                    'London': { center: [51.507, -0.127], zoom: 10 },
+                                    'Kent': { center: [51.278, 0.527], zoom: 9 },
+                                    'Essex': { center: [51.759, 0.457], zoom: 9 }
+                                };
+                                
+                                if (regions[coverageInfo.region]) {
+                                    const { center, zoom } = regions[coverageInfo.region];
+                                    serviceMap.setView(center, zoom);
+                                    
+                                    // Add a temporary marker for the searched postcode
+                                    const marker = L.circleMarker(center, {
+                                        radius: 10,
+                                        fillColor: '#10B981',
+                                        color: '#fff',
+                                        weight: 3,
+                                        opacity: 1,
+                                        fillOpacity: 0.8
+                                    }).addTo(serviceMap)
+                                      .bindPopup(`<b>Searched Area: ${postcodeData.outcode}</b><br>Covered in ${coverageInfo.region}`)
+                                      .openPopup();
+                                    
+                                    // Remove marker after 10 seconds
+                                    setTimeout(() => {
+                                        if (marker && serviceMap) {
+                                            serviceMap.removeLayer(marker);
+                                        }
+                                    }, 10000);
+                                }
+                            }
+                        }
+                        
+                        checkButton.innerHTML = originalBtnText;
+                        checkButton.disabled = false;
+                    }, 800);
+                });
+
+                // Set up postcode placeholder rotation
+                const examples = ['SW1A 1AA', 'ME14 2TT', 'IG1 1AA'];
+                let exampleIndex = 0;
+                
+                setInterval(() => {
+                    postcodeInput.placeholder = `e.g., ${examples[exampleIndex]}`;
+                    exampleIndex = (exampleIndex + 1) % examples.length;
+                }, 3000);
+            }
+
+            // ===== Email Popup System =====
+            // Show popup after delay
+            setTimeout(() => {
+                showEmailPopup();
+            }, EMAIL_CONFIG.popupDelay);
+
+            function showEmailPopup() {
+                const hasSubmittedEmail = localStorage.getItem('greenglo_discount_received');
+                if (hasSubmittedEmail) {
+                    console.log('🚫 Popup not shown - user already submitted email');
+                    return;
+                }
+                
+                // REMOVED THE 24-HOUR RULE - popup will show every time page loads if user hasn't submitted email
+                console.log('✅ Showing email popup');
+                createEmailPopup();
+            }
+
+            function createEmailPopup() {
+                // Check if popup already exists
+                if (document.getElementById('emailPopup')) {
+                    console.log('🚫 Popup already exists');
+                    return;
+                }
+                
+                console.log('✅ Creating email popup');
+                
+                const popupHTML = `
+                    <div class="email-popup-overlay" id="emailPopup">
+                        <div class="email-popup-modal">
+                            <div class="email-popup-header">
+                                <h3>Get 10% Off Your First Clean!</h3>
+                                <p>Subscribe to receive your exclusive discount code</p>
+                                <button class="email-popup-close" id="closeEmailPopup">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="email-popup-content">
+                                <div id="emailForm">
+                                    <p>Enter your email below to receive your 10% discount code valid for first-time customers.</p>
+                                    
+                                    <form class="email-popup-form" id="discountForm">
+                                        <div class="email-popup-input-group">
+                                            <input type="email" 
+                                                   class="email-popup-input" 
+                                                   id="userEmail" 
+                                                   placeholder="Your email address" 
+                                                   required>
+                                            <div class="email-popup-error" id="emailError">
+                                                Please enter a valid email address
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="email-popup-checkbox">
+                                            <input type="checkbox" id="agreeTerms" required>
+                                            <label for="agreeTerms">
+                                                I agree to receive marketing emails from GreenGlo Cleaners. 
+                                                You can unsubscribe at any time. 
+                                                <a href="#" target="_blank">Privacy Policy</a>
+                                            </label>
+                                        </div>
+                                        
+                                        <button type="submit" class="btn email-popup-submit" id="submitEmail">
+                                            <i class="fas fa-gift"></i> Get My 10% Discount Code
+                                        </button>
+                                    </form>
+                                </div>
+                                
+                                <div class="email-popup-success" id="successMessage">
+                                    <i class="fas fa-check-circle"></i>
+                                    <h4>Success! Check Your Email</h4>
+                                    <p>Your 10% discount code has been sent to:</p>
+                                    <p style="font-weight: 600;" id="sentEmail"></p>
+                                    <div class="coupon-code" id="couponCode">${EMAIL_CONFIG.couponCode}</div>
+                                    <p style="font-size: 0.9rem;">This code is valid for first-time customers only.</p>
+                                    <button class="btn" onclick="window.location.href='https://api.whatsapp.com/send?phone=447827784204&text=Hello%20GreenGlo%2C%20I%27d%20like%20to%20use%20my%2010%25%20discount%20code%20${EMAIL_CONFIG.couponCode}'">
+                                        Book Now with Discount
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="email-popup-footer">
+                                <p>Limited time offer. One use per customer.</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                // Add popup to body
+                const popupContainer = document.createElement('div');
+                popupContainer.innerHTML = popupHTML;
+                document.body.appendChild(popupContainer.firstElementChild);
+                
+                // Show popup with animation
+                setTimeout(() => {
+                    const popup = document.getElementById('emailPopup');
+                    if (popup) {
+                        popup.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                        console.log('✅ Popup shown successfully');
+                        
+                        // Initialize popup functionality
+                        initEmailPopup();
+                    } else {
+                        console.error('❌ Popup element not found after creation');
+                    }
+                }, 100);
+            }
+
+            function initEmailPopup() {
+                const emailPopup = document.getElementById('emailPopup');
+                const closeEmailPopupBtn = document.getElementById('closeEmailPopup');
+                const discountForm = document.getElementById('discountForm');
+                const userEmail = document.getElementById('userEmail');
+                const emailError = document.getElementById('emailError');
+                const submitEmail = document.getElementById('submitEmail');
+                const emailForm = document.getElementById('emailForm');
+                const successMessage = document.getElementById('successMessage');
+                const sentEmail = document.getElementById('sentEmail');
+
+                if (!emailPopup) {
+                    console.error('❌ Email popup elements not found');
+                    return;
+                }
+
+                console.log('✅ Initializing email popup functionality');
+
+                // Close popup
+                function closeEmailPopup() {
+                    if (emailPopup) {
+                        emailPopup.classList.remove('active');
+                        document.body.style.overflow = '';
+                        setTimeout(() => {
+                            if (emailPopup && emailPopup.parentNode) {
+                                emailPopup.parentNode.removeChild(emailPopup);
+                            }
+                        }, 300);
+                    }
+                }
+
+                // Validate email
+                function validateEmail(email) {
+                    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    return re.test(email);
+                }
+
+                // Show success message
+                function showSuccessMessage(email) {
+                    if (sentEmail) sentEmail.textContent = email;
+                    if (emailForm) emailForm.style.display = 'none';
+                    if (successMessage) {
+                        successMessage.style.display = 'block';
+                        successMessage.classList.add('show');
+                    }
+                    
+                    // Save to localStorage
+                    localStorage.setItem('greenglo_discount_received', 'true');
+                    localStorage.setItem('greenglo_user_email', email);
+                    localStorage.setItem('greenglo_coupon_code', EMAIL_CONFIG.couponCode);
+                    
+                    // Auto-close after 10 seconds
+                    setTimeout(() => {
+                        if (emailPopup && emailPopup.classList.contains('active')) {
+                            closeEmailPopup();
+                        }
+                    }, 10000);
+                }
+
+                // Send email using EmailJS - FIXED WITH CORRECT VARIABLE {{email}}
+                async function sendDiscountEmail(email) {
+                    try {
+                        console.log('📧 Sending email to:', email);
+                        
+                        // Check if email is valid first
+                        if (!email || !email.includes('@')) {
+                            throw new Error('Invalid email address');
+                        }
+                        
+                        // Template parameters - CORRECTED: using 'email' variable to match {{email}} in template
+                        const templateParams = {
+                            email: email,  // This matches {{email}} in your EmailJS template
+                            coupon_code: EMAIL_CONFIG.couponCode,
+                            discount_percent: EMAIL_CONFIG.couponPercent,
+                            business_name: 'Green Glo Cleaning Co.',
+                            from_name: 'Green Glo Team',
+                            date: new Date().toLocaleDateString('en-GB')
+                        };
+
+                        console.log('📤 Sending with params:', templateParams);
+                        
+                        // Send to customer
+                        const customerResponse = await emailjs.send(
+                            EMAIL_CONFIG.serviceId,
+                            EMAIL_CONFIG.templateId,
+                            templateParams
+                        );
+
+                        console.log('✅ Customer email sent successfully:', customerResponse.status, customerResponse.text);
+                        
+                        // Try to send business notification (optional)
+                        try {
+                            const businessResponse = await emailjs.send(
+                                EMAIL_CONFIG.serviceId,
+                                EMAIL_CONFIG.businessTemplateId,
+                                {
+                                    customer_email: email,
+                                    coupon_code: EMAIL_CONFIG.couponCode,
+                                    date: new Date().toLocaleDateString('en-GB')
+                                }
+                            );
+                            console.log('✅ Business notification sent successfully');
+                        } catch (businessError) {
+                            console.warn('⚠️ Business notification failed, but customer email was sent:', businessError);
+                        }
+                        
+                        return { success: true };
+                        
+                    } catch (error) {
+                        console.error('❌ EmailJS Error:', error);
+                        console.error('Error details:', {
+                            status: error.status,
+                            text: error.text,
+                            message: error.message
+                        });
+                        throw error;
+                    }
+                }
+
+                // Handle form submission
+                if (discountForm) {
+                    discountForm.addEventListener('submit', async (e) => {
+                        e.preventDefault();
+                        
+                        const email = userEmail.value.trim();
+                        console.log('📝 Form submitted with email:', email);
+                        
+                        if (!validateEmail(email)) {
+                            userEmail.classList.add('error');
+                            emailError.classList.add('show');
+                            userEmail.focus();
+                            return;
+                        }
+                        
+                        userEmail.classList.remove('error');
+                        emailError.classList.remove('show');
+                        
+                        // Update button to show loading
+                        submitEmail.disabled = true;
+                        const originalBtnText = submitEmail.innerHTML;
+                        submitEmail.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                        
+                        try {
+                            // Send email via EmailJS
+                            const result = await sendDiscountEmail(email);
+                            
+                            if (result.success) {
+                                console.log('✅ Email sent successfully, showing success message');
+                                showSuccessMessage(email);
+                            }
+                            
+                        } catch (error) {
+                            console.error('❌ Error in submission process:', error);
+                            
+                            // Show error message but still give the coupon code
+                            emailError.textContent = 'Sorry, there was an error sending your discount code by email. Your discount code is shown below.';
+                            emailError.classList.add('show');
+                            
+                            // Still show success message with coupon code
+                            setTimeout(() => {
+                                showSuccessMessage(email);
+                            }, 500);
+                            
+                            // Reset button
+                            submitEmail.disabled = false;
+                            submitEmail.innerHTML = originalBtnText;
+                        }
+                    });
+                }
+
+                // Event Listeners
+                if (closeEmailPopupBtn) {
+                    closeEmailPopupBtn.addEventListener('click', closeEmailPopup);
+                }
+
+                if (emailPopup) {
+                    emailPopup.addEventListener('click', (e) => {
+                        if (e.target === emailPopup) {
+                            closeEmailPopup();
+                        }
+                    });
+                }
+
+                document.addEventListener('keydown', (e) => {
+                    const emailPopup = document.getElementById('emailPopup');
+                    if (e.key === 'Escape' && emailPopup && emailPopup.classList.contains('active')) {
+                        closeEmailPopup();
+                    }
+                });
+
+                // Pre-fill email if previously saved
+                const savedEmail = localStorage.getItem('greenglo_user_email');
+                if (userEmail && savedEmail) {
+                    userEmail.value = savedEmail;
+                }
+
+                // Add real-time email validation
+                if (userEmail) {
+                    userEmail.addEventListener('input', () => {
+                        if (userEmail.value.trim()) {
+                            userEmail.classList.remove('error');
+                            emailError.classList.remove('show');
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+<script src="clickable-images.js"></script>
+</body>
+</html>

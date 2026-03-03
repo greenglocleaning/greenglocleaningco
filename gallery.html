@@ -1,0 +1,2069 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Our Work Gallery | GreenGlo Cleaners</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://api.whatsapp.com/send?phone=447827784204&text=" rel="stylesheet">
+    <style>
+        /* ===== CSS Reset & Variables ===== */
+        :root {
+            /* Modern Green Palette */
+            --primary-green: #10B981;
+            --secondary-green: #34D399;
+            --dark-green: #065F46;
+            --light-green: #D1FAE5;
+            --accent-green: #059669;
+            --emerald: #10B981;
+            --teal: #0D9488;
+            --mint: #A7F3D0;
+
+            /* Neutrals */
+            --white: #FFFFFF;
+            --off-white: #F9FAFB;
+            --light-gray: #F3F4F6;
+            --medium-gray: #9CA3AF;
+            --dark-gray: #4B5563;
+            --black: #111827;
+
+            /* Accents */
+            --gold: #FBBF24;
+            --shadow: 0 20px 40px rgba(16, 185, 129, 0.12);
+            --shadow-lg: 0 25px 50px rgba(16, 185, 129, 0.15);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 16px;
+            --border-radius-lg: 24px;
+            --gradient-primary: linear-gradient(135deg, var(--primary-green), var(--teal));
+            --gradient-dark: linear-gradient(135deg, var(--dark-green), var(--teal));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.7;
+            color: var(--dark-gray);
+            background-color: var(--off-white);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--dark-green);
+            letter-spacing: -0.5px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* ===== Premium Button Styles ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2.5rem;
+            background: var(--gradient-primary);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: var(--shadow);
+            gap: 0.75rem;
+            min-height: 56px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-dark);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            opacity: 1;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn:active {
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-green);
+            color: var(--white);
+        }
+
+        .btn-large {
+            padding: 1.25rem 3rem;
+            font-size: 1.125rem;
+            min-height: 64px;
+        }
+
+        /* ===== Premium Navigation Bar ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 5px 20px rgba(16, 185, 129, 0.1);
+            padding: 0.5rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 1.5rem;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .nav-logo:hover {
+            transform: translateY(-2px);
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text h1 {
+            font-size: 1.75rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .logo-text span {
+            font-size: 0.75rem;
+            color: var(--medium-gray);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 0.25rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--primary-green);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            margin-left: 1rem;
+        }
+
+        .nav-cta .btn {
+            padding: 0.75rem 1.75rem;
+            min-height: auto;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            width: 48px;
+            height: 48px;
+            background: var(--light-green);
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-green);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-btn:hover {
+            background: var(--mint);
+            transform: rotate(90deg);
+        }
+
+        /* ===== Mobile Menu Overlay ===== */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ===== Gallery Hero Section ===== */
+        .gallery-hero {
+            min-height: 60vh;
+            padding: 160px 0 80px;
+            background: linear-gradient(135deg, rgba(209, 250, 229, 0.9) 0%, rgba(255, 255, 255, 0.95) 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+
+        .gallery-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--light-green) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .gallery-hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .gallery-hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            background: linear-gradient(to right, var(--dark-green), var(--teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gallery-hero p {
+            font-size: clamp(1.125rem, 3vw, 1.375rem);
+            color: var(--dark-gray);
+            margin-bottom: 3rem;
+            line-height: 1.6;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ===== Modern Section Styles ===== */
+        .section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-light {
+            background: var(--white);
+        }
+
+        .section-gray {
+            background: var(--off-white);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            font-size: 1.125rem;
+            color: var(--medium-gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* ===== Gallery Categories ===== */
+        .category-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .category-btn {
+            padding: 0.875rem 1.75rem;
+            background: var(--white);
+            border: 2px solid var(--primary-green);
+            border-radius: 50px;
+            color: var(--primary-green);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: var(--gradient-primary);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* ===== Updated Gallery Grid Styles ===== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .gallery-item {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-green);
+        }
+
+        /* ===== Updated Image Container ===== */
+        .gallery-image-container {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, var(--light-green) 0%, rgba(255, 255, 255, 0.95) 100%);
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            transition: var(--transition);
+            background: var(--light-gray);
+        }
+
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.05);
+        }
+
+        .gallery-info {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gallery-info h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-green);
+            flex-shrink: 0;
+        }
+
+        .gallery-info p {
+            color: var(--medium-gray);
+            font-size: 0.875rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.5;
+            flex: 1;
+        }
+
+        .gallery-date {
+            font-size: 0.75rem;
+            color: var(--medium-gray);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        /* ===== Updated Image Modal - FILLS ENTIRE BOX ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.active {
+            opacity: 1;
+            display: flex;
+        }
+
+        .modal-content {
+            position: relative;
+            width: 90%;
+            height: 90%;
+            max-width: 1200px;
+            max-height: 90vh;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-image-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light-gray);
+            overflow: hidden;
+            position: relative;
+            height: 70vh;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* When image is loaded, we'll apply fill mode */
+        .modal-image.fill-mode {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 44px;
+            height: 44px;
+            background: var(--gradient-primary);
+            border: none;
+            border-radius: 50%;
+            color: var(--white);
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2001;
+        }
+
+        .modal-close:hover {
+            background: var(--gradient-dark);
+            transform: rotate(90deg);
+        }
+
+        .modal-info {
+            padding: 2rem;
+            background: var(--white);
+            border-top: 1px solid var(--light-gray);
+            max-height: 30vh;
+            overflow-y: auto;
+        }
+
+        .modal-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--dark-green);
+        }
+
+        .modal-info p {
+            color: var(--medium-gray);
+            line-height: 1.6;
+        }
+
+        /* Fullscreen mode for images */
+        .modal.fullscreen .modal-content {
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 0;
+        }
+
+        .modal.fullscreen .modal-image-container {
+            height: 85vh;
+        }
+
+        .modal.fullscreen .modal-info {
+            max-height: 15vh;
+        }
+
+        /* Image navigation controls */
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1rem;
+            z-index: 2001;
+        }
+
+        .modal-nav-btn {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-primary);
+            border: none;
+            border-radius: 50%;
+            color: var(--white);
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.8;
+        }
+
+        .modal-nav-btn:hover {
+            background: var(--gradient-dark);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .modal-nav-btn.prev {
+            transform: translateX(-20px);
+        }
+
+        .modal-nav-btn.next {
+            transform: translateX(20px);
+        }
+
+        .modal.fullscreen .modal-nav-btn {
+            transform: none;
+        }
+
+        /* Fullscreen toggle button */
+        .modal-fullscreen-btn {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            width: 44px;
+            height: 44px;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            border-radius: 50%;
+            color: var(--white);
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2001;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-fullscreen-btn:hover {
+            background: var(--primary-green);
+            transform: scale(1.1);
+        }
+
+        /* ===== Gallery CTA ===== */
+        .gallery-cta {
+            background: var(--gradient-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 6rem 0;
+            border-radius: var(--border-radius-lg);
+            margin: 4rem auto;
+            max-width: 1200px;
+        }
+
+        .gallery-cta h2 {
+            color: var(--white);
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .gallery-cta p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+
+        /* ===== Premium Footer ===== */
+        .footer {
+            background: var(--dark-green);
+            color: var(--white);
+            padding: 6rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-col h3 {
+            color: var(--white);
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary-green);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--primary-green);
+            transform: translateY(-3px);
+        }
+
+        .newsletter-form {
+            margin-top: 1.5rem;
+        }
+
+        .newsletter-input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            color: var(--white);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .newsletter-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.875rem;
+        }
+
+        .footer-bottom a {
+            color: var(--primary-green);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-bottom a:hover {
+            color: var(--secondary-green);
+            text-decoration: underline;
+        }
+
+        /* ===== Responsive Design ===== */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 300px;
+                height: 100vh;
+                background: var(--white);
+                flex-direction: column;
+                padding: 100px 2rem 2rem;
+                gap: 0;
+                transition: var(--transition);
+                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+                z-index: 1001;
+                overflow-y: auto;
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-item {
+                width: 100%;
+            }
+
+            .nav-link {
+                display: block;
+                padding: 1.25rem 1rem;
+                border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+                font-size: 1.1rem;
+            }
+
+            .nav-cta {
+                margin: 2rem 0 0;
+                width: 100%;
+            }
+
+            .nav-cta .btn {
+                width: 100%;
+                justify-content: center;
+                padding: 1rem 2rem;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+                z-index: 1002;
+                position: relative;
+            }
+
+            .mobile-menu-btn.active {
+                background: var(--primary-green);
+                color: var(--white);
+            }
+
+            .gallery-hero {
+                padding: 140px 0 4rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 4rem 0;
+            }
+
+            .category-filters {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 1rem;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .category-btn {
+                flex-shrink: 0;
+            }
+
+            .modal-content {
+                width: 95%;
+                height: 95%;
+                max-height: 95vh;
+            }
+
+            .modal-image-container {
+                height: 60vh;
+            }
+
+            .modal-info {
+                max-height: 35vh;
+            }
+
+            .modal-nav {
+                padding: 0 0.5rem;
+            }
+
+            .modal-nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .modal.fullscreen .modal-image-container {
+                height: 80vh;
+            }
+
+            .modal.fullscreen .modal-info {
+                max-height: 20vh;
+            }
+
+            /* Mobile Close Button */
+            .mobile-menu-close {
+                position: absolute;
+                top: 1.5rem;
+                right: 1.5rem;
+                width: 44px;
+                height: 44px;
+                background: var(--light-green);
+                border-radius: 12px;
+                border: none;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--primary-green);
+                font-size: 1.25rem;
+                transition: var(--transition);
+                z-index: 1003;
+            }
+
+            .mobile-menu-close:hover {
+                background: var(--mint);
+                transform: rotate(90deg);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .nav-menu {
+                width: 85%;
+            }
+
+            .gallery-item {
+                margin-bottom: 1.5rem;
+            }
+
+            .gallery-info {
+                padding: 1.25rem;
+            }
+
+            .gallery-image-container {
+                height: 200px;
+            }
+
+            .modal-content {
+                width: 100%;
+                height: 100%;
+                max-height: 100vh;
+                border-radius: 0;
+            }
+
+            .modal-image-container {
+                height: 65vh;
+            }
+
+            .modal-info {
+                max-height: 35vh;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+    <!-- Premium Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo">
+                <div class="logo-icon">
+                    <img src="logo.png" alt="GreenGlo Cleaners Logo"
+                        style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px;">
+                </div>
+                <div class="logo-text">
+                    <h1>GreenGlo</h1>
+                    <span>Cleaners</span>
+                </div>
+            </a>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <button class="mobile-menu-close" id="mobileCloseBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="services.html" class="nav-link">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gallery.html" class="nav-link">Gallery</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#testimonials" class="nav-link">Testimonials</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#contact" class="nav-link">Contact</a>
+                </li>
+                <li class="nav-item nav-cta">
+                    <a href="https://api.whatsapp.com/send?phone=447827784204&text=" class="btn open-calendly-btn">Get
+                        Quote</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Gallery Hero Section -->
+    <section class="gallery-hero">
+        <div class="container">
+            <div class="gallery-hero-content">
+                <h1>Our Work Gallery</h1>
+                <p>See the transformation and quality of our professional cleaning services through real customer
+                    photos.
+                    Browse our before and after projects.</p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="#" class="btn btn-large open-calendly-btn">
+                        <i class="fas fa-calendar-check"></i>
+                        Book a Service
+                    </a>
+                    <a href="https://api.whatsapp.com/send?phone=447827784204&text=" class="btn btn-outline btn-large">
+                        <i class="fas fa-list"></i>
+                        View Services
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section section-light">
+        <div class="container">
+            <div class="section-title">
+                <h2>Before & After Gallery</h2>
+                <p>Real results from our professional cleaning services in London</p>
+            </div>
+
+            <div class="category-filters">
+                <button class="category-btn active" onclick="filterGallery('all')">All Projects</button>
+                <button class="category-btn" onclick="filterGallery('domestic')">Domestic Cleaning</button>
+                <button class="category-btn" onclick="filterGallery('office')">Office Cleaning</button>
+                <button class="category-btn" onclick="filterGallery('deep')">Deep Cleaning</button>
+                <button class="category-btn" onclick="filterGallery('special')">Specialized Services</button>
+            </div>
+
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Gallery items will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery CTA -->
+    <section class="section">
+        <div class="container">
+            <div class="gallery-cta">
+                <h2>Ready to Transform Your Space?</h2>
+                <p>Let us bring the same professional cleaning quality to your home or office. Book a service today and
+                    experience the GreenGlo difference.</p>
+                <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="#" class="btn btn-large open-calendly-btn"
+                        style="background: var(--white); color: var(--primary-green);">
+                        <i class="fas fa-calendar-alt"></i>
+                        Book Free Consultation
+                    </a>
+                    <a href="tel:+441234567890" class="btn btn-outline btn-large" style="color: var(--white);">
+                        <i class="fas fa-phone"></i>
+                        Call: 07827 784204
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Modal -->
+    <div class="modal" id="imageModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <button class="modal-fullscreen-btn" onclick="toggleFullscreen()">
+                <i class="fas fa-expand"></i>
+            </button>
+            <div class="modal-nav">
+                <button class="modal-nav-btn prev" onclick="changeImage(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="modal-nav-btn next" onclick="changeImage(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="modal-image-container">
+                <img id="modalImage" class="modal-image" alt="">
+            </div>
+            <div class="modal-info">
+                <h3 id="modalTitle"></h3>
+                <p id="modalDescription"></p>
+                <div class="gallery-date" style="margin-top: 1rem;">
+                    <i class="far fa-calendar"></i>
+                    <span id="modalDate"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>GreenGlo Cleaners</h3>
+                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 1.5rem;">
+                        Professional eco-friendly cleaning services for homes and offices across London.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/greenglocleaningco" class="social-link" target="_blank" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://tiktok.com/@greenglocleaningco" class="social-link" target="_blank" aria-label="TikTok">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="https://facebook.com/greenglocleaningco" class="social-link" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html">Domestic cleaning</a></li>
+                        <li><a href="services.html">One-off cleaning</a></li>
+                        <li><a href="services.html">End of tenancy cleaning</a></li>
+                        <li><a href="services.html">Carpet cleaning</a></li>
+                        <li><a href="services.html">Office cleaning</a></li>
+                        <li><a href="services.html">View all services</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="index.html#prices">Prices</a></li>
+                        <li><a href="index.html#club">GreenGlo Club</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="index.html#faq">FAQ</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 1.5rem;">
+                        <i class="fas fa-phone" style="margin-right: 0.5rem;"></i> 07827 784204
+                    </p>
+                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 1.5rem;">
+                        <i class="fas fa-envelope" style="margin-right: 0.5rem;"></i> info@greenglocleaningco.com
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>GreenGlo Cleaners London © 2025. All rights reserved | <a href="#">Privacy Policy</a> | <a
+                        href="#">Terms of Service</a></p>
+                <p style="margin-top: 0.5rem;">Created by <a
+                        href="https://api.whatsapp.com/send?phone=447543737488&text=" target="_blank">Sacha
+                        Raif</a></p>
+            </div>
+        </div>
+    </footer>
+        <!-- Floating WhatsApp Button for Green Glo Cleaning Co -->
+        <style>
+            /* WhatsApp Button Core Styles */
+            .whatsapp-float {
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                z-index: 9999;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            }
+
+            .whatsapp-button {
+                width: 60px;
+                height: 60px;
+                background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
+                cursor: pointer;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                border: none;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .whatsapp-button:hover {
+                transform: scale(1.1);
+                box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+            }
+
+            .whatsapp-button:active {
+                transform: scale(0.95);
+            }
+
+            /* Improved WhatsApp Logo */
+            .whatsapp-icon-container {
+                position: relative;
+                width: 30px;
+                height: 30px;
+            }
+
+            .whatsapp-icon {
+                width: 100%;
+                height: 100%;
+                filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+                transition: all 0.3s ease;
+            }
+
+            .whatsapp-button:hover .whatsapp-icon {
+                transform: translateY(-2px);
+            }
+
+            /* Notification Badge */
+            .whatsapp-notification {
+                position: absolute;
+                top: -5px;
+                right: -5px;
+                background: linear-gradient(135deg, #FF5252 0%, #FF1744 100%);
+                color: white;
+                font-size: 12px;
+                font-weight: 700;
+                width: 22px;
+                height: 22px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                animation: notificationPulse 2s infinite;
+                border: 2px solid white;
+                box-shadow: 0 2px 8px rgba(255, 23, 68, 0.4);
+                z-index: 1;
+            }
+
+            @keyframes notificationPulse {
+                0% {
+                    transform: scale(1);
+                    box-shadow: 0 0 0 0 rgba(255, 82, 82, 0.7);
+                }
+
+                70% {
+                    transform: scale(1.05);
+                    box-shadow: 0 0 0 10px rgba(255, 82, 82, 0);
+                }
+
+                100% {
+                    transform: scale(1);
+                    box-shadow: 0 0 0 0 rgba(255, 82, 82, 0);
+                }
+            }
+
+            /* Message Bubble */
+            .whatsapp-message-bubble {
+                position: absolute;
+                bottom: 75px;
+                right: 0;
+                background: white;
+                border-radius: 18px 18px 0 18px;
+                padding: 15px;
+                width: 280px;
+                box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(10px);
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: -1;
+            }
+
+            .whatsapp-message-bubble.active {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+
+            .message-header {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 10px;
+            }
+
+            .message-avatar {
+                width: 40px;
+                height: 40px;
+                background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-weight: bold;
+                font-size: 16px;
+            }
+
+            .message-info h4 {
+                margin: 0;
+                font-size: 14px;
+                font-weight: 600;
+                color: #333;
+            }
+
+            .message-info p {
+                margin: 2px 0 0;
+                font-size: 12px;
+                color: #25D366;
+                font-weight: 500;
+            }
+
+            .message-content {
+                font-size: 13px;
+                color: #555;
+                line-height: 1.4;
+                margin-bottom: 15px;
+            }
+
+            .message-input {
+                width: 100%;
+                padding: 10px 15px;
+                border: 1px solid #ddd;
+                border-radius: 25px;
+                font-size: 13px;
+                margin-bottom: 10px;
+                outline: none;
+                transition: border-color 0.3s ease;
+            }
+
+            .message-input:focus {
+                border-color: #25D366;
+            }
+
+            .send-button {
+                width: 100%;
+                background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+                color: white;
+                border: none;
+                padding: 10px;
+                border-radius: 25px;
+                font-size: 14px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+            }
+
+            .send-button:hover {
+                background: linear-gradient(135deg, #22c55e 0%, #0d8a71 100%);
+            }
+
+            .close-bubble {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background: none;
+                border: none;
+                color: #999;
+                font-size: 20px;
+                cursor: pointer;
+                line-height: 1;
+                padding: 0;
+                width: 24px;
+                height: 24px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                transition: all 0.3s ease;
+            }
+
+            .close-bubble:hover {
+                background: #f5f5f5;
+                color: #333;
+            }
+
+            /* Tooltip */
+            .whatsapp-tooltip {
+                position: absolute;
+                right: 75px;
+                top: 50%;
+                transform: translateY(-50%);
+                background: white;
+                color: #333;
+                padding: 10px 15px;
+                border-radius: 8px;
+                font-size: 14px;
+                font-weight: 500;
+                white-space: nowrap;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                z-index: -1;
+            }
+
+            .whatsapp-button:hover+.whatsapp-tooltip {
+                opacity: 1;
+                visibility: visible;
+                right: 70px;
+            }
+
+            /* Mobile Responsive */
+            @media (max-width: 768px) {
+                .whatsapp-float {
+                    bottom: 20px;
+                    right: 20px;
+                }
+
+                .whatsapp-button {
+                    width: 56px;
+                    height: 56px;
+                }
+
+                .whatsapp-message-bubble {
+                    width: calc(100vw - 40px);
+                    max-width: 320px;
+                    right: 0;
+                }
+
+                .whatsapp-tooltip {
+                    display: none;
+                }
+            }
+        </style>
+
+        <div class="whatsapp-float">
+            <div class="whatsapp-message-bubble" id="whatsappBubble">
+                <button class="close-bubble" onclick="closeBubble()">×</button>
+                <div class="message-header">
+                    <div class="message-avatar">GG</div>
+                    <div class="message-info">
+                        <h4>Green Glo Cleaning Co</h4>
+                        <p id="statusText">Typically replies in 24 hours</p>
+                    </div>
+                </div>
+                <div class="message-content">
+                    Hello! 👋 Need a professional clean? Message us for a free quote or to book a service. We're here to
+                    help!
+                </div>
+                <input type="text" class="message-input" id="whatsappMessage" placeholder="Type your message here..."
+                    maxlength="200">
+                <button class="send-button" onclick="sendWhatsAppMessage()">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"
+                        fill="currentColor">
+                        <path
+                            d="M1.101 21.757L23.8 12.028 1.101 2.3l.011 7.912 13.623 1.816-13.623 1.817-.011 7.912z" />
+                    </svg>
+                    Send to WhatsApp
+                </button>
+            </div>
+
+            <button class="whatsapp-button" id="whatsappButton" onclick="toggleBubble()">
+                <div class="whatsapp-notification" id="whatsappNotification">1</div>
+                <div class="whatsapp-icon-container">
+                    <!-- Optimized WhatsApp Logo -->
+                    <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="white">
+                        <path
+                            d="M12 0a12 12 0 1 0 12 12A12 12 0 0 0 12 0Zm6.49 15.387l-1.745 1.745a.374.374 0 0 1-.531 0l-1.93-1.93a.374.374 0 0 1 0-.53l1.745-1.745a6.9 6.9 0 0 0-8.858-.416l-1.21 1.21a6.9 6.9 0 0 0-.416 8.858l-1.745 1.745a.374.374 0 0 1-.531 0l-1.93-1.93a.374.374 0 0 1 0-.53l1.745-1.745a6.9 6.9 0 0 0 .416-8.858l1.21-1.21a6.9 6.9 0 0 0 8.858-.416l1.745-1.745a.374.374 0 0 1 .531 0l1.93 1.93a.374.374 0 0 1 0 .53l-1.745 1.745a6.9 6.9 0 0 0 .416 8.858Z" />
+                    </svg>
+                </div>
+            </button>
+            <span class="whatsapp-tooltip">Chat with Green Glo Cleaning</span>
+        </div>
+
+        <script>
+            // Configuration for Green Glo Cleaning Co
+            const whatsappConfig = {
+                phoneNumber: "447827784204", // Your WhatsApp number from the link
+                companyName: "Green Glo Cleaning Co",
+                defaultMessage: "Hello, I'm interested in your professional cleaning services. Could you provide more information?"
+            };
+
+            // DOM Elements
+            const whatsappButton = document.getElementById('whatsappButton');
+            const whatsappBubble = document.getElementById('whatsappBubble');
+            const whatsappNotification = document.getElementById('whatsappNotification');
+            const whatsappMessageInput = document.getElementById('whatsappMessage');
+            const statusText = document.getElementById('statusText');
+
+            // Toggle message bubble
+            function toggleBubble() {
+                whatsappBubble.classList.contains('active') ? closeBubble() : openBubble();
+            }
+
+            function openBubble() {
+                whatsappBubble.classList.add('active');
+                whatsappMessageInput.focus();
+                whatsappNotification.style.display = 'none';
+                localStorage.setItem('whatsappNotificationRead', 'true');
+            }
+
+            function closeBubble() {
+                whatsappBubble.classList.remove('active');
+            }
+
+            // Send WhatsApp message using your specific link format
+            function sendWhatsAppMessage() {
+                let message = whatsappMessageInput.value.trim();
+                if (!message) message = whatsappConfig.defaultMessage;
+
+                // Encode the message for URL
+                const encodedMessage = encodeURIComponent(message);
+
+                // Construct the URL using your exact WhatsApp API link format
+                const whatsappUrl = `https://api.whatsapp.com/send?phone=447827784204&text=${encodedMessage}`;
+
+                // Open the chat in a new tab
+                window.open(whatsappUrl, 'https://api.whatsapp.com/send?phone=447827784204&text=');
+
+                // Close bubble and reset
+                closeBubble();
+                whatsappMessageInput.value = '';
+
+                // Optional: Track the event (for analytics)
+                console.log('WhatsApp message initiated for:', whatsappConfig.companyName);
+            }
+
+            // Manage notifications
+            function checkNotificationStatus() {
+                const notificationRead = localStorage.getItem('whatsappNotificationRead');
+                const lastVisit = localStorage.getItem('lastWhatsAppVisit');
+                const now = new Date().getTime();
+
+                if (!notificationRead || !lastVisit || (now - parseInt(lastVisit) > 24 * 60 * 60 * 1000)) {
+                    whatsappNotification.style.display = 'flex';
+                } else {
+                    whatsappNotification.style.display = 'none';
+                }
+                localStorage.setItem('lastWhatsAppVisit', now.toString());
+            }
+
+            // Update status based on working hours
+            function updateWorkingStatus() {
+                const now = new Date();
+                const day = now.getDay(); // 0 = Sunday
+                const hour = now.getHours();
+
+                // Set working hours: Mon-Fri 8am-8pm, Sat 9am-6pm
+                const isWorkingHours = (
+                    (day >= 1 && day <= 5 && hour >= 8 && hour < 20) ||
+                    (day === 6 && hour >= 9 && hour < 18)
+                );
+
+                if (statusText) {
+                    statusText.textContent = isWorkingHours
+                        ? "Typically replies instantly"
+                        : "Will reply during working hours";
+                    statusText.style.color = isWorkingHours ? "#25D366" : "#FF9800";
+                }
+            }
+
+            // Close bubble when clicking outside
+            document.addEventListener('click', function (event) {
+                if (!whatsappButton.contains(event.target) &&
+                    !whatsappBubble.contains(event.target) &&
+                    whatsappBubble.classList.contains('active')) {
+                    closeBubble();
+                }
+            });
+
+            // Send message on Enter key
+            whatsappMessageInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendWhatsAppMessage();
+                }
+            });
+
+            // Initialize on page load
+            document.addEventListener('DOMContentLoaded', function () {
+                checkNotificationStatus();
+                updateWorkingStatus();
+
+                // Update status every minute
+                setInterval(updateWorkingStatus, 60000);
+            });
+        </script>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+    <script>
+        // ===== Mobile Navigation =====
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileCloseBtn = document.getElementById('mobileCloseBtn');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        const navMenu = document.getElementById('navMenu');
+        const navbar = document.getElementById('navbar');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        // Function to open mobile menu
+        const openMobileMenu = () => {
+            navMenu.classList.add('active');
+            mobileMenuOverlay.classList.add('active');
+            mobileMenuBtn.classList.add('active');
+            mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
+            document.body.style.overflow = 'hidden';
+        };
+
+        // Function to close mobile menu
+        const closeMobileMenu = () => {
+            navMenu.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            mobileMenuBtn.classList.remove('active');
+            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            document.body.style.overflow = '';
+        };
+
+        // Toggle Mobile Menu
+        mobileMenuBtn.addEventListener('click', () => {
+            if (navMenu.classList.contains('active')) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
+        });
+
+        // Close Mobile Menu with Close Button
+        mobileCloseBtn.addEventListener('click', closeMobileMenu);
+
+        // Close Mobile Menu with Overlay Click
+        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+
+        // Close Mobile Menu on Link Click
+        navLinks.forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        // Close menu on Escape key press
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+                closeMobileMenu();
+            }
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ===== Gallery Data =====
+        const galleryImages = [
+            {
+                id: 1,
+                image: 'livingroom.png',
+                title: 'Living Room Transformation',
+                description: 'Complete living room cleaning and organization after a renovation project. We removed all construction dust and debris, leaving the space spotless and ready for furniture.',
+                category: 'domestic',
+                date: 'Jan 15, 2024'
+            },
+            {
+                id: 2,
+                image: 'office.png',
+                title: 'Office Space Deep Clean',
+                description: 'Professional office cleaning for a tech startup in Shoreditch. We cleaned all workstations, meeting rooms, and common areas using eco-friendly products.',
+                category: 'office',
+                date: 'Jan 10, 2024'
+            },
+            {
+                id: 3,
+                image: 'kitchen.png',
+                title: 'Kitchen Deep Cleaning',
+                description: 'Kitchen deep clean including oven cleaning, cabinet organization, and appliance sanitization. All surfaces were cleaned with our non-toxic eco-friendly solutions.',
+                category: 'domestic',
+                date: 'Jan 5, 2024'
+            },
+            {
+                id: 4,
+                image: 'ovenafter.png',
+                title: 'Oven Deep Clean',
+                description: 'Professional oven cleaning service. Interior, door, and racks deep-cleaned to a pristine, as-new condition.',
+                category: 'deep',
+                date: 'Jan 3, 2024'
+            },
+            {
+                id: 5,
+                image: 'bathroom.png',
+                title: 'Bathroom Makeover',
+                description: 'Complete bathroom cleaning and sanitization. We removed hard water stains, mildew, and thoroughly cleaned all fixtures to like-new condition.',
+                category: 'deep',
+                date: 'Dec 28, 2023'
+            },
+            {
+                id: 6,
+                image: 'turf.png',
+                title: 'Garden Maintenance',
+                description: ' Expert turf laying, featuring ground levelling, premium turf, and expert installation for an instant, lush transformation.'
+                ,
+                category: 'special',
+                date: 'Dec 20, 2023'
+            },
+            {
+                id: 7,
+                image: 'carpet.png',
+                title: 'Carpet Restoration',
+                description: 'Deep carpet cleaning and stain removal for a family home in Chelsea. We removed pet stains and restored the original color of the carpets.',
+                category: 'deep',
+                date: 'Dec 15, 2023'
+            },
+            {
+                id: 8,
+                image: 'patio.png',
+                title: 'Patio Cleaning',
+                description: 'Professional patio cleaning featuring pressure washing and moss treatment for a restored, spotless surface.',
+                category: 'special',
+                date: 'Dec 10, 2023'
+            },
+            {
+                id: 9,
+                image: 'tenancy.png',
+                title: 'End of Tenancy Clean',
+                description: 'Complete apartment cleaning for move-out inspection. Met all landlord requirements and ensured the full deposit was returned to the tenant.',
+                category: 'domestic',
+                date: 'Dec 5, 2023'
+            },
+            {
+                id: 10,
+                image: 'flooring.png',
+                title: 'Property maintenance',
+                description: 'Professional flooring installation featuring precise measurement and expert fitting for a seamless, durable finish.',
+                category: 'special',
+                date: 'May 7, 2023'
+            },
+            {
+                id: 11,
+                image: 'furniture.png',
+                title: 'Furniture Steam Cleaning',
+                description: 'Professional furniture steam cleaning featuring deep fabric sanitization for a fresh, revitalized finish.',
+                category: 'special',
+                date: 'June 2, 2023'
+            }
+        ];
+
+
+        // ===== Gallery Functions =====
+        let currentFilter = 'all';
+        let currentImageIndex = 0;
+        let filteredImages = [];
+
+        // Initialize gallery
+        function initGallery() {
+            loadGallery();
+        }
+
+        // Load gallery images
+        function loadGallery() {
+            const galleryGrid = document.getElementById('galleryGrid');
+            galleryGrid.innerHTML = '';
+
+            filteredImages = filterImages();
+
+            if (filteredImages.length === 0) {
+                galleryGrid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+                        <div style="width: 80px; height: 80px; margin: 0 auto 2rem; background: var(--light-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--primary-green);">
+                            <i class="fas fa-images fa-2x"></i>
+                        </div>
+                        <h3 style="margin-bottom: 1rem; color: var(--dark-green);">No images found</h3>
+                        <p style="color: var(--medium-gray);">Check back soon for more cleaning projects!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filteredImages.forEach((image, index) => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item';
+                galleryItem.innerHTML = `
+                    <div class="gallery-image-container">
+                        <img src="${image.image}" alt="${image.title}" class="gallery-image" 
+                             onclick="viewImage(${index})">
+                    </div>
+                    <div class="gallery-info">
+                        <h3>${image.title}</h3>
+                        <p>${image.description.substring(0, 100)}${image.description.length > 100 ? '...' : ''}</p>
+                        <div class="gallery-date">
+                            <i class="far fa-calendar"></i>
+                            <span>${image.date}</span>
+                        </div>
+                    </div>
+                `;
+                galleryGrid.appendChild(galleryItem);
+            });
+
+            // Add loading animation
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            galleryItems.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+
+                // Trigger animation when in viewport
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                observer.observe(el);
+            });
+        }
+
+        // Filter images based on category
+        function filterImages() {
+            if (currentFilter === 'all') {
+                return galleryImages;
+            }
+            return galleryImages.filter(img => img.category === currentFilter);
+        }
+
+        // Change filter
+        function filterGallery(filter) {
+            currentFilter = filter;
+
+            // Update active button
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            loadGallery();
+        }
+
+        // View image in modal
+        function viewImage(index) {
+            currentImageIndex = index;
+            const image = filteredImages[index];
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDescription = document.getElementById('modalDescription');
+            const modalDate = document.getElementById('modalDate');
+
+            // Preload image
+            modalImage.src = image.image;
+            modalImage.alt = image.title;
+            modalTitle.textContent = image.title;
+            modalDescription.textContent = image.description;
+            modalDate.textContent = image.date;
+
+            // When image loads, apply fill mode
+            modalImage.onload = function () {
+                // Add fill mode class to make image fill the container
+                modalImage.classList.add('fill-mode');
+            };
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            // Reset fullscreen state
+            modal.classList.remove('fullscreen');
+            const fullscreenBtn = document.querySelector('.modal-fullscreen-btn i');
+            fullscreenBtn.className = 'fas fa-expand';
+        }
+
+        // Change image in modal
+        function changeImage(direction) {
+            currentImageIndex += direction;
+
+            // Loop around
+            if (currentImageIndex < 0) {
+                currentImageIndex = filteredImages.length - 1;
+            } else if (currentImageIndex >= filteredImages.length) {
+                currentImageIndex = 0;
+            }
+
+            viewImage(currentImageIndex);
+        }
+
+        // Toggle fullscreen mode
+        function toggleFullscreen() {
+            const modal = document.getElementById('imageModal');
+            const fullscreenBtn = document.querySelector('.modal-fullscreen-btn i');
+
+            if (modal.classList.contains('fullscreen')) {
+                modal.classList.remove('fullscreen');
+                fullscreenBtn.className = 'fas fa-expand';
+            } else {
+                modal.classList.add('fullscreen');
+                fullscreenBtn.className = 'fas fa-compress';
+            }
+        }
+
+        // Close modal
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+            modal.classList.remove('fullscreen');
+            document.body.style.overflow = '';
+
+            // Reset fullscreen button
+            const fullscreenBtn = document.querySelector('.modal-fullscreen-btn i');
+            fullscreenBtn.className = 'fas fa-expand';
+        }
+
+        // ===== Calendly Integration =====
+        function attachCalendlyListeners() {
+            const calendlyButtons = document.querySelectorAll('.open-calendly-btn');
+
+            calendlyButtons.forEach(button => {
+                button.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    Calendly.initPopupWidget({
+                        url: 'https://calendly.com/greenglocleaners',
+                        text: 'Schedule Your Cleaning',
+                        color: '#10B981',
+                        textColor: '#ffffff'
+                    });
+
+                    // Close mobile menu if open
+                    if (navMenu.classList.contains('active')) {
+                        closeMobileMenu();
+                    }
+                });
+            });
+        }
+
+        // ===== Smooth Scrolling =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href') === '#') return;
+
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80
+        // Close modal when clicking outside image
+        document.addEventListener('click', function (e) {
+            const modal = document.getElementById('imageModal');
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Keyboard navigation for modal
+        document.addEventListener('keydown', function (e) {
+            const modal = document.getElementById('imageModal');
+            if (modal.classList.contains('active')) {
+                if (e.key === 'Escape') {
+                    closeModal();
+                } else if (e.key === 'ArrowLeft') {
+                    changeImage(-1);
+                } else if (e.key === 'ArrowRight') {
+                    changeImage(1);
+                } else if (e.key === 'f' || e.key === 'F') {
+                    toggleFullscreen();
+                }
+            }
+        });
+
+        // Initialize gallery when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            initGallery();
+            attachCalendlyListeners();
+        });
+    </script>
+<script src="clickable-images.js"></script>
+</body>
+
+
+</html>
+
+
+
+
+

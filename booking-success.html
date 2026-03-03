@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Confirmed | GreenGlo Cleaners</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--green:#10B981;--dark-green:#065F46;--light-green:#D1FAE5;--off-white:#F9FAFB;--border:#E5E7EB;--gray:#6B7280;--dark:#111827;--grad:linear-gradient(135deg,#10B981,#0D9488);}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Montserrat',sans-serif;background:var(--off-white);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:2rem 1rem;}
+    .logo-bar{margin-bottom:2rem;text-align:center;}
+    .logo-bar img{height:50px;border-radius:10px;}
+    .card{background:white;border-radius:24px;padding:2.5rem 2rem;max-width:520px;width:100%;text-align:center;box-shadow:0 25px 60px rgba(16,185,129,0.12);animation:fadeUp .5s ease;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+    .big-icon{width:88px;height:88px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2.4rem;color:white;margin:0 auto 1.5rem;}
+    .big-icon.success{background:var(--grad);}
+    .big-icon.pending{background:linear-gradient(135deg,#F59E0B,#D97706);}
+    .big-icon.failed{background:linear-gradient(135deg,#EF4444,#DC2626);}
+    h1{font-family:'Poppins',sans-serif;color:var(--dark-green);font-size:1.8rem;margin-bottom:.6rem;}
+    .subtitle{color:var(--gray);font-size:.95rem;line-height:1.7;margin-bottom:1.75rem;}
+    .ref-box{background:var(--light-green);border-radius:12px;padding:.9rem 1.2rem;margin-bottom:1.5rem;font-family:'Poppins',sans-serif;font-weight:700;color:var(--dark-green);font-size:1.05rem;}
+    .details-grid{background:var(--off-white);border-radius:12px;padding:1.2rem 1.4rem;text-align:left;margin-bottom:1.5rem;}
+    .details-grid h4{font-family:'Poppins',sans-serif;color:var(--dark-green);margin-bottom:.9rem;font-size:.95rem;}
+    .detail-row{display:flex;justify-content:space-between;align-items:center;padding:.45rem 0;border-bottom:1px solid var(--border);font-size:.88rem;}
+    .detail-row:last-child{border-bottom:none;}
+    .detail-row span:first-child{color:var(--gray);}
+    .detail-row span:last-child{font-weight:600;color:var(--dark);}
+    .detail-row.highlight span:last-child{color:var(--green);font-size:1rem;}
+    .deposit-notice{background:#FEF3C7;border-radius:12px;padding:.85rem 1.1rem;margin-bottom:1.5rem;font-size:.85rem;color:#92400E;display:flex;gap:.6rem;align-items:flex-start;text-align:left;}
+    .deposit-notice i{flex-shrink:0;margin-top:1px;}
+    .next-steps{background:var(--off-white);border-radius:12px;padding:1.2rem 1.4rem;text-align:left;margin-bottom:1.75rem;}
+    .next-steps h4{font-family:'Poppins',sans-serif;color:var(--dark-green);margin-bottom:.9rem;font-size:.95rem;}
+    .next-steps ul{list-style:none;}
+    .next-steps ul li{display:flex;gap:.6rem;align-items:flex-start;padding:.4rem 0;font-size:.87rem;color:var(--gray);}
+    .next-steps ul li i{color:var(--green);flex-shrink:0;margin-top:2px;}
+    .btn-row{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.75rem;background:var(--grad);color:white;border:none;border-radius:50px;font-weight:600;font-size:.95rem;cursor:pointer;text-decoration:none;transition:all .25s ease;}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(16,185,129,0.3);}
+    .btn-outline{background:transparent;border:2px solid var(--green);color:var(--green);}
+    .btn-outline:hover{background:var(--green);color:white;}
+    .spinner{display:inline-block;width:36px;height:36px;border:3px solid var(--light-green);border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite;}
+    @keyframes spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <div class="logo-bar"><a href="index.html"><img src="logo.png" alt="GreenGlo Cleaners"></a></div>
+  <div class="card" id="card">
+    <div style="text-align:center;padding:2rem;">
+      <div class="spinner"></div>
+      <p style="margin-top:1rem;color:var(--gray);">Confirming your payment&hellip;</p>
+    </div>
+  </div>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const card   = document.getElementById('card');
+    const ref     = params.get('ref')     || '';
+    const service = params.get('service') || 'Cleaning Service';
+    const deposit = parseFloat(params.get('deposit') || '0');
+    const balance = parseFloat(params.get('balance') || '0');
+    const piStatus = params.get('redirect_status');
+
+    function renderSuccess(){
+      card.innerHTML = '<div class="big-icon success"><i class="fas fa-check"></i></div>'
+        + '<h1>Booking Confirmed!</h1>'
+        + '<p class="subtitle">Your deposit has been received. We\u2019ll be in touch shortly to confirm all the details.</p>'
+        + (ref ? '<div class="ref-box"><i class="fas fa-tag" style="margin-right:8px;"></i>Booking ref: ' + ref + '</div>' : '')
+        + (deposit ? '<div class="details-grid"><h4><i class="fas fa-receipt" style="margin-right:6px;color:var(--green);"></i>Payment Summary</h4>'
+            + '<div class="detail-row highlight"><span>Deposit paid today</span><span>\xA3' + deposit.toFixed(2) + '</span></div>'
+            + (balance ? '<div class="detail-row"><span>Balance due on the day</span><span>\xA3' + balance.toFixed(2) + '</span></div>' : '')
+            + '<div class="detail-row"><span>Service</span><span>' + service + '</span></div></div>' : '')
+        + '<div class="deposit-notice"><i class="fas fa-info-circle"></i><span>Your 25% deposit has been taken. The remaining balance '
+            + (balance ? '(\xA3' + balance.toFixed(2) + ')' : '')
+            + ' is due on the day \u2014 payable by cash or card to our team.</span></div>'
+        + '<div class="next-steps"><h4><i class="fas fa-list-check" style="margin-right:6px;color:var(--green);"></i>What happens next?</h4>'
+            + '<ul><li><i class="fas fa-envelope"></i><span>You\u2019ll receive a confirmation email shortly</span></li>'
+            + '<li><i class="fas fa-phone"></i><span>We\u2019ll call or WhatsApp to confirm your appointment</span></li>'
+            + '<li><i class="fas fa-calendar-check"></i><span>Our vetted cleaners arrive at your chosen time</span></li>'
+            + '<li><i class="fas fa-coins"></i><span>Pay the remaining balance on the day</span></li></ul></div>'
+        + '<div class="btn-row"><a href="index.html" class="btn"><i class="fas fa-home"></i> Home</a>'
+            + '<a href="services.html" class="btn btn-outline"><i class="fas fa-broom"></i> Book Again</a></div>';
+    }
+    function renderProcessing(){
+      card.innerHTML = '<div class="big-icon pending"><i class="fas fa-clock"></i></div>'
+        + '<h1>Payment Processing</h1>'
+        + '<p class="subtitle">Your payment is being processed. You\u2019ll receive an email once it\u2019s confirmed.</p>'
+        + (ref ? '<div class="ref-box"><i class="fas fa-tag" style="margin-right:8px;"></i>Booking ref: ' + ref + '</div>' : '')
+        + '<div class="btn-row"><a href="index.html" class="btn"><i class="fas fa-home"></i> Back to Home</a></div>';
+    }
+    function renderFailed(msg){
+      card.innerHTML = '<div class="big-icon failed"><i class="fas fa-times"></i></div>'
+        + '<h1>Payment Unsuccessful</h1>'
+        + '<p class="subtitle">' + (msg || 'Your payment could not be processed. No charge has been made.') + '</p>'
+        + '<div class="btn-row"><a href="services.html" class="btn"><i class="fas fa-arrow-left"></i> Try Again</a>'
+            + '<a href="https://api.whatsapp.com/send?phone=447827784204" target="_blank" class="btn btn-outline">'
+            + '<i class="fab fa-whatsapp"></i> Book via WhatsApp</a></div>';
+    }
+
+    if (!piStatus && ref)            { renderSuccess(); }
+    else if (piStatus === 'succeeded'){ renderSuccess(); }
+    else if (piStatus === 'processing'){ renderProcessing(); }
+    else if (piStatus)               { renderFailed(); }
+    else { renderFailed('No booking reference found. If you just paid, please check your email.'); }
+  </script>
+</body>
+</html>

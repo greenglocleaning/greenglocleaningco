@@ -1,0 +1,1866 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/png" href="logo.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Office & Business Cleaning | GreenGlo Cleaners</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ===== CSS Reset & Variables ===== */
+        :root {
+            --primary-green: #10B981;
+            --secondary-green: #34D399;
+            --dark-green: #065F46;
+            --light-green: #D1FAE5;
+            --accent-green: #059669;
+            --emerald: #10B981;
+            --teal: #0D9488;
+            --mint: #A7F3D0;
+            --white: #FFFFFF;
+            --off-white: #F9FAFB;
+            --light-gray: #F3F4F6;
+            --medium-gray: #9CA3AF;
+            --dark-gray: #4B5563;
+            --black: #111827;
+            --corporate-blue: #2563EB;
+            --corporate-navy: #1E40AF;
+            --shadow: 0 10px 30px rgba(16, 185, 129, 0.1);
+            --shadow-lg: 0 15px 40px rgba(16, 185, 129, 0.15);
+            --shadow-blue: 0 10px 30px rgba(37, 99, 235, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 12px;
+            --border-radius-lg: 16px;
+            --gradient-primary: linear-gradient(135deg, var(--primary-green), var(--teal));
+            --gradient-corporate: linear-gradient(135deg, var(--corporate-blue), var(--corporate-navy));
+            --gradient-light: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(16, 185, 129, 0.1));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background-color: var(--off-white);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--dark-green);
+            letter-spacing: -0.5px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Mobile-first container adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 16px;
+            }
+        }
+
+        /* ===== Button Styles ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px;
+            background: var(--gradient-corporate);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: var(--shadow-blue);
+            gap: 10px;
+            min-height: 52px;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            opacity: 1;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+        }
+
+        .btn-whatsapp::before {
+            background: linear-gradient(135deg, #1da851, #0d7c5a);
+        }
+
+        .btn-large {
+            padding: 16px 32px;
+            font-size: 18px;
+            min-height: 60px;
+        }
+
+        @media (max-width: 768px) {
+            .btn {
+                padding: 12px 24px;
+                font-size: 15px;
+                min-height: 48px;
+                max-width: 100%;
+            }
+            
+            .btn-large {
+                padding: 14px 28px;
+                font-size: 16px;
+                min-height: 52px;
+            }
+        }
+
+        /* ===== Navigation Bar ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+            transition: var(--transition);
+            padding: 12px 0;
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 12px;
+            }
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .nav-logo:hover {
+            transform: translateY(-2px);
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: var(--gradient-primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 20px;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text h1 {
+            font-size: 22px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .logo-text span {
+            font-size: 11px;
+            color: var(--medium-gray);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-top: 3px;
+        }
+
+        @media (max-width: 768px) {
+            .logo-icon {
+                width: 38px;
+                height: 38px;
+                font-size: 18px;
+            }
+            
+            .logo-text h1 {
+                font-size: 20px;
+            }
+            
+            .logo-text span {
+                font-size: 10px;
+            }
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            width: 44px;
+            height: 44px;
+            background: var(--light-green);
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-green);
+            font-size: 20px;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-btn:hover {
+            background: var(--mint);
+            transform: rotate(90deg);
+        }
+
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Mobile Navigation Menu */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 85%;
+                max-width: 320px;
+                height: 100vh;
+                background: var(--white);
+                flex-direction: column;
+                padding: 80px 20px 20px;
+                gap: 0;
+                transition: var(--transition);
+                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+                z-index: 1001;
+                overflow-y: auto;
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-item {
+                width: 100%;
+                margin-bottom: 8px;
+            }
+
+            .nav-link {
+                display: block;
+                padding: 16px;
+                border-radius: 10px;
+                font-size: 16px;
+                font-weight: 500;
+                color: var(--dark-gray);
+                text-decoration: none;
+                transition: var(--transition);
+                border: 1px solid rgba(16, 185, 129, 0.1);
+            }
+
+            .nav-link:hover,
+            .nav-link.active {
+                background: var(--light-green);
+                color: var(--dark-green);
+                border-color: var(--primary-green);
+            }
+
+            .nav-cta {
+                margin-top: 20px;
+                width: 100%;
+            }
+
+            .nav-cta .btn {
+                width: 100%;
+                justify-content: center;
+                padding: 14px 20px;
+            }
+
+            .mobile-menu-close {
+                position: absolute;
+                top: 16px;
+                right: 16px;
+                width: 40px;
+                height: 40px;
+                background: var(--light-green);
+                border-radius: 10px;
+                border: none;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--primary-green);
+                font-size: 20px;
+                transition: var(--transition);
+                z-index: 1003;
+            }
+
+            .mobile-menu-close:hover {
+                background: var(--mint);
+                transform: rotate(90deg);
+            }
+        }
+
+        /* Desktop Navigation */
+        @media (min-width: 769px) {
+            .nav-menu {
+                display: flex;
+                align-items: center;
+                gap: 24px;
+                list-style: none;
+            }
+
+            .nav-link {
+                text-decoration: none;
+                color: var(--dark-gray);
+                font-weight: 500;
+                font-size: 15px;
+                padding: 8px 0;
+                transition: var(--transition);
+                position: relative;
+            }
+
+            .nav-link::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background: var(--gradient-primary);
+                transition: var(--transition);
+            }
+
+            .nav-link:hover {
+                color: var(--primary-green);
+            }
+
+            .nav-link:hover::after {
+                width: 100%;
+            }
+
+            .nav-cta {
+                margin-left: 10px;
+            }
+
+            .nav-cta .btn {
+                padding: 10px 20px;
+                min-height: auto;
+                font-size: 14px;
+                width: auto;
+                max-width: none;
+                margin: 0;
+            }
+        }
+
+        /* ===== Hero Section ===== */
+        .hero {
+            min-height: 70vh;
+            padding: 120px 0 60px;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(209, 250, 229, 0.8) 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 60vh;
+                padding: 100px 0 40px;
+                text-align: center;
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--white);
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            border: 1px solid rgba(37, 99, 235, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .hero-badge {
+                padding: 8px 16px;
+                font-size: 14px;
+                margin-bottom: 24px;
+            }
+        }
+
+        .hero-badge i {
+            color: var(--corporate-blue);
+            font-size: 18px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            background: linear-gradient(to right, var(--corporate-blue), var(--teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+                margin-bottom: 16px;
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--dark-gray);
+            margin-bottom: 40px;
+            line-height: 1.5;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (max-width: 768px) {
+            .hero-subtitle {
+                font-size: 18px;
+                margin-bottom: 32px;
+            }
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .hero-cta {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .hero-cta .btn {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+
+        /* ===== Section Styles ===== */
+        .section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                padding: 60px 0;
+            }
+        }
+
+        .section-light {
+            background: var(--white);
+        }
+
+        .section-gray {
+            background: var(--off-white);
+        }
+
+        .section-corporate {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.03) 0%, rgba(209, 250, 229, 0.1) 100%);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                margin-bottom: 40px;
+            }
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 16px;
+            position: relative;
+            display: inline-block;
+        }
+
+        @media (max-width: 768px) {
+            .section-title h2 {
+                font-size: 28px;
+                margin-bottom: 12px;
+            }
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--gradient-corporate);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            font-size: 18px;
+            color: var(--medium-gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .section-title p {
+                font-size: 16px;
+                padding: 0 10px;
+            }
+        }
+
+        /* ===== Office Packages ===== */
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .packages-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        .package-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 32px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            text-align: center;
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .package-card {
+                padding: 24px 20px;
+            }
+        }
+
+        .package-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-blue);
+            border-color: var(--corporate-blue);
+        }
+
+        .package-card.featured {
+            border: 2px solid var(--corporate-blue);
+            transform: scale(1.05);
+        }
+
+        .package-card.featured:hover {
+            transform: scale(1.05) translateY(-8px);
+        }
+
+        @media (max-width: 768px) {
+            .package-card.featured {
+                transform: none;
+            }
+            
+            .package-card.featured:hover {
+                transform: translateY(-8px);
+            }
+        }
+
+        .package-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient-corporate);
+            color: var(--white);
+            padding: 8px 24px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        @media (max-width: 768px) {
+            .package-badge {
+                font-size: 13px;
+                padding: 6px 20px;
+            }
+        }
+
+        .package-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-corporate);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            color: var(--white);
+            font-size: 28px;
+        }
+
+        @media (max-width: 768px) {
+            .package-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+        }
+
+        .package-card h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            color: var(--corporate-blue);
+        }
+
+        @media (max-width: 768px) {
+            .package-card h3 {
+                font-size: 22px;
+            }
+        }
+
+        .package-price {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--corporate-blue);
+            margin-bottom: 16px;
+            line-height: 1;
+        }
+
+        @media (max-width: 768px) {
+            .package-price {
+                font-size: 36px;
+            }
+        }
+
+        .package-duration {
+            color: var(--medium-gray);
+            font-size: 16px;
+            margin-bottom: 24px;
+            font-weight: 500;
+        }
+
+        .package-features {
+            list-style: none;
+            margin-bottom: 32px;
+            text-align: left;
+        }
+
+        .package-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(37, 99, 235, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .package-features li:last-child {
+            border-bottom: none;
+        }
+
+        .package-features i {
+            color: var(--primary-green);
+            font-size: 16px;
+            min-width: 20px;
+        }
+
+        .package-features span {
+            font-size: 15px;
+            color: var(--dark-gray);
+        }
+
+        @media (max-width: 768px) {
+            .package-features li {
+                padding: 10px 0;
+            }
+            
+            .package-features span {
+                font-size: 14px;
+            }
+        }
+
+        /* ===== Additional Services ===== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 24px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .service-card {
+                padding: 20px;
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-blue);
+            border-color: var(--corporate-blue);
+        }
+
+        .service-icon {
+            min-width: 50px;
+            height: 50px;
+            background: var(--gradient-light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--corporate-blue);
+            font-size: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .service-icon {
+                margin: 0 auto;
+            }
+        }
+
+        .service-content h4 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: var(--corporate-blue);
+        }
+
+        .service-content p {
+            font-size: 14px;
+            color: var(--medium-gray);
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .service-content h4 {
+                font-size: 17px;
+            }
+            
+            .service-content p {
+                font-size: 14px;
+            }
+        }
+
+        /* ===== FAQ Section ===== */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            margin-bottom: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            transition: var(--transition);
+        }
+
+        .faq-item.active {
+            border-color: var(--corporate-blue);
+        }
+
+        .faq-question {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        @media (max-width: 768px) {
+            .faq-question {
+                padding: 16px;
+                font-size: 15px;
+            }
+        }
+
+        .faq-question:hover {
+            background: rgba(37, 99, 235, 0.03);
+        }
+
+        .faq-toggle {
+            width: 28px;
+            height: 28px;
+            background: rgba(37, 99, 235, 0.1);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            flex-shrink: 0;
+            margin-left: 12px;
+            color: var(--corporate-blue);
+        }
+
+        .faq-item.active .faq-toggle {
+            background: var(--corporate-blue);
+            color: var(--white);
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 20px 20px;
+            max-height: 500px;
+        }
+
+        .faq-answer p {
+            color: var(--dark-gray);
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .faq-answer {
+                padding: 0 16px;
+            }
+            
+            .faq-item.active .faq-answer {
+                padding: 0 16px 16px;
+            }
+        }
+
+        /* ===== Contact Form ===== */
+        .contact-form {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            padding: 40px;
+            box-shadow: var(--shadow);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .contact-form {
+                padding: 24px;
+                margin: 0 16px;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-green);
+            font-size: 15px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: 'Montserrat', sans-serif;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--corporate-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .form-control {
+                padding: 12px 14px;
+                font-size: 15px;
+            }
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* ===== CTA Section ===== */
+        .cta-section {
+            background: var(--gradient-corporate);
+            color: var(--white);
+            text-align: center;
+            padding: 60px 20px;
+            border-radius: var(--border-radius-lg);
+            margin: 40px auto;
+            max-width: 1000px;
+        }
+
+        @media (max-width: 768px) {
+            .cta-section {
+                padding: 40px 20px;
+                margin: 30px 16px;
+            }
+        }
+
+        .cta-section h2 {
+            color: var(--white);
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .cta-section h2 {
+                font-size: 26px;
+            }
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .cta-section p {
+                font-size: 16px;
+                margin-bottom: 24px;
+            }
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .cta-buttons {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            background: var(--dark-green);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                padding: 40px 0 24px;
+            }
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+                text-align: center;
+            }
+        }
+
+        .footer-col h3 {
+            color: var(--white);
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary-green);
+        }
+
+        @media (max-width: 768px) {
+            .footer-col h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+            font-size: 15px;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+            transform: translateX(5px);
+        }
+
+        @media (max-width: 768px) {
+            .footer-links a:hover {
+                transform: none;
+            }
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 18px;
+        }
+
+        .social-link:hover {
+            background: var(--primary-green);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+        }
+
+        .footer-bottom a {
+            color: var(--primary-green);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-bottom a:hover {
+            color: var(--secondary-green);
+            text-decoration: underline;
+        }
+
+        /* ===== WhatsApp Button ===== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 9999;
+        }
+
+        @media (max-width: 768px) {
+            .whatsapp-float {
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+
+        .whatsapp-button {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .whatsapp-button {
+                width: 52px;
+                height: 52px;
+            }
+        }
+
+        .whatsapp-button i {
+            color: white;
+            font-size: 28px;
+        }
+
+        @media (max-width: 768px) {
+            .whatsapp-button i {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo">
+                <div class="logo-icon">
+                    <img src="logo.png" alt="GreenGlo Cleaners Logo"
+                        style="width: 100%; height: 100%; object-fit: contain; border-radius: 10px;">
+                </div>
+                <div class="logo-text">
+                    <h1>GreenGlo</h1>
+                    <span>Cleaners</span>
+                </div>
+            </a>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <button class="mobile-menu-close" id="mobileCloseBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="services.html" class="nav-link">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a href="airbnb.html" class="nav-link">Airbnb</a>
+                </li>
+                <li class="nav-item">
+                    <a href="commercial.html" class="nav-link active">Commercial</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gallery.html" class="nav-link">Gallery</a>
+                </li>
+                <li class="nav-item nav-cta">
+                    <a href="https://api.whatsapp.com/send?phone=447827784204&text=Hello%20GreenGlo%2C%20I'd%20like%20a%20quote%20for%20office%20cleaning"
+                        class="btn">Get Quote</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-building"></i>
+                    <span>Office & Business Cleaning Solutions</span>
+                </div>
+
+                <h1>Professional Office Cleaning for London Businesses</h1>
+
+                <p class="hero-subtitle">
+                    Keep your workplace spotless, productive, and healthy with our professional office cleaning
+                    services. Tailored packages for businesses of all sizes across London.
+                </p>
+
+                <div class="hero-cta">
+                    <a href="#officePackages" class="btn btn-large">
+                        <i class="fas fa-eye"></i>
+                        View Packages
+                    </a>
+                    <a href="https://api.whatsapp.com/send?phone=447827784204&text=Hello%20GreenGlo%2C%20I'd%20like%20a%20quote%20for%20office%20cleaning"
+                        class="btn btn-large btn-whatsapp" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        Get Instant Quote
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Office Packages Section -->
+    <section class="section section-light" id="officePackages">
+        <div class="container">
+            <div class="section-title">
+                <h2>Office Cleaning Packages</h2>
+                <p>Choose the perfect cleaning package for your business needs</p>
+            </div>
+
+            <div class="packages-grid">
+                <!-- Small Office Package -->
+                <div class="package-card">
+                    <div class="package-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>Small Office</h3>
+                    <div class="package-price">£20/hour</div>
+                    <div class="package-duration">Weekly or Fortnightly</div>
+                    
+                    <ul class="package-features">
+                        <li><i class="fas fa-check"></i> <span>Up to 10 workstations</span></li>
+                        <li><i class="fas fa-check"></i> <span>1-2 cleaning hours per visit</span></li>
+                        <li><i class="fas fa-check"></i> <span>Vacuuming & mopping floors</span></li>
+                        <li><i class="fas fa-check"></i> <span>Desk & surface cleaning</span></li>
+                        <li><i class="fas fa-check"></i> <span>Kitchen & restroom cleaning</span></li>
+                        <li><i class="fas fa-check"></i> <span>Waste removal</span></li>
+                    </ul>
+
+                    <a href="https://api.whatsapp.com/send?phone=447827784204&text=Hello%20GreenGlo%2C%20I'm%20interested%20in%20the%20Small%20Office%20Cleaning%20package"
+                        class="btn btn-whatsapp" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        Get Quote
+                    </a>
+                </div>
+
+                <!-- Medium Office Package (Featured) -->
+                <div class="package-card featured">
+                    <div class="package-badge">Most Popular</div>
+                    <div class="package-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Medium Office</h3>
+                    <div class="package-price">£25/hour</div>
+                    <div class="package-duration">Flexible Scheduling</div>
+                    
+                    <ul class="package-features">
+                        <li><i class="fas fa-check"></i> <span>11-30 workstations</span></li>
+                        <li><i class="fas fa-check"></i> <span>2-4 cleaning hours per visit</span></li>
+                        <li><i class="fas fa-check"></i> <span>Complete facility cleaning</span></li>
+                        <li><i class="fas fa-check"></i> <span>Meeting room sanitization</span></li>
+                        <li><i class="fas fa-check"></i> <span>Window cleaning (monthly)</span></li>
+                        <li><i class="fas fa-check"></i> <span>Reception area cleaning</span></li>
+                    </ul>
+
+                    <a href="https://api.whatsapp.com/send?phone=447827784204&text=Hello%20GreenGlo%2C%20I'm%20interested%20in%20the%20Medium%20Office%20Cleaning%20package"
+                        class="btn" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        Get Quote
+                    </a>
+                </div>
+
+                <!-- Large Office Package -->
+                <div class="package-card">
+                    <div class="package-icon">
+                        <i class="fas fa-city"></i>
+                    </div>
+                    <h3>Large Office</h3>
+                    <div class="package-price">£30/hour</div>
+                    <div class="package-duration">Daily/Weekly Service</div>
+                    
+                    <ul class="package-features">
+                        <li><i class="fas fa-check"></i> <span>31+ workstations</span></li>
+                        <li><i class="fas fa-check"></i> <span>Multi-team cleaning crew</span></li>
+                        <li><i class="fas fa-check"></i> <span>Specialist floor care</span></li>
+                        <li><i class="fas fa-check"></i> <span>High-level dusting</span></li>
+                        <li><i class="fas fa-check"></i> <span>Priority service</span></li>
+                        <li><i class="fas fa-check"></i> <span>Custom cleaning schedule</span></li>
+                    </ul>
+
+                    <a href="https://api.whatsapp.com/send?phone=447827784204&text=Hello%20GreenGlo%2C%20I'm%20interested%20in%20the%20Large%20Office%20Cleaning%20package"
+                        class="btn btn-whatsapp" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        Get Quote
+                    </a>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="color: var(--medium-gray); font-size: 16px;">
+                    <i class="fas fa-info-circle" style="color: var(--corporate-blue); margin-right: 8px;"></i>
+                    All packages include eco-friendly cleaning products and background-checked staff. 
+                    Minimum 3-hour booking applies.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Services Section -->
+    <section class="section section-corporate">
+        <div class="container">
+            <div class="section-title">
+                <h2>Additional Business Services</h2>
+                <p>Specialized cleaning solutions for different business types</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <div class="service-content">
+                        <h4>Retail Shop Cleaning</h4>
+                        <p>From £35/hour. Perfect for boutiques, clothing stores, and retail spaces.</p>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <div class="service-content">
+                        <h4>Restaurant & Café</h4>
+                        <p>From £40/hour. Food-safe cleaning for kitchens and dining areas.</p>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <div class="service-content">
+                        <h4>Gym & Fitness</h4>
+                        <p>From £45/hour. Sanitization for equipment and changing rooms.</p>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <div class="service-content">
+                        <h4>Medical Offices</h4>
+                        <p>From £50/hour. Clinical-grade sanitization for healthcare facilities.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section section-light">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+                <p>Common questions about our business cleaning services</p>
+            </div>
+
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What's included in your office cleaning service?
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our office cleaning includes vacuuming and mopping floors, dusting surfaces, cleaning windows
+                            and glass, sanitizing restrooms and kitchens, emptying bins, and disinfecting high-touch
+                            areas. We use eco-friendly products and can customize services based on your needs.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How do you determine pricing?
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Pricing is based on office size (square footage), number of employees, frequency of cleaning,
+                            specific requirements, and location. We offer free site visits to provide accurate quotes
+                            for your business.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Are your cleaners insured and background-checked?
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, all our cleaners are fully insured, background-checked, and trained in commercial
+                            cleaning procedures. We take security and professionalism seriously for your peace of mind.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can you work outside business hours?
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely! We offer flexible scheduling including early morning, evenings, weekends, and
+                            overnight cleaning to minimize disruption to your business operations.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Do you provide cleaning supplies and equipment?
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we bring all necessary cleaning supplies, equipment, and eco-friendly products. However,
+                            if you prefer us to use specific products you provide, we can accommodate that as well.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section">
+        <div class="container">
+            <div class="cta-section">
+                <h2>Ready for a Cleaner Workplace?</h2>
+                <p>Join hundreds of London businesses that trust GreenGlo for professional office cleaning. Get a free
+                    quote today and experience the difference.</p>
+                <div class="cta-buttons">
+                    <a href="https://api.whatsapp.com/send?phone=447827784204&text=Hello%20GreenGlo%2C%20I'd%20like%20a%20free%20office%20cleaning%20quote"
+                        class="btn btn-large btn-whatsapp" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        Get Free Quote
+                    </a>
+                    <a href="tel:07827784204" class="btn btn-large" style="background: var(--white); color: var(--corporate-blue);">
+                        <i class="fas fa-phone"></i>
+                        Call: 07827 784204
+                    </a>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact-form">
+                <h3 style="text-align: center; margin-bottom: 30px; color: var(--corporate-blue);">Request a Business Quote</h3>
+                <form id="businessQuoteForm">
+                    <div class="form-group">
+                        <label for="companyName">Company Name *</label>
+                        <input type="text" id="companyName" class="form-control" required placeholder="Your Company Name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactPerson">Contact Person *</label>
+                        <input type="text" id="contactPerson" class="form-control" required placeholder="Your Name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactEmail">Email Address *</label>
+                        <input type="email" id="contactEmail" class="form-control" required placeholder="Your Business Email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactPhone">Phone Number *</label>
+                        <input type="tel" id="contactPhone" class="form-control" required placeholder="Your Phone Number">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="businessType">Business Type *</label>
+                        <select id="businessType" class="form-control" required>
+                            <option value="">Select business type</option>
+                            <option value="office">Office</option>
+                            <option value="retail">Retail Shop</option>
+                            <option value="restaurant">Restaurant/Café</option>
+                            <option value="medical">Medical/Clinic</option>
+                            <option value="gym">Gym/Fitness Center</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cleaningDetails">Cleaning Requirements *</label>
+                        <textarea id="cleaningDetails" class="form-control" rows="4" required placeholder="Please describe your cleaning needs, office size, and preferred schedule..."></textarea>
+                    </div>
+                    
+                    <button type="button" class="btn btn-large" style="width: 100%;" onclick="submitBusinessQuote()">
+                        <i class="fas fa-paper-plane"></i>
+                        Send Quote Request
+                    </button>
+                    
+                    <p style="text-align: center; margin-top: 16px; font-size: 14px; color: var(--medium-gray);">
+                        We'll respond within 24 hours with a customized quote.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>GreenGlo Cleaners</h3>
+                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 20px; font-size: 15px;">
+                        Professional office and business cleaning services across London, Kent, and Essex.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/greenglocleaningco" class="social-link" target="_blank"
+                            aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://tiktok.com/@greenglocleaningco" class="social-link" target="_blank"
+                            aria-label="TikTok">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="https://facebook.com/greenglocleaningco" class="social-link" target="_blank"
+                            aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Business Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#officePackages">Office Cleaning</a></li>
+                        <li><a href="#officePackages">Retail Shop Cleaning</a></li>
+                        <li><a href="#officePackages">Restaurant Cleaning</a></li>
+                        <li><a href="#officePackages">Gym Cleaning</a></li>
+                        <li><a href="services.html">All Services</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Domestic Services</a></li>
+                        <li><a href="airbnb.html">Airbnb Cleaning</a></li>
+                        <li><a href="commercial.html">Business Cleaning</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 16px; font-size: 15px;">
+                        <i class="fas fa-phone" style="margin-right: 8px;"></i> 07827 784204
+                    </p>
+                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 16px; font-size: 15px;">
+                        <i class="fas fa-envelope" style="margin-right: 8px;"></i> info@greenglocleaningco.com
+                    </p>
+                    <p style="color: rgba(255, 255, 255, 0.8); font-size: 15px;">
+                        <i class="fab fa-whatsapp" style="margin-right: 8px;"></i> WhatsApp: 07827 784204
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>GreenGlo Cleaners London © 2025. All rights reserved | <a href="#">Privacy Policy</a> | <a
+                        href="#">Terms of Service</a></p>
+                <p style="margin-top: 8px;">Created by <a
+                        href="https://api.whatsapp.com/send?phone=447543737488&text=" target="_blank">Sacha Raif</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <div class="whatsapp-float">
+        <a href="https://api.whatsapp.com/send?phone=447827784204&text=Hello%20GreenGlo%20Cleaners,%20I%20need%20information%20about%20business%20cleaning%20services"
+           target="_blank" class="whatsapp-button">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // ===== Mobile Navigation =====
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileCloseBtn = document.getElementById('mobileCloseBtn');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        const navMenu = document.getElementById('navMenu');
+        const navbar = document.getElementById('navbar');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const openMobileMenu = () => {
+            navMenu.classList.add('active');
+            mobileMenuOverlay.classList.add('active');
+            mobileMenuBtn.classList.add('active');
+            mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
+            document.body.style.overflow = 'hidden';
+        };
+
+        const closeMobileMenu = () => {
+            navMenu.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            mobileMenuBtn.classList.remove('active');
+            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            document.body.style.overflow = '';
+        };
+
+        mobileMenuBtn.addEventListener('click', () => {
+            if (navMenu.classList.contains('active')) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
+        });
+
+        mobileCloseBtn.addEventListener('click', closeMobileMenu);
+        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+                closeMobileMenu();
+            }
+        });
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ===== FAQ Accordion =====
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            
+            question.addEventListener('click', () => {
+                // Close all other FAQs
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current FAQ
+                item.classList.toggle('active');
+            });
+        });
+
+        // ===== Business Quote Form =====
+        function submitBusinessQuote() {
+            const companyName = document.getElementById('companyName').value.trim();
+            const contactPerson = document.getElementById('contactPerson').value.trim();
+            const contactEmail = document.getElementById('contactEmail').value.trim();
+            const contactPhone = document.getElementById('contactPhone').value.trim();
+            const businessType = document.getElementById('businessType').value;
+            const cleaningDetails = document.getElementById('cleaningDetails').value.trim();
+
+            // Validate required fields
+            if (!companyName || !contactPerson || !contactEmail || !contactPhone || !businessType || !cleaningDetails) {
+                alert('Please fill in all required fields:\n\n• Company Name\n• Contact Person\n• Email Address\n• Phone Number\n• Business Type\n• Cleaning Requirements');
+                return;
+            }
+
+            // Prepare WhatsApp message
+            let whatsappMessage = `🏢 BUSINESS CLEANING QUOTE REQUEST\n\n`;
+            whatsappMessage += `🏢 Company: ${companyName}\n`;
+            whatsappMessage += `👤 Contact: ${contactPerson}\n`;
+            whatsappMessage += `📞 Phone: ${contactPhone}\n`;
+            whatsappMessage += `📧 Email: ${contactEmail}\n`;
+            whatsappMessage += `🏭 Business Type: ${businessType}\n`;
+            whatsappMessage += `\n🧹 CLEANING REQUIREMENTS:\n${cleaningDetails}\n\n`;
+            whatsappMessage += `✅ Please provide a quote for the above requirements.`;
+
+            // Encode for WhatsApp URL
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=447827784204&text=${encodedMessage}`;
+
+            // Show confirmation
+            alert('Thank you for your business quote request!\n\nYou will now be redirected to WhatsApp to send your request to our team.\n\nWe will respond within 24 hours.');
+
+            // Redirect to WhatsApp
+            setTimeout(() => {
+                window.open(whatsappUrl, '_blank');
+            }, 500);
+
+            // Clear form
+            document.getElementById('businessQuoteForm').reset();
+        }
+
+        // ===== Smooth Scrolling =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href') === '#') return;
+
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // ===== Initialize Page =====
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Office Cleaning page loaded - Mobile optimized');
+            
+            // Add loading animation to cards
+            const serviceCards = document.querySelectorAll('.package-card, .service-card');
+            serviceCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
+                
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100);
+            });
+
+            // Log pricing info
+            console.log('💰 Office Cleaning Pricing:');
+            console.log('- Small Office: £25/hour');
+            console.log('- Medium Office: £22/hour');
+            console.log('- Large Office: £19/hour');
+        });
+    </script>
+</body>
+</html>

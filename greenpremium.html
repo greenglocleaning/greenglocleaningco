@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Welcome to Green Premium Plan | GreenGlo Club</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="shortcut icon" type="image/x-icon" href="logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #10B981;
+            --secondary-green: #34D399;
+            --dark-green: #065F46;
+            --light-green: #D1FAE5;
+            --accent-green: #059669;
+            --emerald: #10B981;
+            --teal: #0D9488;
+            --mint: #A7F3D0;
+            --white: #FFFFFF;
+            --off-white: #F9FAFB;
+            --light-gray: #F3F4F6;
+            --medium-gray: #9CA3AF;
+            --dark-gray: #4B5563;
+            --black: #111827;
+            --gold: #FBBF24;
+            --shadow: 0 20px 40px rgba(16, 185, 129, 0.12);
+            --shadow-lg: 0 25px 50px rgba(16, 185, 129, 0.15);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 16px;
+            --border-radius-lg: 24px;
+            --gradient-primary: linear-gradient(135deg, var(--primary-green), var(--teal));
+            --gradient-gold: linear-gradient(135deg, #FBBF24, #F59E0B);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.7;
+            color: var(--dark-gray);
+            background-color: var(--off-white);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--dark-green);
+            letter-spacing: -0.5px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2.5rem;
+            background: var(--gradient-gold);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: var(--shadow);
+            gap: 0.75rem;
+            min-height: 56px;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+        }
+
+        .btn-outline:hover {
+            background: var(--gold);
+            color: var(--white);
+        }
+
+        .btn-large {
+            padding: 1.25rem 3rem;
+            font-size: 1.125rem;
+        }
+
+        .success-hero {
+            min-height: 60vh;
+            padding: 160px 0 80px;
+            background: linear-gradient(135deg, rgba(209, 250, 229, 0.9) 0%, rgba(255, 255, 255, 0.95) 100%);
+            text-align: center;
+        }
+
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: var(--gradient-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            color: var(--white);
+            font-size: 3rem;
+            animation: successPulse 2s infinite;
+        }
+
+        @keyframes successPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .success-hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            background: linear-gradient(to right, var(--dark-green), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .success-hero p {
+            font-size: 1.25rem;
+            color: var(--dark-gray);
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .confirmation-section {
+            padding: 6rem 0;
+            background: var(--white);
+        }
+
+        .confirmation-card {
+            background: var(--off-white);
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .member-id {
+            background: var(--white);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            display: inline-block;
+            font-weight: 700;
+            color: var(--dark-green);
+            border: 2px solid var(--gold);
+            margin: 1rem 0;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .benefit-item {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--gold);
+        }
+
+        .benefit-item i {
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .next-steps {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin: 2rem 0;
+        }
+
+        .next-steps ol {
+            padding-left: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .next-steps li {
+            margin-bottom: 1rem;
+            padding-left: 0.5rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 400px;
+            margin: 2rem auto;
+        }
+
+        .vip-badge {
+            background: var(--gradient-gold);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: 600;
+            display: inline-block;
+            margin: 1rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .success-hero {
+                padding: 120px 0 60px;
+                min-height: 50vh;
+            }
+            
+            .confirmation-card {
+                padding: 2rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="success-hero">
+        <div class="container">
+            <div class="success-icon">
+                <i class="fas fa-crown"></i>
+            </div>
+            <h1>Welcome to Green Premium!</h1>
+            <p>You've joined our highest tier membership. Welcome to VIP status with exclusive benefits and priority service.</p>
+            <div class="member-id">
+                Member ID: GG-PR-<span id="memberId"><?php echo str_pad(rand(1000, 9999), 4, '0', STR_PAD_LEFT); ?></span>
+            </div>
+            <div class="vip-badge">
+                <i class="fas fa-star"></i> VIP MEMBER STATUS <i class="fas fa-star"></i>
+            </div>
+        </div>
+    </section>
+
+    <section class="confirmation-section">
+        <div class="container">
+            <div class="confirmation-card">
+                <h2 style="text-align: center; margin-bottom: 2rem; color: var(--gold);">Your VIP Membership Details</h2>
+                
+                <div style="text-align: center; margin-bottom: 3rem;">
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--gold); margin-bottom: 0.5rem;">£29.99<span style="font-size: 1rem; color: var(--medium-gray);">/month</span></div>
+                    <p style="color: var(--medium-gray);">Billed monthly, cancel anytime</p>
+                </div>
+                
+                <h3 style="margin-bottom: 1.5rem; color: var(--dark-green);">Your Exclusive VIP Benefits:</h3>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <i class="fas fa-pound-sign"></i>
+                        <h4>£15 Off Every Cleaning</h4>
+                        <p>Maximum discount on all services</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-gifts"></i>
+                        <h4>2 FREE Add-Ons</h4>
+                        <p>Oven, fridge, or windows per year</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-calendar-star"></i>
+                        <h4>Annual Deep Clean</h4>
+                        <p>Full eco deep clean included</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-headset"></i>
+                        <h4>Dedicated Support</h4>
+                        <p>Personal account manager</p>
+                    </div>
+                </div>
+                
+                <div class="next-steps">
+                    <h3 style="margin-bottom: 1rem; color: var(--dark-green);">Your VIP Welcome Process:</h3>
+                    <ol>
+                        <li><strong>VIP Welcome Call:</strong> We'll contact you within 2 hours</li>
+                        <li><strong>Personal Account Setup:</strong> Dedicated manager assigned</li>
+                        <li><strong>Free Add-On Scheduling:</strong> Book your 2 free services</li>
+                        <li><strong>Annual Deep Clean:</strong> Schedule your included service</li>
+                        <li><strong>Emergency Access:</strong> Save our priority contact numbers</li>
+                    </ol>
+                </div>
+                
+                <div class="cta-buttons">
+                    <a href="https://api.whatsapp.com/send?phone=447827784204&text=Hello%20GreenGlo%2C%20I%20just%20joined%20the%20Green%20Premium%20VIP%20plan%20and%20would%20like%20to%20schedule%20my%20welcome%20call%20and%20free%20add-ons" 
+                       class="btn" target="_blank">
+                        <i class="fas fa-phone-alt"></i>
+                        Schedule VIP Welcome Call
+                    </a>
+                    <a href="greengloclub.html" class="btn btn-outline">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Membership Plans
+                    </a>
+                </div>
+                
+                <div style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--light-gray);">
+                    <h4 style="margin-bottom: 1rem; color: var(--dark-green);">VIP Priority Support</h4>
+                    <p style="color: var(--medium-gray); margin-bottom: 0.5rem;">
+                        <i class="fas fa-envelope"></i> greenglocleaning@gmail.com (VIP Priority)
+                    </p>
+                    <p style="color: var(--medium-gray); margin-bottom: 1rem;">
+                        <i class="fas fa-phone"></i> 07827 784204 (24/7 Emergency Line)
+                    </p>
+                    <div class="vip-badge" style="font-size: 0.875rem; padding: 0.25rem 1rem;">
+                        <i class="fas fa-shield-alt"></i> Same-Day Emergency Service Available
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

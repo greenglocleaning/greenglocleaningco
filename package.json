@@ -1,0 +1,12 @@
+{
+  "name": "greenglo-club",
+  "version": "1.0.0",
+  "description": "GreenGlo Cleaners Membership Club",
+  "dependencies": {
+    "stripe": "^14.18.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

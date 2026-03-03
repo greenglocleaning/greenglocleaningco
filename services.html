@@ -1,0 +1,2172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <link rel="icon" type="image/png" href="logo.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>All Services | GreenGlo Cleaners</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <style>
+        /* ===== CSS Reset & Variables ===== */
+        :root {
+            --primary-green: #10B981;
+            --secondary-green: #34D399;
+            --dark-green: #065F46;
+            --light-green: #D1FAE5;
+            --accent-green: #059669;
+            --emerald: #10B981;
+            --teal: #0D9488;
+            --mint: #A7F3D0;
+            --white: #FFFFFF;
+            --off-white: #F9FAFB;
+            --light-gray: #F3F4F6;
+            --medium-gray: #9CA3AF;
+            --dark-gray: #4B5563;
+            --black: #111827;
+            --gold: #FBBF24;
+            --ruby: #DC2626;
+            --sapphire: #2563EB;
+            --amethyst: #7C3AED;
+            --shadow: 0 20px 40px rgba(16, 185, 129, 0.12);
+            --shadow-lg: 0 25px 50px rgba(16, 185, 129, 0.15);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 16px;
+            --border-radius-lg: 24px;
+            --gradient-primary: linear-gradient(135deg, var(--primary-green), var(--teal));
+            --gradient-dark: linear-gradient(135deg, var(--dark-green), var(--teal));
+            --gradient-gold: linear-gradient(135deg, #FBBF24, #F59E0B);
+            --gradient-silver: linear-gradient(135deg, #9CA3AF, #6B7280);
+            --gradient-bronze: linear-gradient(135deg, #92400E, #B45309);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.7;
+            color: var(--dark-gray);
+            background-color: var(--off-white);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--dark-green);
+            letter-spacing: -0.5px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2.5rem;
+            background: var(--gradient-primary);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: var(--shadow);
+            gap: 0.75rem;
+            min-height: 56px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-dark);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            opacity: 1;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn:active {
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-green);
+            color: var(--white);
+        }
+
+        .btn-large {
+            padding: 1.25rem 3rem;
+            font-size: 1.125rem;
+            min-height: 64px;
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+        }
+
+        .btn-whatsapp::before {
+            background: linear-gradient(135deg, #1da851, #0d7c5a);
+        }
+
+        .btn-stripe {
+            background: linear-gradient(135deg, #635bff, #8a84ff);
+        }
+
+        .btn-stripe::before {
+            background: linear-gradient(135deg, #544bfd, #7a73ff);
+        }
+
+        /* ===== Navigation Bar ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 5px 20px rgba(16, 185, 129, 0.1);
+            padding: 0.5rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 1.5rem;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .nav-logo:hover {
+            transform: translateY(-2px);
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text h1 {
+            font-size: 1.75rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .logo-text span {
+            font-size: 0.75rem;
+            color: var(--medium-gray);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 0.25rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--primary-green);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            margin-left: 1rem;
+        }
+
+        .nav-cta .btn {
+            padding: 0.75rem 1.75rem;
+            min-height: auto;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            width: 48px;
+            height: 48px;
+            background: var(--light-green);
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-green);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-btn:hover {
+            background: var(--mint);
+            transform: rotate(90deg);
+        }
+
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ===== Modern Section Styles ===== */
+        .section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-light {
+            background: var(--white);
+        }
+
+        .section-gray {
+            background: var(--off-white);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            font-size: 1.125rem;
+            color: var(--medium-gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* ===== Services Hero Section ===== */
+        .services-hero {
+            min-height: 60vh;
+            padding: 160px 0 80px;
+            background: linear-gradient(135deg, rgba(209, 250, 229, 0.8) 0%, rgba(255, 255, 255, 0.9) 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+
+        .services-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--light-green) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .services-hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .services-hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            background: linear-gradient(to right, var(--dark-green), var(--teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .services-hero p {
+            font-size: clamp(1.125rem, 3vw, 1.375rem);
+            color: var(--dark-gray);
+            margin-bottom: 3rem;
+            line-height: 1.6;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ===== Service Categories ===== */
+        .category-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .category-btn {
+            padding: 0.875rem 1.75rem;
+            background: var(--white);
+            border: 2px solid var(--primary-green);
+            border-radius: 50px;
+            color: var(--primary-green);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: var(--gradient-primary);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* ===== Services Grid ===== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+            position: relative;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-green);
+        }
+
+        .service-card::after {
+            content: 'BEST VALUE';
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: var(--gradient-gold);
+            color: var(--black);
+            padding: 8px 40px;
+            font-size: 11px;
+            font-weight: 900;
+            transform: rotate(45deg);
+            z-index: 2;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+            letter-spacing: 1px;
+        }
+
+        .service-image {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            background-color: var(--light-green);
+        }
+
+        .service-image:hover .service-overlay {
+            background: linear-gradient(to bottom, rgba(16, 185, 129, 0.15) 0%, rgba(6, 95, 70, 0.92) 100%);
+        }
+
+        .service-image:hover {
+            filter: brightness(1.05);
+        }
+
+        .service-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 50%, rgba(6, 95, 70, 0.8) 100%);
+            display: flex;
+            align-items: flex-end;
+            padding: 2rem;
+        }
+
+        .service-overlay h3 {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .service-content {
+            padding: 2rem;
+        }
+
+        .service-price-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .price-tag-main {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            line-height: 1;
+            padding: 0.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .price-tag-main::before {
+            content: 'FROM';
+            position: absolute;
+            top: -10px;
+            left: 0;
+            right: 0;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--medium-gray);
+            letter-spacing: 2px;
+        }
+
+        .price-tier-container {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .price-tier {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.75rem;
+            border-radius: 12px;
+            background: var(--light-green);
+            min-width: 80px;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .price-tier:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary-green);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.1);
+        }
+
+        .tier-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .tier-badge.gold {
+            background: var(--gradient-gold);
+        }
+
+        .tier-badge.silver {
+            background: var(--gradient-silver);
+        }
+
+        .tier-badge.bronze {
+            background: var(--gradient-bronze);
+        }
+
+        .tier-bedrooms {
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+            font-weight: 600;
+        }
+
+        .tier-price {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--dark-green);
+            margin-top: 0.25rem;
+        }
+
+        .service-duration-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--light-green);
+            color: var(--dark-green);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin: 0 auto;
+            border: 1px solid var(--secondary-green);
+        }
+
+        .service-description {
+            color: var(--medium-gray);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .service-features li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+            display: flex;
+            align-items: center;
+            color: var(--dark-gray);
+        }
+
+        .service-features li:last-child {
+            border-bottom: none;
+        }
+
+        .service-features li i {
+            color: var(--secondary-green);
+            margin-right: 0.75rem;
+            font-size: 0.875rem;
+            min-width: 20px;
+        }
+
+        .service-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid var(--light-green);
+        }
+
+        .service-cta {
+            width: 100%;
+        }
+
+        .service-card .btn {
+            width: 100%;
+            justify-content: center;
+            font-size: 1.125rem;
+            padding: 1rem 2rem;
+        }
+
+        .payment-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        .stripe-badge {
+            background: #635bff;
+            color: white;
+        }
+
+        .whatsapp-badge {
+            background: #25D366;
+            color: white;
+        }
+
+        /* ===== Booking Modal ===== */
+        .booking-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+
+        .booking-modal {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .booking-modal-header {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 25px 30px;
+            border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .booking-modal-header h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .booking-modal-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .booking-modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .booking-modal-body {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--dark-gray);
+            font-size: 15px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid var(--light-gray);
+            border-radius: 12px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        .booking-summary {
+            background: linear-gradient(135deg, rgba(209, 250, 229, 0.3), rgba(209, 250, 229, 0.1));
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border: 2px solid var(--secondary-green);
+        }
+
+        .payment-note {
+            padding: 15px;
+            border-radius: 12px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .stripe-note {
+            background: linear-gradient(135deg, rgba(99, 91, 255, 0.1), rgba(138, 132, 255, 0.05));
+            border: 2px solid #635bff;
+        }
+
+        .whatsapp-note {
+            background: linear-gradient(135deg, rgba(37, 211, 102, 0.1), rgba(18, 140, 126, 0.05));
+            border: 2px solid #25D366;
+        }
+
+        .time-slots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .time-slot-option {
+            border: 2px solid var(--light-gray);
+            border-radius: 12px;
+            padding: 18px 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            background: white;
+        }
+
+        .time-slot-option:hover {
+            border-color: var(--primary-green);
+            transform: translateY(-2px);
+        }
+
+        .time-slot-option.selected {
+            background: var(--light-green);
+            border-color: var(--primary-green);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+        }
+
+        .time-slot-btn {
+            border: 2px solid var(--light-gray);
+            border-radius: 12px;
+            padding: 14px 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            background: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--dark-gray);
+            width: 100%;
+        }
+        .time-slot-btn:hover { border-color: var(--primary-green); transform: translateY(-2px); }
+        .time-slot-btn.selected {
+            background: var(--light-green);
+            border-color: var(--primary-green);
+            color: var(--dark-green);
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+        }
+
+        .booking-steps {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        /* ===== Services CTA ===== */
+        .services-cta {
+            background: var(--gradient-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 6rem 0;
+            border-radius: var(--border-radius-lg);
+            margin: 4rem auto;
+            max-width: 1200px;
+        }
+
+        .services-cta h2 {
+            color: var(--white);
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .services-cta p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+
+        /* ===== Premium Footer ===== */
+        .footer {
+            background: var(--dark-green);
+            color: var(--white);
+            padding: 6rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-col h3 {
+            color: var(--white);
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary-green);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--primary-green);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.875rem;
+        }
+
+        .footer-bottom a {
+            color: var(--primary-green);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-bottom a:hover {
+            color: var(--secondary-green);
+            text-decoration: underline;
+        }
+
+        /* ===== WhatsApp Button ===== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+        }
+
+        .whatsapp-button {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ===== Responsive Design ===== */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 300px;
+                height: 100vh;
+                background: var(--white);
+                flex-direction: column;
+                padding: 100px 2rem 2rem;
+                gap: 0;
+                transition: var(--transition);
+                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+                z-index: 1001;
+                overflow-y: auto;
+            }
+
+            .nav-menu.active { right: 0; }
+
+            .nav-item { width: 100%; }
+
+            .nav-link {
+                display: block;
+                padding: 1.25rem 1rem;
+                border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+                font-size: 1.1rem;
+            }
+
+            .nav-cta {
+                margin: 2rem 0 0;
+                width: 100%;
+            }
+
+            .nav-cta .btn {
+                width: 100%;
+                justify-content: center;
+                padding: 1rem 2rem;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+                z-index: 1002;
+                position: relative;
+            }
+
+            .mobile-menu-btn.active {
+                background: var(--primary-green);
+                color: var(--white);
+            }
+
+            .services-hero { padding: 140px 0 4rem; }
+            .services-grid { grid-template-columns: 1fr; }
+            .section { padding: 4rem 0; }
+
+            .category-filters {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 1rem;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .category-btn { flex-shrink: 0; }
+            .price-tag-main { font-size: 2rem; }
+            .price-tier-container { flex-wrap: wrap; }
+            .price-tier { min-width: 70px; padding: 0.5rem; }
+            .tier-price { font-size: 1.1rem; }
+            .service-card::after {
+                font-size: 10px;
+                padding: 6px 30px;
+                right: -30px;
+                top: 15px;
+            }
+
+            .mobile-menu-close {
+                position: absolute;
+                top: 1.5rem;
+                right: 1.5rem;
+                width: 44px;
+                height: 44px;
+                background: var(--light-green);
+                border-radius: 12px;
+                border: none;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--primary-green);
+                font-size: 1.25rem;
+                transition: var(--transition);
+                z-index: 1003;
+            }
+
+            .booking-modal { width: 95%; padding: 15px; }
+            .time-slots-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 0 1rem; }
+            .nav-menu { width: 85%; }
+            .service-card { margin-bottom: 1.5rem; }
+            .service-content { padding: 1.5rem; }
+            .payment-badge { font-size: 10px; padding: 3px 8px; margin-left: 5px; }
+            .time-slots-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+    <!-- Premium Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo">
+                <div class="logo-icon">
+                    <img src="logo.png" alt="GreenGlo Cleaners Logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px;">
+                </div>
+                <div class="logo-text">
+                    <h1>GreenGlo</h1>
+                    <span>Cleaners</span>
+                </div>
+            </a>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <button class="mobile-menu-close" id="mobileCloseBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+                <li class="nav-item"><a href="index.html#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
+                <li class="nav-item"><a href="index.html#testimonials" class="nav-link">Testimonials</a></li>
+                <li class="nav-item"><a href="index.html#contact" class="nav-link">Contact</a></li>
+                <li class="nav-item nav-cta">
+                    <a href="https://api.whatsapp.com/send?phone=447827784204&text=" class="btn">Get Quote</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="booking-modal-overlay">
+        <div class="booking-modal">
+            <div class="booking-modal-header">
+                <h3>Book Service: <span id="bookingServiceName">Service</span></h3>
+                <button class="booking-modal-close" id="closeBookingModal">&times;</button>
+            </div>
+            <div class="booking-modal-body">
+                <!-- Step 1: Date & Time Selection -->
+                <div id="bookingStep1">
+                    <div class="booking-summary">
+                        <h4 style="color: var(--dark-green); margin-bottom: 15px;">Booking Summary</h4>
+                        <div id="bookingSummaryDetails"></div>
+                    </div>
+                    
+                    <div class="form-group" id="bedroomsGroup" style="display:none;">
+                        <label>Number of Bedrooms</label>
+                        <select id="bedroomsSelect" class="form-control">
+                            <option value="1">1 Bedroom</option>
+                            <option value="2">2 Bedrooms</option>
+                            <option value="3">3 Bedrooms</option>
+                            <option value="4">4 Bedrooms</option>
+                            <option value="5">5+ Bedrooms</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Select Date</label>
+                        <input type="date" id="bookingDate" class="form-control" min="" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Available Time Slots</label>
+                        <div id="timeSlotsContainer" class="time-slots-grid"></div>
+                    </div>
+                    
+                    <div id="paymentNote" class="payment-note"></div>
+                    
+                    <div class="booking-steps">
+                        <button class="btn btn-outline" id="cancelBookingBtn">Cancel</button>
+                        <button id="nextStepBtn" class="btn">
+                            <i class="fas fa-arrow-right"></i> Next: Your Details
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Customer Details -->
+                <div id="bookingStep2" style="display: none;">
+                    <div class="form-group">
+                        <label>Your Full Name *</label>
+                        <input type="text" id="customerName" class="form-control" required placeholder="John Smith">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number *</label>
+                        <input type="tel" id="customerPhone" class="form-control" required placeholder="07123 456789">
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address *</label>
+                        <input type="email" id="customerEmail" class="form-control" required placeholder="info@greenglocleaningco.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Service Address *</label>
+                        <textarea id="customerAddress" class="form-control" rows="3" required placeholder="Full address including postcode"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Special Instructions (Optional)</label>
+                        <textarea id="bookingNotes" class="form-control" rows="3" placeholder="Any special requirements or notes..."></textarea>
+                    </div>
+                    
+                    <div class="booking-summary" id="finalBookingSummary">
+                        <h4 style="color: var(--dark-green); margin-bottom: 15px;">Final Booking Summary</h4>
+                        <div id="finalSummaryDetails"></div>
+                    </div>
+                    
+                    <div class="booking-steps">
+                        <button class="btn btn-outline" id="backToStep1Btn">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                        <button id="confirmBookingBtn" class="btn" style="flex: 2;">
+                            <i class="fas fa-check-circle"></i> Complete Booking
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services Hero Section -->
+    <section class="services-hero">
+        <div class="container">
+            <div class="services-hero-content">
+                <h1>Our Complete Cleaning Services</h1>
+                <p>Explore our comprehensive range of professional cleaning services, all using eco-friendly products and performed by our vetted, background-checked professionals.</p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="#servicesGrid" class="btn btn-large">
+                        <i class="fas fa-broom"></i> View Services
+                    </a>
+                    <a href="index.html" class="btn btn-outline btn-large">
+                        <i class="fas fa-home"></i> Back to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Categories -->
+    <section class="section section-light">
+        <div class="container">
+            <div class="section-title">
+                <h2>Browse by Category</h2>
+                <p>Find the perfect cleaning service for your needs</p>
+            </div>
+            <div class="category-filters">
+                <button class="category-btn active" data-category="all">All Services</button>
+                <button class="category-btn" data-category="domestic">Domestic Cleaning</button>
+                <button class="category-btn" data-category="office">Office Cleaning</button>
+                <button class="category-btn" data-category="deep">Deep Cleaning</button>
+                <button class="category-btn" data-category="special">Specialized Services</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Domestic Services Grid -->
+    <section class="section section-gray">
+        <div class="container">
+            <div class="services-grid" id="domesticServicesGrid">
+                <!-- Service cards will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Services CTA -->
+    <section class="section">
+        <div class="container">
+            <div class="services-cta">
+                <h2>Need Help Choosing the Right Service?</h2>
+                <p>Our cleaning experts are ready to help you select the perfect service for your needs. Get a personalized quote or book a consultation today.</p>
+                <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://api.whatsapp.com/send?phone=447827784204&text=Hello%20GreenGlo%20Cleaners,%20I%20need%20help%20choosing%20a%20cleaning%20service." class="btn btn-whatsapp btn-large">
+                        <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                    </a>
+                    <a href="tel:+447827784204" class="btn btn-outline btn-large" style="color: var(--white);">
+                        <i class="fas fa-phone"></i> Call: 07827 784204
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>GreenGlo Cleaners</h3>
+                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 1.5rem;">Professional eco-friendly cleaning services for homes, offices, and venues across London.</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/greenglocleaningco" class="social-link" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://tiktok.com/@greenglocleaningco" class="social-link" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://facebook.com/greenglocleaningco" class="social-link" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html">Domestic cleaning</a></li>
+                        <li><a href="services.html">End of tenancy cleaning</a></li>
+                        <li><a href="services.html">Carpet cleaning</a></li>
+                        <li><a href="services.html">Office cleaning</a></li>
+                        <li><a href="services.html">View all services</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="index.html#prices">Prices</a></li>
+                        <li><a href="index.html#club">GreenGlo Club</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="index.html#faq">FAQ</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 1.5rem;"><i class="fas fa-phone" style="margin-right: 0.5rem;"></i> 07827 784204</p>
+                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 1.5rem;"><i class="fas fa-envelope" style="margin-right: 0.5rem;"></i> info@greenglocleaningco.com</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>GreenGlo Cleaners London © 2025. All rights reserved | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+                <p style="margin-top: 0.5rem;">Created by <a href="https://api.whatsapp.com/send?phone=447543737488&text=" target="_blank">Sacha Raif</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <div class="whatsapp-float">
+        <a href="https://api.whatsapp.com/send?phone=447827784204&text=Hello%20GreenGlo%20Cleaners,%20I%20would%20like%20more%20information%20about%20your%20services" target="_blank" class="whatsapp-button">
+            <i class="fab fa-whatsapp" style="color: white; font-size: 32px;"></i>
+        </a>
+    </div>
+
+    <script>
+        // ===== Analytics Configuration =====
+        const ANALYTICS_CONFIG = {
+            supabaseUrl: 'https://faxjeniohetefqwcsefi.supabase.co',
+            supabaseKey: 'sb_publishable_7TZ_Y-HKZc_ibl59lqyAsQ_Qbv9A2o7',
+            sessionTimeout: 30 * 60 * 1000,
+            scrollThresholds: [25, 50, 75, 100]
+        };
+
+        let analyticsState = { isTracking: false };
+        let supabaseAnalyticsClient = null;
+        let supabaseClient = null;
+
+        // ===== Config (loaded from config.json) =====
+        let CONFIG = {
+            stripe: { publishableKey: '' },
+            supabase: { url: '', anonKey: '' },
+            business: { phone: '447827784204', siteUrl: '' },
+            payment: { depositPercent: 25, currency: 'gbp' }
+        };
+
+        async function loadConfig() {
+            try {
+                const res = await fetch('/config.json');
+                if (res.ok) CONFIG = await res.json();
+            } catch(e) { console.warn('config.json not found, using defaults'); }
+        }
+
+        // ===== Build URL to checkout.html with all booking params ===== 
+        function buildCheckoutUrl(bookingData) {
+            const serviceData = bookingData.service.data;
+            const fullPrice = bookingData.calculatedPrice || serviceData.basePrice;
+            const depositPercent = (CONFIG.payment && CONFIG.payment.depositPercent) || 25;
+            const depositAmount = (Math.round(fullPrice * depositPercent) / 100).toFixed(2);
+            const balanceAmount = (fullPrice - depositAmount).toFixed(2);
+
+            const p = new URLSearchParams({
+                ref:     bookingData.bookingRef,
+                service: bookingData.service.title,
+                price:   fullPrice,
+                deposit: depositAmount,
+                balance: balanceAmount,
+                date:    bookingData.date,
+                time:    bookingData.timeSlot || '',
+                bedrooms: bookingData.bedrooms || '',
+                name:    bookingData.customer.name,
+                email:   bookingData.customer.email,
+                phone:   bookingData.customer.phone,
+                address: bookingData.customer.address,
+                notes:   bookingData.customer.notes || '',
+            });
+            return 'checkout.html?' + p.toString();
+        }
+
+        // ===== Save booking to Supabase =====
+        async function saveBookingToSupabase(bookingData, bookingRef) {
+            if (!CONFIG.supabase || !CONFIG.supabase.url || CONFIG.supabase.url.includes('YOUR_')) return;
+            try {
+                const sb = window.supabase.createClient(CONFIG.supabase.url, CONFIG.supabase.anonKey);
+                const serviceData = bookingData.service.data;
+                await sb.from('bookings').insert({
+                    customer_name: bookingData.customer.name,
+                    customer_email: bookingData.customer.email,
+                    customer_phone: bookingData.customer.phone,
+                    customer_address: bookingData.customer.address,
+                    booking_date: bookingData.date,
+                    time_slot: bookingData.timeSlot,
+                    service_type: bookingData.service.title,
+                    service_title: bookingData.service.title,
+                    service_id: parseInt(bookingData.service.id),
+                    duration: serviceData.duration,
+                    price: String(bookingData.calculatedPrice || serviceData.basePrice),
+                    special_instructions: bookingData.customer.notes || '',
+                    notes: 'Bedrooms: ' + (bookingData.bedrooms || 'N/A') + ' | Deposit: 25%',
+                    status: 'pending',
+                    booking_reference: bookingRef
+                });
+            } catch(e) {
+                console.warn('Supabase booking save failed:', e);
+            }
+        }
+
+        // ===== Calculate price based on bedrooms =====
+        function calculatePrice(serviceData, bedrooms) {
+            if (serviceData.hasBedrooms) {
+                const extra = (bedrooms - 1) * (serviceData.perBedroomPrice || 30);
+                return serviceData.basePrice + extra;
+            }
+            return serviceData.basePrice;
+        }
+
+        // ===== UPDATED PRICING: Client's exact prices =====
+        const domesticServicesData = [
+            {
+                id: 2,
+                title: "Office Cleaning",
+                category: "office",
+                description: "Professional commercial cleaning for businesses and startups.",
+                features: ["Workstation sanitization", "Meeting room cleaning", "Kitchenette cleaning", "Floor care", "Waste removal"],
+                duration: "2-6 hours",
+                hasBedrooms: false,
+                basePrice: 18,
+                displayPrice: "£18/hour",
+                image: "office.png",
+                fallbackColor: "#10B981",
+                isHourly: true
+            },
+            {
+                id: 3,
+                title: "Kitchen Deep Clean",
+                category: "deep",
+                description: "Complete kitchen deep clean including appliances and cabinets. Starts from £120.",
+                features: ["Oven cleaning included*", "Appliance sanitization", "Cabinet degreasing", "Tile splashback", "Drawer interiors"],
+                duration: "3-4 hours",
+                hasBedrooms: false,
+                basePrice: 120,
+                displayPrice: "From £120",
+                image: "kitchen.png",
+                fallbackColor: "#10B981",
+                isHourly: false
+            },
+            {
+                id: 4,
+                title: "Oven Deep Clean",
+                category: "deep",
+                description: "Professional oven cleaning for single and double ovens. Starts from £60.",
+                features: ["Complete interior clean", "Door & glass polish", "Rack cleaning", "Exterior finish", "Trays included"],
+                duration: "1.5-2 hours",
+                hasBedrooms: false,
+                basePrice: 60,
+                displayPrice: "From £60",
+                image: "ovenafter.png",
+                fallbackColor: "#10B981",
+                isHourly: false
+            },
+            {
+                id: 5,
+                title: "Bathroom Deep Clean",
+                category: "deep",
+                description: "Complete bathroom sanitization and deep cleaning.",
+                features: ["Tile & grout scrubbing", "Sanitization", "Fixture polishing", "Mould treatment", "Limescale removal"],
+                duration: "1.5-2 hours",
+                hasBedrooms: false,
+                basePrice: 65,
+                displayPrice: "£65",
+                image: "bathroom.png",
+                fallbackColor: "#10B981",
+                isHourly: false
+            },
+            {
+                id: 6,
+                title: "End of Tenancy Cleaning",
+                category: "deep",
+                description: "Professional cleaning to ensure full deposit return. Starts from £220.",
+                features: ["Inventory check ready", "Complete property clean", "Carpet cleaning available", "Guaranteed satisfaction", "Often required for deposit"],
+                duration: "4-8 hours",
+                hasBedrooms: true,
+                basePrice: 220,
+                perBedroomPrice: 30,
+                displayPrice: "From £220",
+                image: "tenancy.png",
+                fallbackColor: "#10B981",
+                isHourly: false
+            },
+            {
+                id: 7,
+                title: "Carpet Cleaning",
+                category: "deep",
+                description: "Professional hot water extraction carpet cleaning.",
+                features: ["Hot water extraction", "Stain removal", "Quick drying", "Deodorizing", "Suitable for homes/offices"],
+                duration: "1-3 hours",
+                hasBedrooms: false,
+                basePrice: 15,
+                displayPrice: "From £15/room",
+                image: "carpet.png",
+                fallbackColor: "#10B981",
+                isHourly: false
+            },
+            {
+                id: 8,
+                title: "Regular Domestic Clean",
+                category: "domestic",
+                description: "Weekly or fortnightly cleaning service. General clean starts from £50.",
+                features: ["Dusting & vacuuming", "Kitchen & bathroom", "Surface cleaning", "Floor mopping", "Flexible schedule"],
+                duration: "2-4 hours",
+                hasBedrooms: false,
+                basePrice: 50,
+                displayPrice: "From £50",
+                image: "domestic.png",
+                fallbackColor: "#10B981",
+                isHourly: false
+            },
+            {
+                id: 9,
+                title: "One-Off Deep Clean",
+                category: "deep",
+                description: "Thorough one-time cleaning for your entire home. Starts from £200.",
+                features: ["Complete home clean", "Inside cabinets", "Appliance cleaning", "Detailed attention", "Perfect for refresh"],
+                duration: "4-8 hours",
+                hasBedrooms: true,
+                basePrice: 200,
+                perBedroomPrice: 35,
+                displayPrice: "From £200",
+                image: "deep.png",
+                fallbackColor: "#10B981",
+                isHourly: false
+            },
+            {
+                id: 10,
+                title: "Window Cleaning",
+                category: "special",
+                description: "Professional window cleaning for houses and flats. Streak-free finish.",
+                features: ["Interior & exterior available", "Streak-free shine", "Sills & frames", "Traditional or water-fed pole", "Safe working practices"],
+                duration: "1-3 hours",
+                hasBedrooms: false,
+                basePrice: 60,
+                displayPrice: "House from £60, Flat from £60",
+                image: "windows.png",
+                fallbackColor: "#0D9488",
+                isHourly: false
+            },
+            {
+                id: 11,
+                title: "After Builders Cleaning",
+                category: "deep",
+                description: "Post-construction cleanup for renovation projects.",
+                features: ["Debris removal", "Dust elimination", "Surface cleaning", "Final touch-up", "Ready to move in"],
+                duration: "4-8 hours",
+                hasBedrooms: true,
+                basePrice: 200,
+                perBedroomPrice: 40,
+                displayPrice: "From £200",
+                image: "afterbuilders.png",
+                fallbackColor: "#10B981",
+                isHourly: false
+            },
+            {
+                id: 12,
+                title: "Upholstery Cleaning",
+                category: "special",
+                description: "Sofa, armchair, and car seat deep cleaning.",
+                features: ["Stain removal", "Fabric protection", "Deodorizing", "Professional equipment", "Fast drying"],
+                duration: "1-2 hours",
+                hasBedrooms: false,
+                basePrice: 55,
+                displayPrice: "Sofa 3-seater: £55",
+                image: "furniture.png",
+                fallbackColor: "#10B981",
+                isHourly: false
+            },
+            {
+                id: 13,
+                title: "Patio & Decking Cleaning",
+                category: "special",
+                description: "Pressure washing for patios and decking areas.",
+                features: ["Pressure washing", "Moss removal", "Stain treatment", "Restoration", "Makes outdoor spaces fresh"],
+                duration: "2-4 hours",
+                hasBedrooms: false,
+                basePrice: 70,
+                displayPrice: "From £70",
+                image: "patio.png",
+                fallbackColor: "#10B981",
+                isHourly: false
+            },
+            {
+                id: 14,
+                title: "Commercial Cleaning",
+                category: "office",
+                description: "Regular commercial cleaning for businesses.",
+                features: ["Daily/weekly service", "Floor maintenance", "Restroom cleaning", "Waste removal", "Custom schedule"],
+                duration: "2-8 hours",
+                hasBedrooms: false,
+                basePrice: 25,
+                displayPrice: "£25/hour",
+                image: "commercial.png",
+                fallbackColor: "#10B981",
+                isHourly: true
+            }
+        ];
+
+        // ===== Booking & UI State =====
+        let currentBooking = {
+            service: null,
+            stripeLink: null,
+            date: null,
+            timeSlot: null,
+            slotId: null,
+            bedrooms: 1,
+            calculatedPrice: 0,
+            bookingRef: null,
+            customer: {}
+        };
+
+        const domesticServicesGrid = document.getElementById('domesticServicesGrid');
+
+        // ===== Render Services =====
+        function renderDomesticServices(category = 'all') {
+            domesticServicesGrid.innerHTML = '';
+            const filteredServices = category === 'all' 
+                ? domesticServicesData
+                : domesticServicesData.filter(s => s.category === category);
+            filteredServices.forEach(service => createServiceCard(service, domesticServicesGrid));
+            setupServiceCardListeners();
+        }
+
+        function createServiceCard(service, container) {
+            const serviceCard = document.createElement('div');
+            serviceCard.className = 'service-card';
+            serviceCard.setAttribute('data-category', service.category);
+            serviceCard.setAttribute('data-service-id', service.id);
+
+            let priceContent = '';
+            if (service.hasBedrooms) {
+                const tiers = [
+                    { bedrooms: 1, price: service.basePrice, badge: 'gold' },
+                    { bedrooms: 2, price: service.basePrice + (service.perBedroomPrice || 30), badge: 'silver' },
+                    { bedrooms: 3, price: service.basePrice + ((service.perBedroomPrice || 30) * 2), badge: 'bronze' }
+                ];
+                priceContent = `
+                    <div class="service-price-container">
+                        <div class="price-tag-main">£${service.basePrice}</div>
+                        <div class="price-tier-container">
+                            ${tiers.map(tier => `
+                                <div class="price-tier">
+                                    <div class="tier-badge ${tier.badge}">${tier.bedrooms} BED</div>
+                                    <div class="tier-bedrooms">${tier.bedrooms} Bedroom${tier.bedrooms > 1 ? 's' : ''}</div>
+                                    <div class="tier-price">£${tier.price}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            } else {
+                let display = `<div class="price-tag-main">${service.displayPrice}</div>`;
+                if (service.isOneOffAvailable) {
+                    display = `<div class="price-tag-main" style="margin-bottom: 0.5rem;">${service.displayPrice}</div>
+                               <div style="text-align: center; font-weight: 600; color: var(--dark-green);">One-off: £60</div>`;
+                }
+                priceContent = `<div class="service-price-container" style="text-align: center;">${display}</div>`;
+            }
+
+            let badgeHTML = '<span class="payment-badge" style="background:linear-gradient(135deg,#10B981,#0D9488);color:white;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;"><i class="fas fa-lock"></i> Secure Booking</span>';
+            
+            // Check if service is hourly - show WhatsApp button instead
+            let buttonHTML = '';
+            if (service.isHourly) {
+                buttonHTML = `
+                    <a href="https://api.whatsapp.com/send?phone=${CONFIG.business.phone}&text=Hello%20GreenGlo%20Cleaners,%20I'm%20interested%20in%20${encodeURIComponent(service.title)}.%20Please%20provide%20more%20information." 
+                       class="btn btn-whatsapp" 
+                       target="_blank"
+                       style="padding: 1rem 2rem; font-size: 1.125rem;">
+                        <i class="fab fa-whatsapp"></i> Contact via WhatsApp
+                    </a>
+                `;
+            } else {
+                buttonHTML = `
+                    <button class="btn book-service-btn" 
+                            data-service-id="${service.id}" 
+                            data-service-title="${service.title}"
+                            style="padding: 1rem 2rem; font-size: 1.125rem;">
+                        <i class="fas fa-calendar-check"></i> Book Now — Pay 25% Deposit
+                    </button>
+                `;
+            }
+
+            // Build the click action for the image
+            let imageClickAttr = '';
+            let imageCursorStyle = 'cursor: pointer;';
+            if (service.isHourly) {
+                imageClickAttr = `onclick="window.open('https://api.whatsapp.com/send?phone=447827784204&text=Hello%20GreenGlo%20Cleaners,%20I%27m%20interested%20in%20${encodeURIComponent(service.title)}.%20Please%20provide%20more%20information.', '_blank')"`;
+            } else {
+                imageClickAttr = `onclick="handleImageClick(${service.id})"`;
+            }
+
+            serviceCard.innerHTML = `
+                <div class="service-image" ${imageClickAttr} style="${service.image ? `background-image: url('${service.image}');` : `background: linear-gradient(135deg, ${service.fallbackColor || 'var(--primary-green)'}, var(--teal));`} background-color: var(--light-green); ${imageCursorStyle}">
+                    <div class="service-overlay">
+                        <h3>${service.title} ${badgeHTML}</h3>
+                        <div style="position:absolute;top:12px;left:12px;background:rgba(0,0,0,0.5);color:white;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:600;backdrop-filter:blur(4px);"><i class="fas fa-hand-pointer" style="margin-right:4px;"></i>${service.isHourly ? 'Get Quote' : 'Book Now'}</div>
+                    </div>
+                </div>
+                <div class="service-content">
+                    ${priceContent}
+                    <div style="text-align: center; margin: 1rem 0;">
+                        <span class="service-duration-badge"><i class="far fa-clock"></i> ${service.duration}</span>
+                    </div>
+                    <p class="service-description" style="cursor:pointer;" onclick="${service.isHourly ? `window.open('https://api.whatsapp.com/send?phone=447827784204&text=Hello%20GreenGlo%20Cleaners,%20I%27m%20interested%20in%20${encodeURIComponent(service.title)}.%20Please%20provide%20more%20information.', '_blank')` : `handleImageClick(${service.id})`}">${service.description}</p>
+                    <ul class="service-features">
+                        ${service.features.map(f => `<li><i class="fas fa-check"></i>${f}</li>`).join('')}
+                    </ul>
+                    <div class="service-meta"><div class="service-cta">${buttonHTML}</div></div>
+                </div>
+            `;
+            container.appendChild(serviceCard);
+        }
+
+        function handleImageClick(serviceId) {
+            const serviceData = domesticServicesData.find(s => s.id == serviceId);
+            if (serviceData && !serviceData.isHourly) {
+                openBookingModal(serviceData.title, serviceData.id, serviceData);
+            }
+        }
+
+        function setupServiceCardListeners() {
+            document.querySelectorAll('.book-service-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const serviceId = this.getAttribute('data-service-id');
+                    const serviceTitle = this.getAttribute('data-service-title');
+                    let serviceData = domesticServicesData.find(s => s.id == serviceId);
+                    if (serviceData) openBookingModal(serviceTitle, serviceId, serviceData);
+                });
+            });
+        }
+
+        // ===== Modal Functions =====
+        function openBookingModal(serviceTitle, serviceId, serviceData) {
+            currentBooking.service = { title: serviceTitle, id: serviceId, data: serviceData };
+            currentBooking.stripeLink = null;
+            currentBooking.bedrooms = 1;
+            currentBooking.calculatedPrice = serviceData.basePrice;
+            document.getElementById('bookingServiceName').textContent = serviceTitle;
+            updateBookingSummary();
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('bookingDate').min = today;
+            document.getElementById('bookingDate').value = today;
+            currentBooking.date = today;
+
+            const paymentNote = document.getElementById('paymentNote');
+            const depositPct = (CONFIG.payment && CONFIG.payment.depositPercent) || 25;
+            const depositAmt = Math.round(serviceData.basePrice * depositPct) / 100;
+            paymentNote.className = 'payment-note';
+            paymentNote.innerHTML = `<i class="fas fa-lock" style="color: var(--primary-green); font-size: 24px; margin-bottom: 10px;"></i><p style="color: var(--dark-gray); margin: 0;"><strong>Secure deposit payment — ${depositPct}% today.</strong><br>You'll pay a ${depositPct}% deposit (£${depositAmt.toFixed(2)}) now to confirm your booking. The remaining balance is due on the day of your clean.</p>`;
+            const nextBtn = document.getElementById('nextStepBtn');
+            nextBtn.className = 'btn';
+            nextBtn.innerHTML = '<i class="fas fa-arrow-right"></i> Continue';
+
+            // Show/hide bedrooms selector
+            const bedroomsGroup = document.getElementById('bedroomsGroup');
+            if (serviceData.hasBedrooms) {
+                bedroomsGroup.style.display = 'block';
+                document.getElementById('bedroomsSelect').value = '1';
+            } else {
+                bedroomsGroup.style.display = 'none';
+            }
+            document.getElementById('bookingModal').style.display = 'flex';
+            document.getElementById('bookingStep1').style.display = 'block';
+            document.getElementById('bookingStep2').style.display = 'none';
+            document.getElementById('customerName').value = '';
+            document.getElementById('customerPhone').value = '';
+            document.getElementById('customerEmail').value = '';
+            document.getElementById('customerAddress').value = '';
+            document.getElementById('bookingNotes').value = '';
+            loadTimeSlots(today);
+        }
+
+        function updateBookingSummary() {
+            const summary = document.getElementById('bookingSummaryDetails');
+            if (!currentBooking.service) return;
+            
+            const serviceData = currentBooking.service.data;
+            const calcPrice = currentBooking.calculatedPrice || serviceData.basePrice;
+            let priceDisplay = currentBooking.calculatedPrice ? '£' + calcPrice : serviceData.displayPrice;
+            if (serviceData.isOneOffAvailable) priceDisplay = "From £50 (one-off £60)";
+            const depositDisplay = (Math.round(calcPrice * 25) / 100).toFixed(2);
+            let bedroomInfo = serviceData.hasBedrooms ? `<div style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>Bedrooms:</span><span>${currentBooking.bedrooms} bedroom${currentBooking.bedrooms>1?'s':''}</span></div>` : '';
+            let dateTimeInfo = '';
+            if (currentBooking.date && currentBooking.timeSlot) {
+                const [start,end] = currentBooking.timeSlot.split('-');
+                dateTimeInfo = `<div style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>Date:</span><span>${formatDate(currentBooking.date)}</span></div><div style="display: flex; justify-content: space-between;"><span>Time:</span><span>${formatTime(start)} - ${formatTime(end)}</span></div>`;
+            }
+            summary.innerHTML = `
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>Service:</span><span style="font-weight:600;color:var(--dark-green);">${currentBooking.service.title}</span></div>
+                ${bedroomInfo}
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>Duration:</span><span>${serviceData.duration}</span></div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>Price:</span><span style="font-weight:600;color:var(--primary-green);">${priceDisplay}</span></div>
+                ${dateTimeInfo}
+                <div style="display: flex; justify-content: space-between; margin-top:12px; padding-top:12px; border-top:1px solid rgba(16,185,129,0.2);"><span style="font-weight:600;">Deposit (25%):</span><span style="color:var(--primary-green);font-weight:700;">£${depositDisplay}</span></div>
+            `;
+        }
+
+        function updateFinalSummary() {
+            const summary = document.getElementById('finalSummaryDetails');
+            if (!currentBooking.service) return;
+            
+            const serviceData = currentBooking.service.data;
+            const calcPrice = currentBooking.calculatedPrice || serviceData.basePrice;
+            let priceDisplay = currentBooking.calculatedPrice ? '£' + calcPrice : serviceData.displayPrice;
+            if (serviceData.isOneOffAvailable) priceDisplay = "From £50 (one-off £60)";
+            const depositDisplay = (Math.round(calcPrice * 25) / 100).toFixed(2);
+            const balanceDisplay = (calcPrice - depositDisplay).toFixed(2);
+            let bedroomInfo = serviceData.hasBedrooms ? `<div style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>Bedrooms:</span><span>${currentBooking.bedrooms} bedroom${currentBooking.bedrooms>1?'s':''}</span></div>` : '';
+            
+            let dateTimeInfo = '';
+            if (currentBooking.timeSlot) {
+                const [start,end] = currentBooking.timeSlot.split('-');
+                dateTimeInfo = `
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>Date:</span><span>${formatDate(currentBooking.date)}</span></div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>Time:</span><span style="font-weight:600;color:var(--primary-green);">${formatTime(start)} - ${formatTime(end)}</span></div>
+                `;
+            }
+            
+            summary.innerHTML = `
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>Service:</span><span style="font-weight:600;color:var(--dark-green);">${currentBooking.service.title}</span></div>
+                ${bedroomInfo}
+                ${dateTimeInfo}
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>Duration:</span><span>${serviceData.duration}</span></div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>Total Price:</span><span style="font-weight:700;color:var(--primary-green);font-size:1.25rem;">${priceDisplay}</span></div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span style="font-weight:600;">Deposit Due Now (25%):</span><span style="color:var(--primary-green);font-weight:700;font-size:1.1rem;">£${depositDisplay}</span></div>
+                <div style="display: flex; justify-content: space-between; margin-top:8px; padding-top:8px; border-top:1px solid rgba(16,185,129,0.2);"><span>Balance on the day:</span><span style="color:var(--dark-gray);font-weight:600;">£${balanceDisplay}</span></div>
+            `;
+        }
+
+        function closeBookingModal() {
+            document.getElementById('bookingModal').style.display = 'none';
+            currentBooking = { service: null, stripeLink: null, date: null, timeSlot: null, slotId: null, bedrooms: 1, calculatedPrice: 0, bookingRef: null, customer: {} };
+        }
+
+        function updateBedrooms(val) {
+            currentBooking.bedrooms = parseInt(val);
+            const sd = currentBooking.service && currentBooking.service.data;
+            if (sd) {
+                currentBooking.calculatedPrice = calculatePrice(sd, currentBooking.bedrooms);
+                updateBookingSummary();
+                // Update payment note deposit amount
+                const depositPct = (CONFIG.payment && CONFIG.payment.depositPercent) || 25;
+                const depositAmt = (Math.round(currentBooking.calculatedPrice * depositPct) / 100).toFixed(2);
+                const paymentNote = document.getElementById('paymentNote');
+                if (paymentNote && paymentNote.innerHTML) {
+                    paymentNote.querySelector('p').innerHTML = '<strong>Secure deposit payment — ' + depositPct + '% today.</strong><br>You\'ll pay a ' + depositPct + '% deposit (£' + depositAmt + ') now to confirm your booking. The remaining balance is due on the day of your clean.';
+                }
+            }
+        }
+
+        async function loadTimeSlots(date) {
+            const container = document.getElementById('timeSlotsContainer');
+            container.innerHTML = '<div style="grid-column: span 2; text-align: center; padding: 40px; color: var(--medium-gray);"><i class="fas fa-spinner fa-spin fa-2x"></i><div style="margin-top: 10px;">Loading available time slots...</div></div>';
+
+            // Default slots to show if Supabase not configured
+            const defaultSlots = [
+                { id: 'slot-1', start_time: '08:00', end_time: '10:00', label: 'Morning (8am - 10am)' },
+                { id: 'slot-2', start_time: '10:00', end_time: '13:00', label: 'Mid-Morning (10am - 1pm)' },
+                { id: 'slot-3', start_time: '13:00', end_time: '16:00', label: 'Afternoon (1pm - 4pm)' },
+                { id: 'slot-4', start_time: '16:00', end_time: '18:00', label: 'Evening (4pm - 6pm)' }
+            ];
+
+            let slots = defaultSlots;
+
+            // Try to load from Supabase if configured
+            if (CONFIG.supabase && CONFIG.supabase.url && !CONFIG.supabase.url.includes('YOUR_')) {
+                try {
+                    const sb = window.supabase.createClient(CONFIG.supabase.url, CONFIG.supabase.anonKey);
+                    const { data, error } = await sb
+                        .from('availability_slots')
+                        .select('*')
+                        .eq('slot_date', date)
+                        .eq('is_blocked', false)
+                        .lt('booked_count', 1);
+                    if (!error && data && data.length > 0) {
+                        slots = data.map(s => ({
+                            id: s.id,
+                            start_time: s.start_time,
+                            end_time: s.end_time,
+                            label: formatTime(s.start_time) + ' - ' + formatTime(s.end_time)
+                        }));
+                    }
+                } catch(e) { console.warn('Supabase slot fetch failed, using defaults:', e); }
+            }
+
+            if (slots.length === 0) {
+                container.innerHTML = '<div style="grid-column: span 2; text-align: center; padding: 30px; color: var(--medium-gray);"><i class="fas fa-calendar-times fa-2x"></i><div style="margin-top: 15px;">No slots available for this date.</div><div style="margin-top: 10px; font-size: 14px;">Please choose another date or call us.</div></div>';
+                currentBooking.timeSlot = null;
+                return;
+            }
+
+            container.innerHTML = '';
+            slots.forEach((slot, idx) => {
+                const label = slot.label || (formatTime(slot.start_time) + ' - ' + formatTime(slot.end_time));
+                const timeVal = slot.start_time.substring(0,5) + '-' + slot.end_time.substring(0,5);
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'time-slot-btn' + (idx === 0 ? ' selected' : '');
+                btn.textContent = label;
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.time-slot-btn').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                    currentBooking.timeSlot = timeVal;
+                    currentBooking.slotId = slot.id;
+                    updateBookingSummary();
+                });
+                container.appendChild(btn);
+            });
+
+            // Auto-select first slot
+            currentBooking.timeSlot = slots[0].start_time.substring(0,5) + '-' + slots[0].end_time.substring(0,5);
+            currentBooking.slotId = slots[0].id;
+            updateBookingSummary();
+        }
+
+        function formatTime(time) { 
+            if (!time) return '';
+            const [h,m] = time.split(':'); 
+            const hour = parseInt(h);
+            const ampm = hour >= 12 ? 'PM' : 'AM';
+            const hour12 = hour % 12 || 12;
+            return `${hour12}:${m} ${ampm}`;
+        }
+        
+        function formatDate(d) { 
+            return new Date(d).toLocaleDateString('en-GB', { weekday:'short', day:'numeric', month:'short', year:'numeric' }); 
+        }
+        
+        function nextBookingStep() {
+            if (!currentBooking.date) { alert('⚠️ Please select a date'); return; }
+            if (!currentBooking.timeSlot) { alert('⚠️ Please select a time slot'); return; }
+            updateFinalSummary();
+            const confirmBtn = document.getElementById('confirmBookingBtn');
+            const depositPct = (CONFIG.payment && CONFIG.payment.depositPercent) || 25;
+            const calcPrice = currentBooking.calculatedPrice || currentBooking.service.data.basePrice;
+            const depositAmt = (Math.round(calcPrice * depositPct) / 100).toFixed(2);
+            confirmBtn.innerHTML = '<i class="fas fa-lock"></i> Pay £' + depositAmt + ' Deposit & Confirm';
+            document.getElementById('bookingStep1').style.display = 'none';
+            document.getElementById('bookingStep2').style.display = 'block';
+        }
+        
+        function prevBookingStep() {
+            document.getElementById('bookingStep2').style.display = 'none';
+            document.getElementById('bookingStep1').style.display = 'block';
+        }
+        
+        async function confirmBooking() {
+            const name    = document.getElementById('customerName').value.trim();
+            const phone   = document.getElementById('customerPhone').value.trim();
+            const email   = document.getElementById('customerEmail').value.trim();
+            const address = document.getElementById('customerAddress').value.trim();
+            if (!name || !phone || !email || !address) {
+                alert('❌ Please fill in all required fields: Name, Phone, Email, Address');
+                return;
+            }
+
+            // Validate UK phone number format (simple check)
+            const phoneRegex = /^[0-9\s\+\-\(\)]{10,}$/;
+            if (!phoneRegex.test(phone)) {
+                alert('⚠️ Please enter a valid UK phone number');
+                return;
+            }
+
+            // Validate email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('⚠️ Please enter a valid email address');
+                return;
+            }
+
+            const serviceData = currentBooking.service.data;
+            const bookingRef  = 'GG' + Date.now().toString().slice(-8);
+            currentBooking.bookingRef = bookingRef;
+            currentBooking.customer   = { name, phone, email, address, notes: document.getElementById('bookingNotes').value };
+
+            const confirmBtn    = document.getElementById('confirmBookingBtn');
+            const originalText  = confirmBtn.innerHTML;
+            confirmBtn.disabled = true;
+            confirmBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving booking…';
+
+            try {
+                // Save booking to Supabase (status: pending — payment pending)
+                await saveBookingToSupabase(currentBooking, bookingRef);
+            } catch(e) {
+                console.warn('Supabase save failed (non-fatal):', e);
+            }
+
+            // Build checkout URL and redirect
+            const checkoutUrl = buildCheckoutUrl(currentBooking);
+            closeBookingModal();
+            window.location.href = checkoutUrl;
+        }
+
+        // ===== Initialize all event listeners =====
+        document.addEventListener('DOMContentLoaded', async function() {
+            await loadConfig();
+            renderDomesticServices();
+            
+            // Update WhatsApp links with correct phone number
+            document.querySelectorAll('.btn-whatsapp').forEach(btn => {
+                const href = btn.getAttribute('href');
+                if (href && href.includes('${CONFIG.business.phone}')) {
+                    btn.setAttribute('href', `https://api.whatsapp.com/send?phone=${CONFIG.business.phone}&text=`);
+                }
+            });
+
+            // Modal close buttons
+            const closeBtn = document.getElementById('closeBookingModal');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeBookingModal);
+            }
+            
+            const cancelBtn = document.getElementById('cancelBookingBtn');
+            if (cancelBtn) {
+                cancelBtn.addEventListener('click', closeBookingModal);
+            }
+            
+            const modalOverlay = document.getElementById('bookingModal');
+            if (modalOverlay) {
+                modalOverlay.addEventListener('click', function(e) { 
+                    if (e.target === this) closeBookingModal(); 
+                });
+            }
+            
+            // Date change listener
+            const bookingDate = document.getElementById('bookingDate');
+            if (bookingDate) {
+                bookingDate.addEventListener('change', function() { 
+                    currentBooking.date = this.value; 
+                    loadTimeSlots(this.value); 
+                    updateBookingSummary(); 
+                });
+            }
+            
+            // Next step button
+            const nextStepBtn = document.getElementById('nextStepBtn');
+            if (nextStepBtn) {
+                nextStepBtn.addEventListener('click', nextBookingStep);
+            }
+            
+            // Back button
+            const backBtn = document.getElementById('backToStep1Btn');
+            if (backBtn) {
+                backBtn.addEventListener('click', prevBookingStep);
+            }
+            
+            // Confirm booking button
+            const confirmBtn = document.getElementById('confirmBookingBtn');
+            if (confirmBtn) {
+                confirmBtn.addEventListener('click', confirmBooking);
+            }
+            
+            // Bedrooms select
+            const bedroomsSelect = document.getElementById('bedroomsSelect');
+            if (bedroomsSelect) {
+                bedroomsSelect.addEventListener('change', function() {
+                    updateBedrooms(this.value);
+                });
+            }
+
+            // Category filter buttons
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    renderDomesticServices(this.getAttribute('data-category'));
+                });
+            });
+
+            // Mobile menu
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileCloseBtn = document.getElementById('mobileCloseBtn');
+            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+            const navMenu = document.getElementById('navMenu');
+            
+            function openMobileMenu() { 
+                navMenu.classList.add('active'); 
+                mobileMenuOverlay.classList.add('active'); 
+                document.body.style.overflow = 'hidden'; 
+            }
+            
+            function closeMobileMenu() { 
+                navMenu.classList.remove('active'); 
+                mobileMenuOverlay.classList.remove('active'); 
+                document.body.style.overflow = ''; 
+            }
+            
+            if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openMobileMenu);
+            if (mobileCloseBtn) mobileCloseBtn.addEventListener('click', closeMobileMenu);
+            if (mobileMenuOverlay) mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+
+            // Auto-open booking modal if ?book=ID is in the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const bookId = urlParams.get('book');
+            if (bookId) {
+                const serviceData = domesticServicesData.find(s => s.id == bookId);
+                if (serviceData) {
+                    setTimeout(() => openBookingModal(serviceData.title, serviceData.id, serviceData), 400);
+                }
+            }
+        });
+    </script>
+<script src="clickable-images.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "stripe": {
+    "publishableKey": "pk_live_51RR9ib2Kluec3BRLT9k1GyisMtEi4StpryIMy1xdk1F4pAKM3jljoCSmdeEzkks2wqqMWbzF6fOde2fx7OMBO3wM00JzOKZL5S"
+  },
+  "supabase": {
+    "url": "https://faxjeniohetefqwcsefi.supabase.co",
+    "anonKey": "sb_publishable_7TZ_Y-HKZc_ibl59lqyAsQ_Qbv9A2o7"
+  },
+  "business": {
+    "name": "GreenGlo Cleaners",
+    "phone": "447827784204",
+    "email": "info@greenglocleaners.co.uk",
+    "siteUrl": "https://greenglocleaners.co.uk"
+  },
+  "payment": {
+    "depositPercent": 25,
+    "currency": "gbp",
+    "workerUrl": "https://white-sky-ecf2.sacharaif.workers.dev"
+  }
+}
