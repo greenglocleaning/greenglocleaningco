@@ -2646,18 +2646,24 @@
 
         // ===== Main JavaScript =====
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize EmailJS
-            (function() {
-                emailjs.init({
-                    publicKey: EMAIL_CONFIG.publicKey,
-                    blockHeadless: true,
-                    limitRate: {
-                        id: 'greenglo',
-                        throttle: 10000
-                    }
-                });
-                console.log('✅ EmailJS initialized successfully');
-            })();
+            // Initialize EmailJS (guarded so other features still work if the library fails to load)
+            if (typeof emailjs !== 'undefined') {
+                try {
+                    emailjs.init({
+                        publicKey: EMAIL_CONFIG.publicKey,
+                        blockHeadless: true,
+                        limitRate: {
+                            id: 'greenglo',
+                            throttle: 10000
+                        }
+                    });
+                    console.log('✅ EmailJS initialized successfully');
+                } catch (err) {
+                    console.error('⚠️ EmailJS initialization failed:', err);
+                }
+            } else {
+                console.warn('⚠️ EmailJS library not loaded - email features disabled');
+            }
             
             // ===== Mobile Navigation =====
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -3466,8 +3472,9 @@
                 }
             }
         });
-    
-<script src="//code.tidio.co/0kn01vdcioixihsbua1x0fzzezsoixet.js" async></script>
-clickable-images.js"></script>
+    </script>
+
+    <script src="//code.tidio.co/0kn01vdcioixihsbua1x0fzzezsoixet.js" async></script>
+    <script src="clickable-images.js"></script>
 </body>
 </html>
