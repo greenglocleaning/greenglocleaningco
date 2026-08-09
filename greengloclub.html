@@ -156,7 +156,7 @@
 
         .navbar.scrolled {
             background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 5px 20px rgba(16, 185, 129, 0.1);
+            box-shadow: 0 8px 30px rgba(16, 185, 129, 0.12);
             padding: 0.5rem 0;
         }
 
@@ -164,7 +164,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.25rem 1.5rem;
+            padding: 0.85rem 1.5rem;
         }
 
         .nav-logo {
@@ -180,15 +180,15 @@
         }
 
         .logo-icon {
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
             background: var(--gradient-primary);
-            border-radius: 12px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--white);
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
         }
 
@@ -198,7 +198,7 @@
         }
 
         .logo-text h1 {
-            font-size: 1.75rem;
+            font-size: 1.35rem;
             background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -207,17 +207,17 @@
         }
 
         .logo-text span {
-            font-size: 0.75rem;
+            font-size: 0.65rem;
             color: var(--medium-gray);
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            margin-top: 0.25rem;
+            margin-top: 0.15rem;
         }
 
         .nav-menu {
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 0.5rem;
             list-style: none;
         }
 
@@ -227,10 +227,12 @@
 
         .nav-link {
             text-decoration: none;
-            color: var(--dark-gray);
+            color: #4B5563;
             font-weight: 600;
-            font-size: 1rem;
-            padding: 0.5rem 0;
+            font-size: 0.92rem;
+            letter-spacing: 0.3px;
+            padding: 0.6rem 0.9rem;
+            border-radius: 8px;
             transition: var(--transition);
             position: relative;
         }
@@ -238,29 +240,49 @@
         .nav-link::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
+            bottom: 4px;
+            left: 0.9rem;
             width: 0;
             height: 2px;
+            border-radius: 2px;
             background: var(--gradient-primary);
             transition: var(--transition);
         }
 
         .nav-link:hover {
             color: var(--primary-green);
+            background: rgba(16, 185, 129, 0.08);
         }
 
         .nav-link:hover::after {
-            width: 100%;
+            width: calc(100% - 1.8rem);
+        }
+
+        .nav-link.active {
+            color: var(--primary-green);
+        }
+
+        .nav-link.active::after {
+            width: calc(100% - 1.8rem);
         }
 
         .nav-cta {
-            margin-left: 1rem;
+            margin-left: 0.5rem;
         }
 
         .nav-cta .btn {
-            padding: 0.75rem 1.75rem;
+            padding: 0.65rem 1.4rem;
+            font-size: 0.9rem;
             min-height: auto;
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+        }
+
+        .nav-cta .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .mobile-menu-close {
+            display: none;
         }
 
         .mobile-menu-btn {
@@ -927,15 +949,40 @@
         }
 
         @media (max-width: 768px) {
+            /* Mobile top navbar */
+            .navbar.scrolled {
+                padding: 0;
+            }
+
+            .nav-container {
+                padding: 0.7rem 1rem;
+                min-height: 64px;
+            }
+
+            .logo-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .logo-text h1 {
+                font-size: 1.2rem;
+            }
+
+            .logo-text span {
+                font-size: 0.6rem;
+            }
+
             .nav-menu {
                 position: fixed;
                 top: 0;
                 right: -100%;
-                width: 300px;
+                width: 100%;
+                max-width: 320px;
                 height: 100vh;
                 background: var(--white);
                 flex-direction: column;
-                padding: 100px 2rem 2rem;
+                padding: 5rem 1.25rem 2rem;
                 gap: 0;
                 transition: var(--transition);
                 box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
@@ -952,21 +999,24 @@
             }
 
             .nav-link {
-                display: block;
-                padding: 1.25rem 1rem;
+                display: flex;
+                align-items: center;
+                padding: 0.9rem 0.75rem;
                 border-bottom: 1px solid rgba(16, 185, 129, 0.1);
-                font-size: 1.1rem;
+                font-size: 1rem;
+                min-height: 48px;
+                width: 100%;
             }
 
             .nav-cta {
-                margin: 2rem 0 0;
+                margin: 1.75rem 0 0;
                 width: 100%;
             }
 
             .nav-cta .btn {
                 width: 100%;
                 justify-content: center;
-                padding: 1rem 2rem;
+                padding: 1rem 1.5rem;
             }
 
             .mobile-menu-btn {
@@ -1061,7 +1111,7 @@
             </a>
 
             <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
+                <i class="fas fa-bars-staggered"></i>
             </button>
 
             <ul class="nav-menu" id="navMenu">
@@ -1082,6 +1132,9 @@
                     <a href="greengloclub.html" class="nav-link active">Green Glo Club</a>
                 </li>
                 <li class="nav-item">
+                    <a href="airbnb.html" class="nav-link">Airbnb Cleaning</a>
+                </li>
+                <li class="nav-item">
                     <a href="index.html#testimonials" class="nav-link">Testimonials</a>
                 </li>
                 <li class="nav-item">
@@ -1089,7 +1142,7 @@
                 </li>
                 <li class="nav-item nav-cta">
                     <a href="https://api.whatsapp.com/send?phone=447827784204&text=Hello%20GreenGlo%2C%20I'd%20like%20a%20quote%20for%20cleaning%20services"
-                        class="btn" target="_blank">Get Quote</a>
+                        class="btn" target="_blank"><i class="fab fa-whatsapp"></i> Get Quote</a>
                 </li>
             </ul>
         </div>
@@ -1135,7 +1188,7 @@
                 </div>
                 
                 <div class="image-showcase-card">
-                    <img src="commercial.png" alt="Eco-friendly cleaning">
+                    <img src="deep.png" alt="Eco-friendly cleaning">
                     <div class="image-showcase-content">
                         <h4>Premium Service</h4>
                         <p>Same-cleaner guarantee and eco-friendly products</p>
@@ -1279,54 +1332,10 @@
                 
                 <div class="service-item">
                     <div class="service-icon">
-                        <i class="fas fa-building"></i>
-                    </div>
-                    <h3>Eco Office Cleaning</h3>
-                    <p>Commercial cleaning with eco-friendly products</p>
-                </div>
-                
-                <div class="service-item">
-                    <div class="service-icon">
                         <i class="fas fa-hammer"></i>
                     </div>
                     <h3>After-Builders Cleaning</h3>
                     <p>Post-construction cleanup and dust removal</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Member Results Gallery -->
-    <section class="section section-light">
-        <div class="container">
-            <div class="section-title">
-                <h2>Member Results Gallery</h2>
-                <p>See the premium results our members enjoy</p>
-            </div>
-            
-            <div class="image-showcase-grid">
-                <div class="image-showcase-card">
-                    <img src="bathroom.png" alt="Bathroom cleaning results">
-                    <div class="image-showcase-content">
-                        <h4>Sparkling Bathrooms</h4>
-                        <p>Professional bathroom cleaning with eco-friendly products</p>
-                    </div>
-                </div>
-                
-                <div class="image-showcase-card">
-                    <img src="carpet.png" alt="Carpet cleaning results">
-                    <div class="image-showcase-content">
-                        <h4>Fresh Carpets</h4>
-                        <p>Deep carpet cleaning for a fresh, clean home</p>
-                    </div>
-                </div>
-                
-                <div class="image-showcase-card">
-                    <img src="furniture.png" alt="Furniture cleaning results">
-                    <div class="image-showcase-content">
-                        <h4>Upholstery Care</h4>
-                        <p>Professional furniture and upholstery cleaning</p>
-                    </div>
                 </div>
             </div>
         </div>
@@ -1482,8 +1491,6 @@
                         <li><a href="services.html">Domestic cleaning</a></li>
                         <li><a href="services.html">One-off cleaning</a></li>
                         <li><a href="services.html">End of tenancy cleaning</a></li>
-                        <li><a href="services.html">Carpet cleaning</a></li>
-                        <li><a href="services.html">Office cleaning</a></li>
                         <li><a href="services.html">View all services</a></li>
                     </ul>
                 </div>
@@ -1546,7 +1553,7 @@
             navMenu.classList.remove('active');
             mobileMenuOverlay.classList.remove('active');
             mobileMenuBtn.classList.remove('active');
-            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            mobileMenuBtn.innerHTML = '<i class="fas fa-bars-staggered"></i>';
             document.body.style.overflow = '';
         };
 
@@ -1584,6 +1591,14 @@
             } else {
                 navbar.classList.remove('scrolled');
             }
+        });
+
+        // Desktop Nav Active State
+        const currentPageFile = window.location.pathname.split('/').pop() || 'index.html';
+        navLinks.forEach(link => {
+            const href = link.getAttribute('href') || '';
+            if (href.startsWith('#')) return;
+            if (href.split('#')[0] === currentPageFile) link.classList.add('active');
         });
 
         // ===== Smooth Scrolling =====
@@ -1644,6 +1659,6 @@
         });
     </script>
 <script src="clickable-images.js"></script>
-<script src="//code.tidio.co/0kn01vdcioixihsbua1x0fzzezsoixet.js" async></script>
+<!-- <script src="//code.tidio.co/0kn01vdcioixihsbua1x0fzzezsoixet.js" async></script> -->
 </body>
 </html>
