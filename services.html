@@ -175,7 +175,7 @@
 
         .navbar.scrolled {
             background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 5px 20px rgba(16, 185, 129, 0.1);
+            box-shadow: 0 8px 30px rgba(16, 185, 129, 0.12);
             padding: 0.5rem 0;
         }
 
@@ -183,7 +183,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.25rem 1.5rem;
+            padding: 0.85rem 1.5rem;
         }
 
         .nav-logo {
@@ -199,15 +199,15 @@
         }
 
         .logo-icon {
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
             background: var(--gradient-primary);
-            border-radius: 12px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--white);
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
         }
 
@@ -217,7 +217,7 @@
         }
 
         .logo-text h1 {
-            font-size: 1.75rem;
+            font-size: 1.35rem;
             background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -226,17 +226,17 @@
         }
 
         .logo-text span {
-            font-size: 0.75rem;
+            font-size: 0.65rem;
             color: var(--medium-gray);
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            margin-top: 0.25rem;
+            margin-top: 0.15rem;
         }
 
         .nav-menu {
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 0.5rem;
             list-style: none;
         }
 
@@ -246,10 +246,12 @@
 
         .nav-link {
             text-decoration: none;
-            color: var(--dark-gray);
+            color: #4B5563;
             font-weight: 600;
-            font-size: 1rem;
-            padding: 0.5rem 0;
+            font-size: 0.92rem;
+            letter-spacing: 0.3px;
+            padding: 0.6rem 0.9rem;
+            border-radius: 8px;
             transition: var(--transition);
             position: relative;
         }
@@ -257,29 +259,49 @@
         .nav-link::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
+            bottom: 4px;
+            left: 0.9rem;
             width: 0;
             height: 2px;
+            border-radius: 2px;
             background: var(--gradient-primary);
             transition: var(--transition);
         }
 
         .nav-link:hover {
             color: var(--primary-green);
+            background: rgba(16, 185, 129, 0.08);
         }
 
         .nav-link:hover::after {
-            width: 100%;
+            width: calc(100% - 1.8rem);
+        }
+
+        .nav-link.active {
+            color: var(--primary-green);
+        }
+
+        .nav-link.active::after {
+            width: calc(100% - 1.8rem);
         }
 
         .nav-cta {
-            margin-left: 1rem;
+            margin-left: 0.5rem;
         }
 
         .nav-cta .btn {
-            padding: 0.75rem 1.75rem;
+            padding: 0.65rem 1.4rem;
+            font-size: 0.9rem;
             min-height: auto;
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+        }
+
+        .nav-cta .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .mobile-menu-close {
+            display: none;
         }
 
         .mobile-menu-btn {
@@ -1030,15 +1052,40 @@
 
         /* ===== Responsive Design ===== */
         @media (max-width: 768px) {
+            /* Mobile top navbar */
+            .navbar.scrolled {
+                padding: 0;
+            }
+
+            .nav-container {
+                padding: 0.7rem 1rem;
+                min-height: 64px;
+            }
+
+            .logo-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .logo-text h1 {
+                font-size: 1.2rem;
+            }
+
+            .logo-text span {
+                font-size: 0.6rem;
+            }
+
             .nav-menu {
                 position: fixed;
                 top: 0;
                 right: -100%;
-                width: 300px;
+                width: 100%;
+                max-width: 320px;
                 height: 100vh;
                 background: var(--white);
                 flex-direction: column;
-                padding: 100px 2rem 2rem;
+                padding: 5rem 1.25rem 2rem;
                 gap: 0;
                 transition: var(--transition);
                 box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
@@ -1051,21 +1098,24 @@
             .nav-item { width: 100%; }
 
             .nav-link {
-                display: block;
-                padding: 1.25rem 1rem;
+                display: flex;
+                align-items: center;
+                padding: 0.9rem 0.75rem;
                 border-bottom: 1px solid rgba(16, 185, 129, 0.1);
-                font-size: 1.1rem;
+                font-size: 1rem;
+                min-height: 48px;
+                width: 100%;
             }
 
             .nav-cta {
-                margin: 2rem 0 0;
+                margin: 1.75rem 0 0;
                 width: 100%;
             }
 
             .nav-cta .btn {
                 width: 100%;
                 justify-content: center;
-                padding: 1rem 2rem;
+                padding: 1rem 1.5rem;
             }
 
             .mobile-menu-btn {
@@ -1127,7 +1177,7 @@
 
         @media (max-width: 480px) {
             .container { padding: 0 1rem; }
-            .nav-menu { width: 85%; }
+            .nav-menu { width: 100%; }
             .service-card { margin-bottom: 1.5rem; }
             .service-content { padding: 1.5rem; }
             .payment-badge { font-size: 10px; padding: 3px 8px; margin-left: 5px; }
@@ -1153,7 +1203,7 @@
             </a>
 
             <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
+                <i class="fas fa-bars-staggered"></i>
             </button>
 
             <ul class="nav-menu" id="navMenu">
@@ -1163,12 +1213,13 @@
 
                 <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
-                <li class="nav-item"><a href="index.html#about" class="nav-link">About</a></li>
                 <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
+                <li class="nav-item"><a href="greengloclub.html" class="nav-link">Green Glo Club</a></li>
+                <li class="nav-item"><a href="airbnb.html" class="nav-link">Airbnb Cleaning</a></li>
                 <li class="nav-item"><a href="index.html#testimonials" class="nav-link">Testimonials</a></li>
                 <li class="nav-item"><a href="index.html#contact" class="nav-link">Contact</a></li>
                 <li class="nav-item nav-cta">
-                    <a href="https://api.whatsapp.com/send?phone=447827784204&text=" class="btn">Get Quote</a>
+                    <a href="https://api.whatsapp.com/send?phone=447827784204&text=" class="btn"><i class="fab fa-whatsapp"></i> Get Quote</a>
                 </li>
             </ul>
         </div>
@@ -1289,7 +1340,6 @@
             <div class="category-filters">
                 <button class="category-btn active" data-category="all">All Services</button>
                 <button class="category-btn" data-category="domestic">Domestic Cleaning</button>
-                <button class="category-btn" data-category="office">Office Cleaning</button>
                 <button class="category-btn" data-category="deep">Deep Cleaning</button>
                 <button class="category-btn" data-category="special">Specialized Services</button>
             </div>
@@ -1342,8 +1392,6 @@
                     <ul class="footer-links">
                         <li><a href="services.html">Domestic cleaning</a></li>
                         <li><a href="services.html">End of tenancy cleaning</a></li>
-                        <li><a href="services.html">Carpet cleaning</a></li>
-                        <li><a href="services.html">Office cleaning</a></li>
                         <li><a href="services.html">View all services</a></li>
                     </ul>
                 </div>
@@ -1476,62 +1524,6 @@
         // ===== UPDATED PRICING: Client's exact prices =====
         const domesticServicesData = [
             {
-                id: 2,
-                title: "Office Cleaning",
-                category: "office",
-                description: "Professional commercial cleaning for businesses and startups.",
-                features: ["Workstation sanitization", "Meeting room cleaning", "Kitchenette cleaning", "Floor care", "Waste removal"],
-                duration: "2-6 hours",
-                hasBedrooms: false,
-                basePrice: 18,
-                displayPrice: "£18/hour",
-                image: "office.png",
-                fallbackColor: "#10B981",
-                isHourly: true
-            },
-            {
-                id: 3,
-                title: "Kitchen Deep Clean",
-                category: "deep",
-                description: "Complete kitchen deep clean including appliances and cabinets. Starts from £120.",
-                features: ["Oven cleaning included*", "Appliance sanitization", "Cabinet degreasing", "Tile splashback", "Drawer interiors"],
-                duration: "3-4 hours",
-                hasBedrooms: false,
-                basePrice: 120,
-                displayPrice: "From £120",
-                image: "kitchen.png",
-                fallbackColor: "#10B981",
-                isHourly: false
-            },
-            {
-                id: 4,
-                title: "Oven Deep Clean",
-                category: "deep",
-                description: "Professional oven cleaning for single and double ovens. Starts from £60.",
-                features: ["Complete interior clean", "Door & glass polish", "Rack cleaning", "Exterior finish", "Trays included"],
-                duration: "1.5-2 hours",
-                hasBedrooms: false,
-                basePrice: 60,
-                displayPrice: "From £60",
-                image: "ovenafter.png",
-                fallbackColor: "#10B981",
-                isHourly: false
-            },
-            {
-                id: 5,
-                title: "Bathroom Deep Clean",
-                category: "deep",
-                description: "Complete bathroom sanitization and deep cleaning.",
-                features: ["Tile & grout scrubbing", "Sanitization", "Fixture polishing", "Mould treatment", "Limescale removal"],
-                duration: "1.5-2 hours",
-                hasBedrooms: false,
-                basePrice: 65,
-                displayPrice: "£65",
-                image: "bathroom.png",
-                fallbackColor: "#10B981",
-                isHourly: false
-            },
-            {
                 id: 6,
                 title: "End of Tenancy Cleaning",
                 category: "deep",
@@ -1543,20 +1535,6 @@
                 perBedroomPrice: 30,
                 displayPrice: "From £220",
                 image: "tenancy.png",
-                fallbackColor: "#10B981",
-                isHourly: false
-            },
-            {
-                id: 7,
-                title: "Carpet Cleaning",
-                category: "deep",
-                description: "Professional hot water extraction carpet cleaning.",
-                features: ["Hot water extraction", "Stain removal", "Quick drying", "Deodorizing", "Suitable for homes/offices"],
-                duration: "1-3 hours",
-                hasBedrooms: false,
-                basePrice: 15,
-                displayPrice: "From £15/room",
-                image: "carpet.png",
                 fallbackColor: "#10B981",
                 isHourly: false
             },
@@ -1617,48 +1595,6 @@
                 image: "afterbuilders.png",
                 fallbackColor: "#10B981",
                 isHourly: false
-            },
-            {
-                id: 12,
-                title: "Upholstery Cleaning",
-                category: "special",
-                description: "Sofa, armchair, and car seat deep cleaning.",
-                features: ["Stain removal", "Fabric protection", "Deodorizing", "Professional equipment", "Fast drying"],
-                duration: "1-2 hours",
-                hasBedrooms: false,
-                basePrice: 55,
-                displayPrice: "Sofa 3-seater: £55",
-                image: "furniture.png",
-                fallbackColor: "#10B981",
-                isHourly: false
-            },
-            {
-                id: 13,
-                title: "Patio & Decking Cleaning",
-                category: "special",
-                description: "Pressure washing for patios and decking areas.",
-                features: ["Pressure washing", "Moss removal", "Stain treatment", "Restoration", "Makes outdoor spaces fresh"],
-                duration: "2-4 hours",
-                hasBedrooms: false,
-                basePrice: 70,
-                displayPrice: "From £70",
-                image: "patio.png",
-                fallbackColor: "#10B981",
-                isHourly: false
-            },
-            {
-                id: 14,
-                title: "Commercial Cleaning",
-                category: "office",
-                description: "Regular commercial cleaning for businesses.",
-                features: ["Daily/weekly service", "Floor maintenance", "Restroom cleaning", "Waste removal", "Custom schedule"],
-                duration: "2-8 hours",
-                hasBedrooms: false,
-                basePrice: 25,
-                displayPrice: "£25/hour",
-                image: "commercial.png",
-                fallbackColor: "#10B981",
-                isHourly: true
             }
         ];
 
@@ -2156,6 +2092,24 @@
             if (mobileCloseBtn) mobileCloseBtn.addEventListener('click', closeMobileMenu);
             if (mobileMenuOverlay) mobileMenuOverlay.addEventListener('click', closeMobileMenu);
 
+            // Navbar scroll effect
+            window.addEventListener('scroll', () => {
+                const navEl = document.getElementById('navbar');
+                if (window.scrollY > 50) {
+                    navEl.classList.add('scrolled');
+                } else {
+                    navEl.classList.remove('scrolled');
+                }
+            });
+
+            // Desktop nav active state
+            const currentPageFile = window.location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('.nav-link').forEach(link => {
+                const href = link.getAttribute('href') || '';
+                if (href.startsWith('#')) return;
+                if (href.split('#')[0] === currentPageFile) link.classList.add('active');
+            });
+
             // Auto-open booking modal if ?book=ID is in the URL
             const urlParams = new URLSearchParams(window.location.search);
             const bookId = urlParams.get('book');
@@ -2168,6 +2122,6 @@
         });
     </script>
 <script src="clickable-images.js"></script>
-<script src="//code.tidio.co/0kn01vdcioixihsbua1x0fzzezsoixet.js" async></script>
+<!-- <script src="//code.tidio.co/0kn01vdcioixihsbua1x0fzzezsoixet.js" async></script> -->
 </body>
 </html>

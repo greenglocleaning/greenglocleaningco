@@ -8,22 +8,11 @@
 
   // ── Service map: filename → { title, serviceId, isHourly } ─────────────────
   const IMAGE_SERVICE_MAP = {
-    'bathroom.png':      { title: 'Bathroom Deep Clean',        serviceId: 5,  isHourly: false },
-    'kitchen.png':       { title: 'Kitchen Deep Clean',         serviceId: 3,  isHourly: false },
-    'carpet.png':        { title: 'Carpet Cleaning',            serviceId: 7,  isHourly: false },
     'afterbuilders.png': { title: 'After Builders Cleaning',    serviceId: 11, isHourly: false },
     'domestic.png':      { title: 'Regular Domestic Clean',     serviceId: 8,  isHourly: false },
     'deep.png':          { title: 'One-Off Deep Clean',         serviceId: 9,  isHourly: false },
     'tenancy.png':       { title: 'End of Tenancy Cleaning',    serviceId: 6,  isHourly: false },
-    'ovenafter.png':     { title: 'Oven Deep Clean',            serviceId: 4,  isHourly: false },
-    'furniture.png':     { title: 'Upholstery Cleaning',        serviceId: 12, isHourly: false },
-    'patio.png':         { title: 'Patio & Decking Cleaning',   serviceId: 13, isHourly: false },
-    'office.png':        { title: 'Office Cleaning',            serviceId: 2,  isHourly: true  },
-    'commercial.png':    { title: 'Commercial Cleaning',        serviceId: 14, isHourly: true  },
     'windows.png':       { title: 'Window Cleaning',            serviceId: 10, isHourly: false },
-    'emergency.png':     { title: 'Emergency Cleaning',         serviceId: null, isHourly: true },
-    'flooring.png':      { title: 'Property Maintenance',       serviceId: null, isHourly: true },
-    'turf.png':          { title: 'Garden Maintenance',         serviceId: null, isHourly: true },
     'livingroom.png':    { title: 'Regular Domestic Clean',     serviceId: 8,  isHourly: false },
   };
 
