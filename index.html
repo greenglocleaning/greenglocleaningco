@@ -2748,12 +2748,6 @@
             }
 
             function prevSlide() {
-                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-                updateCarousel();
-            }
-
-            // Initialize carousel
-            if (prevBtn && nextBtn) {
                 prevBtn.addEventListener('click', prevSlide);
                 nextBtn.addEventListener('click', nextSlide);
 
