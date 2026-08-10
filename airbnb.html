@@ -1301,6 +1301,33 @@
             text-decoration: underline;
         }
 
+        .whatsapp-float {
+            position: fixed;
+            bottom: 110px;
+            right: 30px;
+            z-index: 9999;
+        }
+
+        .whatsapp-button {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .whatsapp-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+        }
+
         /* ===== Responsive Design ===== */
         @media (max-width: 768px) {
             /* Mobile top navbar */
@@ -1732,7 +1759,7 @@
                     <div class="pricing-cta">
                         <a href="https://api.whatsapp.com/send?phone=447827784204&text=Hello%20GreenGlo%2C%20I'd%20like%20to%20book%20a%20Deep%20Clean%20for%20my%20Airbnb"
                             class="btn btn-airbnb" target="_blank">
-                            <i class="fas fa-sparkles"></i>
+                            <i class="fas fa-spray-can-sparkles"></i>
                             Book Deep Clean
                         </a>
                     </div>
@@ -1883,7 +1910,7 @@
                             <span><strong>Travel fee</strong> may apply for properties outside core service areas (London, Kent, Essex)</span>
                         </li>
                         <li>
-                            <i class="fas fa-calendar-star"></i>
+                            <i class="fas fa-calendar-check"></i>
                             <span><strong>Prices may vary</strong> during peak holiday periods and bank holidays</span>
                         </li>
                         <li>
@@ -2080,6 +2107,13 @@
             </div>
         </div>
     </section>
+
+    <!-- Floating WhatsApp Button -->
+    <div class="whatsapp-float">
+        <a href="https://api.whatsapp.com/send?phone=447827784204&text=Hello%20GreenGlo%20Cleaners,%20I%20would%20like%20more%20information%20about%20your%20services" target="_blank" class="whatsapp-button">
+            <i class="fab fa-whatsapp" style="color: white; font-size: 32px;"></i>
+        </a>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">

@@ -12,7 +12,6 @@
     'domestic.png':      { title: 'Regular Domestic Clean',     serviceId: 8,  isHourly: false },
     'deep.png':          { title: 'One-Off Deep Clean',         serviceId: 9,  isHourly: false },
     'tenancy.png':       { title: 'End of Tenancy Cleaning',    serviceId: 6,  isHourly: false },
-    'windows.png':       { title: 'Window Cleaning',            serviceId: 10, isHourly: false },
     'livingroom.png':    { title: 'Regular Domestic Clean',     serviceId: 8,  isHourly: false },
   };
 
