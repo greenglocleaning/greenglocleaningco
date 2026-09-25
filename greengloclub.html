@@ -987,23 +987,50 @@
         }
 
         .whatsapp-button {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
             border-radius: 50%;
+            border: none;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
-            cursor: pointer;
-            border: none;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
             position: relative;
-            overflow: hidden;
         }
 
         .whatsapp-button:hover {
             transform: scale(1.1);
-            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-icon {
+            width: 32px;
+            height: 32px;
+        }
+
+        .whatsapp-tooltip {
+            position: absolute;
+            right: 75px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--white);
+            color: var(--dark-gray);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .whatsapp-button:hover + .whatsapp-tooltip {
+            opacity: 1;
         }
 
         /* Responsive Design */
@@ -1146,6 +1173,21 @@
             .mobile-menu-close:hover {
                 background: var(--mint);
                 transform: rotate(90deg);
+            }
+
+            /* WhatsApp button mobile */
+            .whatsapp-button {
+                width: 56px;
+                height: 56px;
+            }
+
+            .whatsapp-icon {
+                width: 28px;
+                height: 28px;
+            }
+
+            .whatsapp-tooltip {
+                display: none; /* Hide on mobile */
             }
         }
 
@@ -1541,9 +1583,12 @@
 
     <!-- Floating WhatsApp Button -->
     <div class="whatsapp-float">
-        <a href="https://api.whatsapp.com/send?phone=447767972498&text=Hello%20GreenGlo%20Cleaners,%20I%20would%20like%20more%20information%20about%20your%20services" target="_blank" class="whatsapp-button">
-            <i class="fab fa-whatsapp" style="color: white; font-size: 32px;"></i>
-        </a>
+        <div class="whatsapp-button" id="whatsappButton">
+            <div class="whatsapp-icon-container">
+                <i class="fab fa-whatsapp" style="color: white; font-size: 32px; line-height: 1; display: block;"></i>
+            </div>
+        </div>
+        <span class="whatsapp-tooltip">Chat with Green Glo Cleaning</span>
     </div>
 
     <!-- Footer -->
@@ -1736,6 +1781,21 @@
                     link.classList.add('active');
                 }
             });
+
+            // ===== WhatsApp Button =====
+            const whatsappButton = document.getElementById('whatsappButton');
+
+            function openWhatsApp() {
+                const message = "Hello GreenGlo, I'm interested in your professional cleaning services. Could you provide more information?";
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappUrl = `https://api.whatsapp.com/send?phone=447767972498&text=${encodedMessage}`;
+
+                window.open(whatsappUrl, '_blank');
+            }
+
+            if (whatsappButton) {
+                whatsappButton.addEventListener('click', openWhatsApp);
+            }
         });
     </script>
 <script src="clickable-images.js"></script>
