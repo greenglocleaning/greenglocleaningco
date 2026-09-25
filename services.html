@@ -1346,6 +1346,7 @@
             </div>
             <div class="category-filters">
                 <button class="category-btn active" data-category="all">All Services</button>
+                <button class="category-btn" data-category="domestic">General Cleaning</button>
                 <button class="category-btn" data-category="deep">Deep Cleaning</button>
             </div>
         </div>
@@ -1395,6 +1396,7 @@
                 <div class="footer-col">
                     <h3>Our Services</h3>
                     <ul class="footer-links">
+                        <li><a href="services.html">General cleaning</a></li>
                         <li><a href="services.html">End of tenancy cleaning</a></li>
                         <li><a href="services.html">View all services</a></li>
                     </ul>
@@ -1527,6 +1529,20 @@
         // ===== UPDATED PRICING: Client's exact prices =====
         const domesticServicesData = [
             {
+                id: 8,
+                title: "General Clean",
+                category: "domestic",
+                description: "Regular home cleaning tailored to your schedule. From £60.",
+                features: ["Dusting & vacuuming", "Kitchen & bathroom", "Surface cleaning", "Floor mopping", "Flexible schedule"],
+                duration: "2-4 hours",
+                hasBedrooms: false,
+                basePrice: 60,
+                displayPrice: "From £60",
+                image: "domestic.png",
+                fallbackColor: "#10B981",
+                isHourly: false
+            },
+            {
                 id: 6,
                 title: "End of Tenancy Cleaning",
                 category: "deep",
@@ -1626,12 +1642,7 @@
                     </div>
                 `;
             } else {
-                let display = `<div class="price-tag-main">${service.displayPrice}</div>`;
-                if (service.isOneOffAvailable) {
-                    display = `<div class="price-tag-main" style="margin-bottom: 0.5rem;">${service.displayPrice}</div>
-                               <div style="text-align: center; font-weight: 600; color: var(--dark-green);">One-off: £60</div>`;
-                }
-                priceContent = `<div class="service-price-container" style="text-align: center;">${display}</div>`;
+                priceContent = `<div class="service-price-container" style="text-align: center;"><div class="price-tag-main">${service.displayPrice}</div></div>`;
             }
 
             let badgeHTML = '<span class="payment-badge" style="background:linear-gradient(135deg,#10B981,#0D9488);color:white;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;"><i class="fas fa-lock"></i> Secure Booking</span>';
@@ -1754,8 +1765,7 @@
             
             const serviceData = currentBooking.service.data;
             const calcPrice = currentBooking.calculatedPrice || serviceData.basePrice;
-            let priceDisplay = currentBooking.calculatedPrice ? '£' + calcPrice : serviceData.displayPrice;
-            if (serviceData.isOneOffAvailable) priceDisplay = "From £50 (one-off £60)";
+            const priceDisplay = currentBooking.calculatedPrice ? '£' + calcPrice : serviceData.displayPrice;
             const depositDisplay = (Math.round(calcPrice * 25) / 100).toFixed(2);
             let bedroomInfo = serviceData.hasBedrooms ? `<div style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>Bedrooms:</span><span>${currentBooking.bedrooms} bedroom${currentBooking.bedrooms>1?'s':''}</span></div>` : '';
             let dateTimeInfo = '';
@@ -1779,8 +1789,7 @@
             
             const serviceData = currentBooking.service.data;
             const calcPrice = currentBooking.calculatedPrice || serviceData.basePrice;
-            let priceDisplay = currentBooking.calculatedPrice ? '£' + calcPrice : serviceData.displayPrice;
-            if (serviceData.isOneOffAvailable) priceDisplay = "From £50 (one-off £60)";
+            const priceDisplay = currentBooking.calculatedPrice ? '£' + calcPrice : serviceData.displayPrice;
             const depositDisplay = (Math.round(calcPrice * 25) / 100).toFixed(2);
             const balanceDisplay = (calcPrice - depositDisplay).toFixed(2);
             let bedroomInfo = serviceData.hasBedrooms ? `<div style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>Bedrooms:</span><span>${currentBooking.bedrooms} bedroom${currentBooking.bedrooms>1?'s':''}</span></div>` : '';
