@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Private / transactional pages - no value in the index
+Disallow: /admin.html
+Disallow: /checkout.html
+Disallow: /booking-success.html
+Disallow: /config.json
+
+Sitemap: https://greenglocleaningco.com/sitemap.xml
