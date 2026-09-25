@@ -200,6 +200,13 @@
       gap: 0.4rem;
     }
     .security-note i { color: var(--green); }
+    .deposit-terms {
+      text-align: center;
+      font-size: 0.72rem;
+      color: var(--gray);
+      margin: 0 0 0.8rem;
+      line-height: 1.5;
+    }
 
     /* ── Loading State ── */
     #loading-state {
@@ -269,6 +276,7 @@
         <div class="card-title"><i class="fas fa-credit-card"></i> Payment Details</div>
         <div id="payment-element"></div>
         <div id="card-errors"></div>
+        <p class="deposit-terms">By paying this deposit, you agree that the deposit is non-refundable.</p>
         <button class="pay-btn" id="pay-btn" disabled>
           <i class="fas fa-lock"></i>
           <span id="pay-btn-text">Pay deposit</span>

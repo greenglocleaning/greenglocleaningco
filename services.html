@@ -838,6 +838,13 @@
             font-size: 14px;
         }
 
+        .deposit-terms {
+            display: block;
+            margin-top: 8px;
+            font-size: 0.75rem;
+            line-height: 1.5;
+        }
+
         .stripe-note {
             background: linear-gradient(135deg, rgba(99, 91, 255, 0.1), rgba(138, 132, 255, 0.05));
             border: 2px solid #635bff;
@@ -1219,7 +1226,7 @@
                 <li class="nav-item"><a href="index.html#testimonials" class="nav-link">Testimonials</a></li>
                 <li class="nav-item"><a href="index.html#contact" class="nav-link">Contact</a></li>
                 <li class="nav-item nav-cta">
-                    <a href="https://api.whatsapp.com/send?phone=447827784204&text=" class="btn"><i class="fab fa-whatsapp"></i> Get Quote</a>
+                    <a href="https://api.whatsapp.com/send?phone=447767972498&text=" class="btn"><i class="fab fa-whatsapp"></i> Get Quote</a>
                 </li>
             </ul>
         </div>
@@ -1339,7 +1346,6 @@
             </div>
             <div class="category-filters">
                 <button class="category-btn active" data-category="all">All Services</button>
-                <button class="category-btn" data-category="domestic">Domestic Cleaning</button>
                 <button class="category-btn" data-category="deep">Deep Cleaning</button>
             </div>
         </div>
@@ -1361,11 +1367,11 @@
                 <h2>Need Help Choosing the Right Service?</h2>
                 <p>Our cleaning experts are ready to help you select the perfect service for your needs. Get a personalized quote or book a consultation today.</p>
                 <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
-                    <a href="https://api.whatsapp.com/send?phone=447827784204&text=Hello%20GreenGlo%20Cleaners,%20I%20need%20help%20choosing%20a%20cleaning%20service." class="btn btn-whatsapp btn-large">
+                    <a href="https://api.whatsapp.com/send?phone=447767972498&text=Hello%20GreenGlo%20Cleaners,%20I%20need%20help%20choosing%20a%20cleaning%20service." class="btn btn-whatsapp btn-large">
                         <i class="fab fa-whatsapp"></i> Chat on WhatsApp
                     </a>
-                    <a href="tel:+447827784204" class="btn btn-outline btn-large" style="color: var(--white);">
-                        <i class="fas fa-phone"></i> Call: 07827 784204
+                    <a href="tel:+447767972498" class="btn btn-outline btn-large" style="color: var(--white);">
+                        <i class="fas fa-phone"></i> Call: 07767972498
                     </a>
                 </div>
             </div>
@@ -1389,7 +1395,6 @@
                 <div class="footer-col">
                     <h3>Our Services</h3>
                     <ul class="footer-links">
-                        <li><a href="services.html">Domestic cleaning</a></li>
                         <li><a href="services.html">End of tenancy cleaning</a></li>
                         <li><a href="services.html">View all services</a></li>
                     </ul>
@@ -1410,21 +1415,20 @@
 
                 <div class="footer-col">
                     <h3>Contact Us</h3>
-                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 1.5rem;"><i class="fas fa-phone" style="margin-right: 0.5rem;"></i> 07827 784204</p>
+                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 1.5rem;"><i class="fas fa-phone" style="margin-right: 0.5rem;"></i> 07767972498</p>
                     <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 1.5rem;"><i class="fas fa-envelope" style="margin-right: 0.5rem;"></i> info@greenglocleaningco.com</p>
                 </div>
             </div>
 
             <div class="footer-bottom">
                 <p>GreenGlo Cleaners London © 2025. All rights reserved | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
-                <p style="margin-top: 0.5rem;">Created by <a href="https://api.whatsapp.com/send?phone=447543737488&text=" target="_blank">Sacha Raif</a></p>
             </div>
         </div>
     </footer>
 
     <!-- WhatsApp Button -->
     <div class="whatsapp-float">
-        <a href="https://api.whatsapp.com/send?phone=447827784204&text=Hello%20GreenGlo%20Cleaners,%20I%20would%20like%20more%20information%20about%20your%20services" target="_blank" class="whatsapp-button">
+        <a href="https://api.whatsapp.com/send?phone=447767972498&text=Hello%20GreenGlo%20Cleaners,%20I%20would%20like%20more%20information%20about%20your%20services" target="_blank" class="whatsapp-button">
             <i class="fab fa-whatsapp" style="color: white; font-size: 32px;"></i>
         </a>
     </div>
@@ -1446,7 +1450,7 @@
         let CONFIG = {
             stripe: { publishableKey: '' },
             supabase: { url: '', anonKey: '' },
-            business: { phone: '447827784204', siteUrl: '' },
+            business: { phone: '447767972498', siteUrl: '' },
             payment: { depositPercent: 25, currency: 'gbp' }
         };
 
@@ -1534,20 +1538,6 @@
                 perBedroomPrice: 30,
                 displayPrice: "From £220",
                 image: "tenancy.png",
-                fallbackColor: "#10B981",
-                isHourly: false
-            },
-            {
-                id: 8,
-                title: "Regular Domestic Clean",
-                category: "domestic",
-                description: "Weekly or fortnightly cleaning service. General clean starts from £50.",
-                features: ["Dusting & vacuuming", "Kitchen & bathroom", "Surface cleaning", "Floor mopping", "Flexible schedule"],
-                duration: "2-4 hours",
-                hasBedrooms: false,
-                basePrice: 50,
-                displayPrice: "From £50",
-                image: "domestic.png",
                 fallbackColor: "#10B981",
                 isHourly: false
             },
@@ -1672,7 +1662,7 @@
             let imageClickAttr = '';
             let imageCursorStyle = 'cursor: pointer;';
             if (service.isHourly) {
-                imageClickAttr = `onclick="window.open('https://api.whatsapp.com/send?phone=447827784204&text=Hello%20GreenGlo%20Cleaners,%20I%27m%20interested%20in%20${encodeURIComponent(service.title)}.%20Please%20provide%20more%20information.', '_blank')"`;
+                imageClickAttr = `onclick="window.open('https://api.whatsapp.com/send?phone=447767972498&text=Hello%20GreenGlo%20Cleaners,%20I%27m%20interested%20in%20${encodeURIComponent(service.title)}.%20Please%20provide%20more%20information.', '_blank')"`;
             } else {
                 imageClickAttr = `onclick="handleImageClick(${service.id})"`;
             }
@@ -1689,7 +1679,7 @@
                     <div style="text-align: center; margin: 1rem 0;">
                         <span class="service-duration-badge"><i class="far fa-clock"></i> ${service.duration}</span>
                     </div>
-                    <p class="service-description" style="cursor:pointer;" onclick="${service.isHourly ? `window.open('https://api.whatsapp.com/send?phone=447827784204&text=Hello%20GreenGlo%20Cleaners,%20I%27m%20interested%20in%20${encodeURIComponent(service.title)}.%20Please%20provide%20more%20information.', '_blank')` : `handleImageClick(${service.id})`}">${service.description}</p>
+                    <p class="service-description" style="cursor:pointer;" onclick="${service.isHourly ? `window.open('https://api.whatsapp.com/send?phone=447767972498&text=Hello%20GreenGlo%20Cleaners,%20I%27m%20interested%20in%20${encodeURIComponent(service.title)}.%20Please%20provide%20more%20information.', '_blank')` : `handleImageClick(${service.id})`}">${service.description}</p>
                     <ul class="service-features">
                         ${service.features.map(f => `<li><i class="fas fa-check"></i>${f}</li>`).join('')}
                     </ul>
@@ -1734,7 +1724,7 @@
             const depositPct = (CONFIG.payment && CONFIG.payment.depositPercent) || 25;
             const depositAmt = Math.round(serviceData.basePrice * depositPct) / 100;
             paymentNote.className = 'payment-note';
-            paymentNote.innerHTML = `<i class="fas fa-lock" style="color: var(--primary-green); font-size: 24px; margin-bottom: 10px;"></i><p style="color: var(--dark-gray); margin: 0;"><strong>Secure deposit payment — ${depositPct}% today.</strong><br>You'll pay a ${depositPct}% deposit (£${depositAmt.toFixed(2)}) now to confirm your booking. The remaining balance is due on the day of your clean.</p>`;
+            paymentNote.innerHTML = `<i class="fas fa-lock" style="color: var(--primary-green); font-size: 24px; margin-bottom: 10px;"></i><p style="color: var(--dark-gray); margin: 0;"><strong>Secure deposit payment — ${depositPct}% today.</strong><br>You'll pay a ${depositPct}% deposit (£${depositAmt.toFixed(2)}) now to confirm your booking. The remaining balance is due on the day of your clean.<small class="deposit-terms">The deposit is non-refundable.</small></p>`;
             const nextBtn = document.getElementById('nextStepBtn');
             nextBtn.className = 'btn';
             nextBtn.innerHTML = '<i class="fas fa-arrow-right"></i> Continue';
@@ -1831,7 +1821,7 @@
                 const depositAmt = (Math.round(currentBooking.calculatedPrice * depositPct) / 100).toFixed(2);
                 const paymentNote = document.getElementById('paymentNote');
                 if (paymentNote && paymentNote.innerHTML) {
-                    paymentNote.querySelector('p').innerHTML = '<strong>Secure deposit payment — ' + depositPct + '% today.</strong><br>You\'ll pay a ' + depositPct + '% deposit (£' + depositAmt + ') now to confirm your booking. The remaining balance is due on the day of your clean.';
+                    paymentNote.querySelector('p').innerHTML = '<strong>Secure deposit payment — ' + depositPct + '% today.</strong><br>You\'ll pay a ' + depositPct + '% deposit (£' + depositAmt + ') now to confirm your booking. The remaining balance is due on the day of your clean.<small class="deposit-terms">The deposit is non-refundable.</small>';
                 }
             }
         }

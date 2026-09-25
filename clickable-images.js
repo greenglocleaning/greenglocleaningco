@@ -9,13 +9,11 @@
   // ── Service map: filename → { title, serviceId, isHourly } ─────────────────
   const IMAGE_SERVICE_MAP = {
     'afterbuilders.png': { title: 'After Builders Cleaning',    serviceId: 11, isHourly: false },
-    'domestic.png':      { title: 'Regular Domestic Clean',     serviceId: 8,  isHourly: false },
     'deep.png':          { title: 'One-Off Deep Clean',         serviceId: 9,  isHourly: false },
     'tenancy.png':       { title: 'End of Tenancy Cleaning',    serviceId: 6,  isHourly: false },
-    'livingroom.png':    { title: 'Regular Domestic Clean',     serviceId: 8,  isHourly: false },
   };
 
-  const WHATSAPP_NUMBER = '447827784204';
+  const WHATSAPP_NUMBER = '447767972498';
 
   // ── Resolve the filename from a src string ─────────────────────────────────
   function getFilename(src) {
