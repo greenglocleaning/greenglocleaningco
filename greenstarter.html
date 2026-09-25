@@ -4,6 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Welcome to Green Starter Plan | GreenGlo Club</title>
+    <!-- Authoritative business details for search engines (phone, email, service areas) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://greenglocleaningco.com/#organization",
+          "name": "GreenGlo Cleaners",
+          "url": "https://greenglocleaningco.com/",
+          "logo": "https://greenglocleaningco.com/logo.png",
+          "email": "info@greenglocleaningco.com",
+          "telephone": "+447767972498",
+          "sameAs": [
+            "https://instagram.com/greenglocleaningco",
+            "https://tiktok.com/@greenglocleaningco",
+            "https://facebook.com/greenglocleaningco"
+          ]
+        },
+        {
+          "@type": "CleaningService",
+          "@id": "https://greenglocleaningco.com/#business",
+          "name": "GreenGlo Cleaners",
+          "url": "https://greenglocleaningco.com/",
+          "image": "https://greenglocleaningco.com/logo.png",
+          "logo": "https://greenglocleaningco.com/logo.png",
+          "description": "Premium eco-friendly cleaning services for homes, offices and venues across London, Kent and Essex.",
+          "telephone": "+447767972498",
+          "email": "info@greenglocleaningco.com",
+          "priceRange": "$$",
+          "currenciesAccepted": "GBP",
+          "parentOrganization": { "@id": "https://greenglocleaningco.com/#organization" },
+          "areaServed": [
+            { "@type": "City", "name": "London" },
+            { "@type": "AdministrativeArea", "name": "Kent" },
+            { "@type": "AdministrativeArea", "name": "Essex" }
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://greenglocleaningco.com/#website",
+          "url": "https://greenglocleaningco.com/",
+          "name": "GreenGlo Cleaners",
+          "publisher": { "@id": "https://greenglocleaningco.com/#organization" },
+          "inLanguage": "en-GB"
+        }
+      ]
+    }
+    </script>
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="logo.png">
     <link rel="apple-touch-icon" href="logo.png">
