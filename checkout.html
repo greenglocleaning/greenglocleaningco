@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +29,6 @@
       color: var(--dark);
     }
 
-    /* ── Top Bar ── */
     .topbar {
       background: white;
       border-bottom: 1px solid var(--border);
@@ -48,7 +46,6 @@
     .topbar-secure { display: flex; align-items: center; gap: 0.5rem; color: var(--gray); font-size: 0.85rem; }
     .topbar-secure i { color: var(--green); }
 
-    /* ── Layout ── */
     .checkout-layout {
       max-width: 960px;
       margin: 2rem auto;
@@ -63,7 +60,6 @@
       .order-summary { order: -1; }
     }
 
-    /* ── Cards ── */
     .card {
       background: white;
       border-radius: 20px;
@@ -82,7 +78,6 @@
     }
     .card-title i { color: var(--green); }
 
-    /* ── Order Summary ── */
     .summary-service {
       display: flex;
       align-items: flex-start;
@@ -153,7 +148,6 @@
     }
     .ref-badge strong { color: var(--dark-green); }
 
-    /* ── Stripe Payment Form ── */
     #payment-element {
       margin-bottom: 1.5rem;
     }
@@ -208,7 +202,6 @@
       line-height: 1.5;
     }
 
-    /* ── Loading State ── */
     #loading-state {
       text-align: center;
       padding: 3rem 2rem;
@@ -217,14 +210,12 @@
     @keyframes spin { to { transform: rotate(360deg); } }
     #loading-state p { margin-top: 1rem; color: var(--gray); font-size: 0.9rem; }
 
-    /* ── Error State ── */
     #error-state { display: none; text-align: center; padding: 2rem; }
     #error-state .error-icon { font-size: 3rem; color: #DC2626; margin-bottom: 1rem; }
     #error-state h3 { font-family: 'Poppins', sans-serif; color: var(--dark); margin-bottom: 0.5rem; }
     #error-state p { color: var(--gray); font-size: 0.9rem; margin-bottom: 1.5rem; }
-    .btn-back { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: var(--grad); color: white; border: none; border-radius: 50px; font-weight: 600; font-size: 0.9rem; cursor: pointer; text-decoration: none; }
+    .btn-back { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: var(--grad); color: white; border: none; border-radius: 50px; font-weight: 600; font-size: 0.95rem; text-decoration: none; }
 
-    /* ── Trust badges ── */
     .trust-badges {
       display: flex;
       align-items: center;
@@ -244,7 +235,6 @@
   </style>
 </head>
 <body>
-
   <div class="topbar">
     <a href="index.html" class="topbar-logo">
       <img src="logo.png" alt="GreenGlo Cleaners">
@@ -257,8 +247,6 @@
   </div>
 
   <div class="checkout-layout">
-
-    <!-- ── Left: Payment Form ── -->
     <div class="card" id="payment-card">
       <div id="loading-state">
         <div class="spinner"></div>
@@ -288,7 +276,6 @@
       </div>
     </div>
 
-    <!-- ── Right: Order Summary ── -->
     <div class="card order-summary">
       <div class="card-title"><i class="fas fa-receipt"></i> Order Summary</div>
 
@@ -330,78 +317,97 @@
       </div>
     </div>
 
-  </div><!-- /.checkout-layout -->
+  </div>
 
   <script>
-    // ─────────────────────────────────────────────────────────────
-    // Parse booking data from URL params
-    // ─────────────────────────────────────────────────────────────
     const params = new URLSearchParams(window.location.search);
 
     const booking = {
-      ref:          params.get('ref')       || '',
-      service:      params.get('service')   || 'Cleaning Service',
-      fullPrice:    parseFloat(params.get('price') || '0'),
-      depositAmount:parseFloat(params.get('deposit') || '0'),
-      date:         params.get('date')      || '',
-      timeSlot:     params.get('time')      || '',
-      bedrooms:     params.get('bedrooms')  || '',
-      name:         params.get('name')      || '',
-      email:        params.get('email')     || '',
-      phone:        params.get('phone')     || '',
-      address:      params.get('address')   || '',
-      notes:        params.get('notes')     || '',
+      ref: params.get('ref') || '',
+      service: params.get('service') || 'Cleaning Service',
+      fullPrice: parseFloat(params.get('price') || '0'),
+      depositAmount: parseFloat(params.get('deposit') || '0'),
+      date: params.get('date') || '',
+      timeSlot: params.get('time') || '',
+      bedrooms: params.get('bedrooms') || '',
+      name: params.get('name') || '',
+      email: params.get('email') || '',
+      phone: params.get('phone') || '',
+      address: params.get('address') || '',
+      notes: params.get('notes') || '',
     };
 
-    // ─────────────────────────────────────────────────────────────
-    // Populate order summary
-    // ─────────────────────────────────────────────────────────────
-    document.getElementById('s-service').textContent  = booking.service;
-    document.getElementById('s-ref').textContent      = booking.ref || '—';
+    function isPlaceholder(value) {
+      return !value || String(value).includes('YOUR_') || String(value).includes('REPLACE_WITH');
+    }
+
+    function validateBookingData(data) {
+      if (!data.ref || !data.service) return 'Missing booking details.';
+      if (!data.name || !data.email || !data.phone || !data.address) return 'Please complete your contact and address details.';
+      if (!data.date) return 'Please select a booking date.';
+      if (!data.depositAmount || Number(data.depositAmount) <= 0) return 'Invalid deposit amount.';
+      if (Number(data.fullPrice) < Number(data.depositAmount)) return 'Booking total is lower than the deposit amount.';
+      return null;
+    }
+
+    document.getElementById('s-service').textContent = booking.service;
+    document.getElementById('s-ref').textContent = booking.ref || '—';
 
     const detailParts = [];
-    if (booking.date)     detailParts.push(formatDate(booking.date));
+    if (booking.date) detailParts.push(formatDate(booking.date));
     if (booking.timeSlot) detailParts.push(formatTime(booking.timeSlot));
     if (booking.bedrooms) detailParts.push(booking.bedrooms + ' bedroom(s)');
     document.getElementById('s-details').textContent = detailParts.join(' · ') || 'See booking details';
 
     const balance = booking.fullPrice - booking.depositAmount;
     document.getElementById('s-full-price').textContent = '£' + booking.fullPrice.toFixed(2);
-    document.getElementById('s-deposit').textContent    = '£' + booking.depositAmount.toFixed(2);
-    document.getElementById('s-balance').textContent    = '£' + balance.toFixed(2);
+    document.getElementById('s-deposit').textContent = '£' + booking.depositAmount.toFixed(2);
+    document.getElementById('s-balance').textContent = '£' + balance.toFixed(2);
     document.getElementById('pay-btn-text').textContent = 'Pay £' + booking.depositAmount.toFixed(2) + ' deposit';
     document.title = 'Pay £' + booking.depositAmount.toFixed(2) + ' | GreenGlo Cleaners';
 
-    // ─────────────────────────────────────────────────────────────
-    // Load config and initialise Stripe
-    // ─────────────────────────────────────────────────────────────
-    async function init() {
+    async function loadRuntimeConfig() {
       let config;
       try {
         const res = await fetch('/config.json');
         config = await res.json();
-      } catch(e) {
-        showError('Could not load payment configuration. Please return to the services page and try again.');
+      } catch (e) {
+        throw new Error('Could not load payment configuration. Please return to the services page and try again.');
+      }
+
+      const publishableKey = config?.stripe?.publishableKey;
+      const workerUrl = config?.payment?.workerUrl;
+
+      if (isPlaceholder(publishableKey) || isPlaceholder(workerUrl)) {
+        throw new Error('Payment configuration is incomplete. Please contact us to complete your booking.');
+      }
+
+      return config;
+    }
+
+    async function init() {
+      const bookingError = validateBookingData(booking);
+      if (bookingError) {
+        showError(bookingError);
+        return;
+      }
+
+      let config;
+      try {
+        config = await loadRuntimeConfig();
+      } catch (err) {
+        showError(err.message);
         return;
       }
 
       const { publishableKey } = config.stripe || {};
       const workerUrl = config.payment && config.payment.workerUrl;
 
-      if (!publishableKey || publishableKey.includes('YOUR_')) {
-        showError('Stripe is not yet configured. Please contact us to complete your booking.');
-        return;
-      }
-      if (!workerUrl || workerUrl.includes('YOUR_')) {
-        showError('Payment processor not yet configured. Please contact us directly to confirm your booking.');
-        return;
-      }
-      if (!booking.depositAmount || booking.depositAmount < 0.3) {
-        showError('Invalid payment amount. Please go back and try again.');
+      if (!publishableKey || !workerUrl) {
+        showError('Payment configuration is incomplete. Please contact us directly to confirm your booking.');
         return;
       }
 
-      // Get Payment Intent from Cloudflare Worker
       let clientSecret;
       try {
         const res = await fetch(workerUrl.replace(/\/+$/, '') + '/create-payment-intent', {
@@ -409,28 +415,27 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             depositAmount: booking.depositAmount,
-            serviceTitle:  booking.service,
-            servicePrice:  booking.fullPrice,
-            bookingRef:    booking.ref,
-            customerName:  booking.name,
+            serviceTitle: booking.service,
+            servicePrice: booking.fullPrice,
+            bookingRef: booking.ref,
+            customerName: booking.name,
             customerEmail: booking.email,
-            bookingDate:   booking.date,
-            timeSlot:      booking.timeSlot,
-            bedrooms:      booking.bedrooms,
-            address:       booking.address,
-            notes:         booking.notes,
+            bookingDate: booking.date,
+            timeSlot: booking.timeSlot,
+            bedrooms: booking.bedrooms,
+            address: booking.address,
+            notes: booking.notes,
           }),
         });
         const data = await res.json();
         if (!res.ok || !data.clientSecret) throw new Error(data.error || 'Could not create payment');
         clientSecret = data.clientSecret;
-      } catch(err) {
+      } catch (err) {
         showError('Could not connect to payment processor: ' + err.message);
         return;
       }
 
-      // Initialise Stripe.js
-      const stripe   = Stripe(publishableKey);
+      const stripe = Stripe(publishableKey);
       const elements = stripe.elements({ clientSecret, appearance: stripeAppearance });
       const paymentEl = elements.create('payment');
       paymentEl.mount('#payment-element');
@@ -441,23 +446,21 @@
         document.getElementById('pay-btn').disabled = false;
       });
 
-      // Handle submit
       document.getElementById('pay-btn').addEventListener('click', async () => {
         const btn = document.getElementById('pay-btn');
         btn.disabled = true;
         btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing…';
         clearError();
 
-        const successUrl = window.location.origin
-          + (window.location.pathname.replace('checkout.html', ''))
-          + 'booking-success.html?ref=' + encodeURIComponent(booking.ref)
-          + '&service=' + encodeURIComponent(booking.service)
-          + '&deposit=' + booking.depositAmount
-          + '&balance=' + balance.toFixed(2);
+        const successUrl = new URL('booking-success.html', window.location.href);
+        successUrl.searchParams.set('ref', booking.ref);
+        successUrl.searchParams.set('service', booking.service);
+        successUrl.searchParams.set('deposit', String(booking.depositAmount));
+        successUrl.searchParams.set('balance', String(balance.toFixed(2)));
 
         const { error } = await stripe.confirmPayment({
           elements,
-          confirmParams: { return_url: successUrl },
+          confirmParams: { return_url: successUrl.toString() },
         });
 
         if (error) {
@@ -468,9 +471,6 @@
       });
     }
 
-    // ─────────────────────────────────────────────────────────────
-    // Stripe appearance
-    // ─────────────────────────────────────────────────────────────
     const stripeAppearance = {
       theme: 'stripe',
       variables: {
@@ -491,13 +491,10 @@
       },
     };
 
-    // ─────────────────────────────────────────────────────────────
-    // Helpers
-    // ─────────────────────────────────────────────────────────────
     function showError(msg) {
       document.getElementById('loading-state').style.display = 'none';
-      document.getElementById('error-state').style.display  = 'block';
-      document.getElementById('error-message').textContent  = msg;
+      document.getElementById('error-state').style.display = 'block';
+      document.getElementById('error-message').textContent = msg;
     }
     function showFieldError(msg) {
       const el = document.getElementById('card-errors');
@@ -511,7 +508,7 @@
     }
     function formatDate(d) {
       if (!d) return '';
-      return new Date(d + 'T00:00:00').toLocaleDateString('en-GB', { weekday:'short', day:'numeric', month:'short' });
+      return new Date(d + 'T00:00:00').toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
     }
     function formatTime(t) {
       if (!t) return '';
@@ -523,7 +520,5 @@
 
     init();
   </script>
-
-<!-- <script src="//code.tidio.co/0kn01vdcioixihsbua1x0fzzezsoixet.js" async></script> -->
 </body>
 </html>
