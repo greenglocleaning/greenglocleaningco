@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,68 +6,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>GreenGlo Cleaners | Premium Eco-Friendly Cleaning Services London</title>
-    <meta property="og:title" content="GreenGlo Cleaners | Premium Eco-Friendly Cleaning Services London">
-    <meta property="og:description" content="Premium eco-friendly cleaning services for homes, offices and venues across London, Kent and Essex.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://greenglocleaningco.com/">
-    <meta property="og:image" content="https://greenglocleaningco.com/logo.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="GreenGlo Cleaners logo">
-    <meta property="og:site_name" content="GreenGlo Cleaners">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="GreenGlo Cleaners | Premium Eco-Friendly Cleaning Services London">
-    <meta name="twitter:description" content="Premium eco-friendly cleaning services for homes, offices and venues across London, Kent and Essex.">
-    <meta name="twitter:image" content="https://greenglocleaningco.com/logo.png">
-    <!-- Authoritative business details for search engines (phone, email, service areas) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Organization",
-          "@id": "https://greenglocleaningco.com/#organization",
-          "name": "GreenGlo Cleaners",
-          "url": "https://greenglocleaningco.com/",
-          "logo": "https://greenglocleaningco.com/logo.png",
-          "email": "info@greenglocleaningco.com",
-          "telephone": "+447767972498",
-          "sameAs": [
-            "https://instagram.com/greenglocleaningco",
-            "https://tiktok.com/@greenglocleaningco",
-            "https://facebook.com/greenglocleaningco"
-          ]
-        },
-        {
-          "@type": "CleaningService",
-          "@id": "https://greenglocleaningco.com/#business",
-          "name": "GreenGlo Cleaners",
-          "url": "https://greenglocleaningco.com/",
-          "image": "https://greenglocleaningco.com/logo.png",
-          "logo": "https://greenglocleaningco.com/logo.png",
-          "description": "Premium eco-friendly cleaning services for homes, offices and venues across London, Kent and Essex.",
-          "telephone": "+447767972498",
-          "email": "info@greenglocleaningco.com",
-          "priceRange": "$$",
-          "currenciesAccepted": "GBP",
-          "parentOrganization": { "@id": "https://greenglocleaningco.com/#organization" },
-          "areaServed": [
-            { "@type": "City", "name": "London" },
-            { "@type": "AdministrativeArea", "name": "Kent" },
-            { "@type": "AdministrativeArea", "name": "Essex" }
-          ]
-        },
-        {
-          "@type": "WebSite",
-          "@id": "https://greenglocleaningco.com/#website",
-          "url": "https://greenglocleaningco.com/",
-          "name": "GreenGlo Cleaners",
-          "publisher": { "@id": "https://greenglocleaningco.com/#organization" },
-          "inLanguage": "en-GB"
-        }
-      ]
-    }
-    </script>
     <link rel="icon" type="image/png" href="logo.png">
     <link rel="apple-touch-icon" href="logo.png">
     <link rel="shortcut icon" type="image/x-icon" href="logo.png">
@@ -76,3 +15,207 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <!-- Add Supabase client library -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        :root {
+            --primary-green: #10B981;
+            --secondary-green: #34D399;
+            --dark-green: #065F46;
+            --light-green: #D1FAE5;
+            --accent-green: #059669;
+            --emerald: #10B981;
+            --teal: #0D9488;
+            --mint: #A7F3D0;
+            --white: #FFFFFF;
+            --off-white: #F9FAFB;
+            --light-gray: #F3F4F6;
+            --medium-gray: #9CA3AF;
+            --dark-gray: #4B5563;
+            --black: #111827;
+            --gold: #FBBF24;
+            --shadow: 0 20px 40px rgba(16, 185, 129, 0.12);
+            --shadow-lg: 0 25px 50px rgba(16, 185, 129, 0.15);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 16px;
+            --border-radius-lg: 24px;
+            --gradient-primary: linear-gradient(135deg, var(--primary-green), var(--teal));
+            --gradient-dark: linear-gradient(135deg, var(--dark-green), var(--teal));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.7;
+            color: var(--dark-gray);
+            background-color: var(--off-white);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--dark-green);
+            letter-spacing: -0.5px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2.5rem;
+            background: var(--gradient-primary);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: var(--shadow);
+            gap: 0.75rem;
+            min-height: 56px;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+            transition: var(--transition);
+        }
+
+        .hero {
+            min-height: 100vh;
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, rgba(209, 250, 229, 0.8) 0%, rgba(255, 255, 255, 0.9) 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+
+        .section {
+            padding: 6rem 0;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0;">
+                <a href="index.html" style="color: var(--primary-green); text-decoration: none; font-weight: 700; font-size: 1.5rem;">
+                    GreenGlo Cleaners
+                </a>
+                <div style="display: flex; gap: 2rem; align-items: center;">
+                    <a href="services.html" style="color: var(--dark-gray); text-decoration: none; font-weight: 600;">Services</a>
+                    <a href="gallery.html" style="color: var(--dark-gray); text-decoration: none; font-weight: 600;">Gallery</a>
+                    <a href="greengloclub.html" style="color: var(--dark-gray); text-decoration: none; font-weight: 600;">Club</a>
+                    <a href="#contact" style="color: var(--white); background: var(--primary-green); padding: 0.75rem 1.5rem; border-radius: 50px; text-decoration: none; font-weight: 600;">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container" style="text-align: center;">
+            <h1 style="font-size: 3.5rem; margin-bottom: 1.5rem; color: var(--dark-green);">
+                Premium Eco-Friendly Cleaning Services
+            </h1>
+            <p style="font-size: 1.25rem; color: var(--dark-gray); margin-bottom: 2rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+                Professional cleaning for homes, offices, and venues across London, Kent, and Essex
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="services.html" class="btn" style="background: var(--gradient-primary);">
+                    <i class="fas fa-calendar-check"></i> Book Now
+                </a>
+                <a href="greengloclub.html" class="btn" style="background: transparent; border: 2px solid var(--primary-green); color: var(--primary-green);">
+                    <i class="fas fa-star"></i> Join Club
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section" style="background: var(--white);">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 3rem;">Our Services</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+                <div style="background: var(--off-white); padding: 2rem; border-radius: var(--border-radius); text-align: center;">
+                    <i class="fas fa-home" style="font-size: 2.5rem; color: var(--primary-green); margin-bottom: 1rem;"></i>
+                    <h3 style="margin-bottom: 0.5rem;">Domestic Cleaning</h3>
+                    <p style="color: var(--medium-gray);">Professional home cleaning services tailored to your needs</p>
+                </div>
+                <div style="background: var(--off-white); padding: 2rem; border-radius: var(--border-radius); text-align: center;">
+                    <i class="fas fa-building" style="font-size: 2.5rem; color: var(--primary-green); margin-bottom: 1rem;"></i>
+                    <h3 style="margin-bottom: 0.5rem;">Commercial Cleaning</h3>
+                    <p style="color: var(--medium-gray);">Comprehensive office and commercial space cleaning</p>
+                </div>
+                <div style="background: var(--off-white); padding: 2rem; border-radius: var(--border-radius); text-align: center;">
+                    <i class="fas fa-sparkles" style="font-size: 2.5rem; color: var(--primary-green); margin-bottom: 1rem;"></i>
+                    <h3 style="margin-bottom: 0.5rem;">Deep Cleaning</h3>
+                    <p style="color: var(--medium-gray);">Thorough deep cleaning for a sparkling home</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section" style="background: var(--gradient-dark); color: var(--white); text-align: center; padding: 4rem 0; border-radius: var(--border-radius-lg); margin: 2rem auto; max-width: 1200px;">
+        <div class="container">
+            <h2 style="color: var(--white); margin-bottom: 1.5rem;">Ready to Experience Premium Cleaning?</h2>
+            <p style="font-size: 1.125rem; margin-bottom: 2rem; opacity: 0.9;">Get your free quote today or join our membership club for exclusive benefits</p>
+            <a href="services.html" class="btn" style="background: var(--white); color: var(--primary-green); font-weight: 700;">Get Started Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: var(--black); color: var(--white); padding: 3rem 0; text-align: center;">
+        <div class="container">
+            <p>&copy; 2025 GreenGlo Cleaners. All rights reserved.</p>
+            <p style="margin-top: 1rem; color: var(--medium-gray);">
+                <i class="fas fa-phone"></i> 07767 972498 | 
+                <i class="fas fa-envelope"></i> info@greenglocleaningco.com
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple navigation
+        console.log('GreenGlo Cleaners website loaded');
+    </script>
+</body>
+
+</html>
