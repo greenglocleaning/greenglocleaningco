@@ -1,8 +1,8 @@
     <script>
         // ===== Analytics Configuration =====
         const ANALYTICS_CONFIG = {
-            supabaseUrl: '',
-            supabaseKey: '',
+            supabaseUrl: 'https://faxjeniohetefqwcsefi.supabase.co',
+            supabaseKey: 'sb_publishable_7TZ_Y-HKZc_ibl59lqyAsQ_Qbv9A2o7',
             sessionTimeout: 30 * 60 * 1000,
             scrollThresholds: [25, 50, 75, 100]
         };
@@ -19,28 +19,9 @@
             payment: { depositPercent: 25, currency: 'gbp' }
         };
 
-        function isPlaceholder(value) {
-            if (value === null || value === undefined) return true;
-            const str = String(value).trim();
-            return str === '' || str.includes('YOUR_') || str.includes('REPLACE_WITH') || str.includes('your-project-id') || str.includes('your-worker-name');
-        }
-
         async function loadConfig() {
             try {
                 const res = await fetch('/config.json');
-                if (res.ok) {
-                    const loaded = await res.json();
-                    CONFIG = { ...CONFIG, ...loaded };
-                    if (isPlaceholder(CONFIG?.supabase?.url) || isPlaceholder(CONFIG?.supabase?.anonKey)) {
-                        console.warn('Supabase config is not yet live. Analytics are disabled until values are configured.');
-                        CONFIG.supabase = { url: '', anonKey: '' };
-                    }
-                }
-            } catch (e) {
-                console.warn('config.json not found, using defaults');
-            }
+                if (res.ok) CONFIG = await res.json();
+            } catch(e) { console.warn('config.json not found, using defaults'); }
         }
-
-        // Any analytics logic below should guard against empty config and not crash the page.
-        // The site should continue to load normally until real credentials are added.
-    </script>
