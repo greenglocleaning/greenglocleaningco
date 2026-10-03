@@ -2,22 +2,27 @@
  * GreenGlo Cleaners — Cloudflare Worker
  * Handles Stripe Payment Intent creation (keeps secret key server-side)
  *
- * Setup:
- * 1. Create a Cloudflare Worker
- * 2. Add the real Stripe secret as a secret named STRIPE_SECRET_KEY
- * 3. Update the ALLOWED_ORIGINS list below to match your live domain(s)
- * 4. Deploy the worker and copy the worker URL into config.json
+ * SETUP (takes ~2 minutes):
+ * 1. Go to https://workers.cloudflare.com and sign up for free
+ * 2. Click "Create a Worker" → paste this entire file
+ * 3. Replace STRIPE_SECRET_KEY below with your actual sk_live_... key
+ * 4. Click "Save and Deploy"
+ * 5. Copy the worker URL (e.g. https://greenglo-checkout.your-username.workers.dev)
+ * 6. Paste that URL into config.json as "workerUrl"
+ * 7. Also add your GitHub Pages domain to ALLOWED_ORIGINS below
  */
 
-const STRIPE_SECRET_KEY = "";
+// ========================================================
+// CONFIGURATION — edit these values
+// ========================================================
+const STRIPE_SECRET_KEY = "sk_live_YOUR_STRIPE_SECRET_KEY_HERE";
 const ALLOWED_ORIGINS = [
-  "https://greenglocleaningco.com",
-  "https://www.greenglocleaningco.com",
+  "https://YOUR_GITHUB_USERNAME.github.io",
   "https://greenglocleaners.co.uk",
-  "https://www.greenglocleaners.co.uk",
-  "http://localhost:5500",
+  "http://localhost:5500",   // for local testing
   "http://127.0.0.1:5500",
 ];
+// ========================================================
 
 export default {
   async fetch(request, env) {
@@ -32,6 +37,7 @@ export default {
       "Access-Control-Max-Age": "86400",
     };
 
+    // Handle CORS preflight
     if (request.method === "OPTIONS") {
       return new Response(null, { status: 204, headers: corsHeaders });
     }
@@ -43,17 +49,10 @@ export default {
       });
     }
 
-    const secretKey = env?.STRIPE_SECRET_KEY || STRIPE_SECRET_KEY;
-    if (!secretKey || secretKey.includes("YOUR_STRIPE_SECRET_KEY")) {
-      return new Response(JSON.stringify({ error: "Stripe secret key not configured" }), {
-        status: 500,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
-    }
-
     const url = new URL(request.url);
 
     try {
+      // ── Route: Create Payment Intent ──────────────────────────
       if (url.pathname === "/create-payment-intent") {
         const body = await request.json();
         const {
@@ -74,6 +73,7 @@ export default {
           return jsonError(corsHeaders, "Missing required fields", 400);
         }
 
+        // Amount in pence (Stripe uses smallest currency unit)
         const amountPence = Math.round(parseFloat(depositAmount) * 100);
         if (isNaN(amountPence) || amountPence < 30) {
           return jsonError(corsHeaders, "Invalid deposit amount", 400);
@@ -100,7 +100,7 @@ export default {
         const stripeRes = await fetch("https://api.stripe.com/v1/payment_intents", {
           method: "POST",
           headers: {
-            Authorization: `Bearer ${secretKey}`,
+            Authorization: `Bearer ${STRIPE_SECRET_KEY}`,
             "Content-Type": "application/x-www-form-urlencoded",
           },
           body: formBody,
@@ -118,11 +118,12 @@ export default {
         );
       }
 
+      // ── Route: Confirm booking after payment ──────────────────
       if (url.pathname === "/confirm-booking") {
         const { paymentIntentId, bookingRef } = await request.json();
 
         const stripeRes = await fetch(`https://api.stripe.com/v1/payment_intents/${paymentIntentId}`, {
-          headers: { Authorization: `Bearer ${secretKey}` },
+          headers: { Authorization: `Bearer ${STRIPE_SECRET_KEY}` },
         });
         const intent = await stripeRes.json();
 
@@ -137,6 +138,7 @@ export default {
       }
 
       return jsonError(corsHeaders, "Unknown route", 404);
+
     } catch (err) {
       return jsonError(corsHeaders, err.message || "Internal error", 500);
     }
