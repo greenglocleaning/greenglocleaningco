@@ -1,10 +1,10 @@
 {
   "stripe": {
-    "publishableKey": "pk_live_51RR9ib2Kluec3BRLT9k1GyisMtEi4StpryIMy1xdk1F4pAKM3jljoCSmdeEzkks2wqqMWbzF6fOde2fx7OMBO3wM00JzOKZL5S"
+    "publishableKey": "pk_live_REPLACE_WITH_YOUR_STRIPE_PUBLIC_KEY"
   },
   "supabase": {
-    "url": "https://faxjeniohetefqwcsefi.supabase.co",
-    "anonKey": "sb_publishable_7TZ_Y-HKZc_ibl59lqyAsQ_Qbv9A2o7"
+    "url": "https://your-project-id.supabase.co",
+    "anonKey": "sb_publishable_REPLACE_WITH_YOUR_SUPABASE_ANON_KEY"
   },
   "business": {
     "name": "GreenGlo Cleaners",
@@ -15,6 +15,6 @@
   "payment": {
     "depositPercent": 25,
     "currency": "gbp",
-    "workerUrl": "https://white-sky-ecf2.sacharaif.workers.dev"
+    "workerUrl": "https://your-worker-name.your-account.workers.dev"
   }
 }
