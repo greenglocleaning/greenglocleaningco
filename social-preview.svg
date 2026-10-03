@@ -1,0 +1,52 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E8FFF6"/>
+      <stop offset="0.5" stop-color="#F5FFFB"/>
+      <stop offset="1" stop-color="#DDF6ED"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="120" y1="70" x2="560" y2="560" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#10B981"/>
+      <stop offset="1" stop-color="#0D9488"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#34D399"/>
+      <stop offset="1" stop-color="#A7F3D0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <circle cx="1060" cy="120" r="132" fill="#D1FAE5" opacity="0.9"/>
+  <circle cx="1085" cy="500" r="170" fill="#C7F9D9" opacity="0.8"/>
+  <circle cx="145" cy="530" r="155" fill="#E7F9EF" opacity="0.7"/>
+
+  <g transform="translate(90 120)">
+    <rect x="0" y="0" width="220" height="220" rx="52" fill="url(#brand)"/>
+    <path d="M114 62C85 62 58 73 38 94C18 115 8 140 8 170C8 200 18 225 38 246C58 267 85 278 114 278C152 278 185 262 207 233L177 210C162 227 141 236 114 236C91 236 72 229 58 214C44 199 37 181 37 170C37 159 44 141 58 126C72 111 91 104 114 104C143 104 165 114 180 132L210 103C190 83 156 62 114 62Z" fill="white" opacity="0.95"/>
+    <path d="M148 93H229V148H148V93Z" fill="#D1FAE5" opacity="0.95"/>
+    <path d="M198 94C191 94 186 99 186 106V130C186 137 191 142 198 142H229V94H198Z" fill="#D1FAE5" opacity="0.95"/>
+    <path d="M97 155H187V191H97V155Z" fill="#D1FAE5" opacity="0.95"/>
+    <path d="M116 196H171C184 196 195 207 195 220V263H92V220C92 207 103 196 116 196Z" fill="#D1FAE5" opacity="0.95"/>
+    <circle cx="144" cy="85" r="16" fill="#D1FAE5"/>
+  </g>
+
+  <g transform="translate(390 150)">
+    <text x="0" y="120" fill="#0F172A" font-family="Arial, Helvetica, sans-serif" font-size="86" font-weight="700" letter-spacing="-2">GreenGlo</text>
+    <text x="2" y="200" fill="#0F766E" font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="700" letter-spacing="2">CLEANERS</text>
+    <rect x="0" y="232" width="430" height="10" rx="5" fill="url(#accent)"/>
+    <text x="0" y="300" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="500">Premium eco-friendly cleaning services</text>
+    <text x="0" y="350" fill="#475569" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="500">London • Kent • Essex</text>
+  </g>
+
+  <g transform="translate(910 170)">
+    <rect x="0" y="0" width="180" height="54" rx="27" fill="#0F766E" opacity="0.12"/>
+    <text x="90" y="35" text-anchor="middle" fill="#0F766E" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700">Since 2024</text>
+  </g>
+
+  <g transform="translate(845 390)">
+    <circle cx="62" cy="62" r="62" fill="#10B981" opacity="0.14"/>
+    <circle cx="62" cy="62" r="44" fill="#10B981" opacity="0.16"/>
+    <path d="M40 52L58 70L84 44" stroke="#10B981" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>
