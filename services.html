@@ -1,8 +1,8 @@
     <script>
         // ===== Analytics Configuration =====
         const ANALYTICS_CONFIG = {
-            supabaseUrl: 'https://your-project-id.supabase.co',
-            supabaseKey: 'sb_publishable_REPLACE_WITH_YOUR_SUPABASE_ANON_KEY',
+            supabaseUrl: '',
+            supabaseKey: '',
             sessionTimeout: 30 * 60 * 1000,
             scrollThresholds: [25, 50, 75, 100]
         };
@@ -20,14 +20,17 @@
         };
 
         function isPlaceholder(value) {
-            return !value || String(value).includes('YOUR_') || String(value).includes('REPLACE_WITH');
+            if (value === null || value === undefined) return true;
+            const str = String(value).trim();
+            return str === '' || str.includes('YOUR_') || str.includes('REPLACE_WITH') || str.includes('your-project-id') || str.includes('your-worker-name');
         }
 
         async function loadConfig() {
             try {
                 const res = await fetch('/config.json');
                 if (res.ok) {
-                    CONFIG = await res.json();
+                    const loaded = await res.json();
+                    CONFIG = { ...CONFIG, ...loaded };
                     if (isPlaceholder(CONFIG?.supabase?.url) || isPlaceholder(CONFIG?.supabase?.anonKey)) {
                         console.warn('Supabase config is not yet live. Analytics are disabled until values are configured.');
                         CONFIG.supabase = { url: '', anonKey: '' };
@@ -37,3 +40,7 @@
                 console.warn('config.json not found, using defaults');
             }
         }
+
+        // Any analytics logic below should guard against empty config and not crash the page.
+        // The site should continue to load normally until real credentials are added.
+    </script>

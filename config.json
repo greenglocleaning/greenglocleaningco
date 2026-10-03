@@ -1,20 +1,20 @@
 {
   "stripe": {
-    "publishableKey": "pk_live_REPLACE_WITH_YOUR_STRIPE_PUBLIC_KEY"
+    "publishableKey": ""
   },
   "supabase": {
-    "url": "https://your-project-id.supabase.co",
-    "anonKey": "sb_publishable_REPLACE_WITH_YOUR_SUPABASE_ANON_KEY"
+    "url": "",
+    "anonKey": ""
   },
   "business": {
     "name": "GreenGlo Cleaners",
     "phone": "447767972498",
-    "email": "info@greenglocleaners.co.uk",
-    "siteUrl": "https://greenglocleaners.co.uk"
+    "email": "info@greenglocleaningco.com",
+    "siteUrl": "https://greenglocleaningco.com"
   },
   "payment": {
     "depositPercent": 25,
     "currency": "gbp",
-    "workerUrl": "https://your-worker-name.your-account.workers.dev"
+    "workerUrl": ""
   }
 }
